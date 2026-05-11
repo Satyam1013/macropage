@@ -3,6 +3,7 @@ import MarqueeStrip from "@/components/sections/MarqueeStrip";
 import WorkSection from "@/components/sections/WorkSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import AboutSection from "@/components/sections/AboutSection";
+import ReviewsSection from "@/components/sections/ReviewsSection";
 import CtaSection from "@/components/sections/CtaSection";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <WorkSection />
       <ServicesSection />
       <AboutSection />
+      <ReviewsSection />
       <CtaSection />
     </>
   );
