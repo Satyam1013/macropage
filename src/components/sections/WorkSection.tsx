@@ -43,8 +43,15 @@ const HOLD = 2800;
 export default function WorkSection() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
-  const fillRef = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const goTo = (idx: number) => {
     if (animating) return;
@@ -56,7 +63,6 @@ export default function WorkSection() {
     }, 600);
   };
 
-  // Auto advance
   useEffect(() => {
     timerRef.current = setTimeout(() => goTo(current + 1), HOLD);
     return () => clearTimeout(timerRef.current);
@@ -72,7 +78,8 @@ export default function WorkSection() {
     return "hidden";
   };
 
-  const stateStyles: Record<string, React.CSSProperties> = {
+  // ─── Desktop styles (3-card carousel) ───
+  const desktopStyles: Record<string, React.CSSProperties> = {
     center: {
       position: "absolute",
       width: "42%",
@@ -89,9 +96,9 @@ export default function WorkSection() {
     left: {
       position: "absolute",
       width: "26%",
-      height: "88%", // 👈 82% → 88%
+      height: "88%",
       left: "2%",
-      top: "6%", // 👈 9% → 6%
+      top: "6%",
       zIndex: 5,
       opacity: 0.55,
       transform: "scale(0.96)",
@@ -102,9 +109,9 @@ export default function WorkSection() {
     right: {
       position: "absolute",
       width: "26%",
-      height: "88%", // 👈 82% → 88%
+      height: "88%",
       left: "72%",
-      top: "6%", // 👈 9% → 6%
+      top: "6%",
       zIndex: 5,
       opacity: 0.55,
       transform: "scale(0.96)",
@@ -115,8 +122,8 @@ export default function WorkSection() {
     hidden: {
       position: "absolute",
       width: "26%",
-      height: "88%", // 👈 82% → 88%
-      top: "6%", // 👈 9% → 6%
+      height: "88%",
+      top: "6%",
       zIndex: 1,
       opacity: 0,
       transform: "scale(0.9)",
@@ -126,12 +133,70 @@ export default function WorkSection() {
     },
   };
 
+  // ─── Mobile styles (single full-width card) ───
+  const mobileStyles: Record<string, React.CSSProperties> = {
+    center: {
+      position: "absolute",
+      width: "85%",
+      height: "100%",
+      left: "7.5%",
+      top: 0,
+      zIndex: 10,
+      opacity: 1,
+      transform: "translateX(0) scale(1)",
+      transition: "all 0.55s cubic-bezier(0.77,0,0.18,1)",
+      borderRadius: 16,
+      overflow: "hidden",
+    },
+    left: {
+      position: "absolute",
+      width: "85%",
+      height: "100%",
+      left: "7.5%",
+      top: 0,
+      zIndex: 5,
+      opacity: 0,
+      transform: "translateX(-60px) scale(0.95)",
+      transition: "all 0.55s cubic-bezier(0.77,0,0.18,1)",
+      borderRadius: 16,
+      overflow: "hidden",
+    },
+    right: {
+      position: "absolute",
+      width: "85%",
+      height: "100%",
+      left: "7.5%",
+      top: 0,
+      zIndex: 5,
+      opacity: 0,
+      transform: "translateX(60px) scale(0.95)",
+      transition: "all 0.55s cubic-bezier(0.77,0,0.18,1)",
+      borderRadius: 16,
+      overflow: "hidden",
+    },
+    hidden: {
+      position: "absolute",
+      width: "85%",
+      height: "100%",
+      left: "7.5%",
+      top: 0,
+      zIndex: 1,
+      opacity: 0,
+      transform: "scale(0.9)",
+      transition: "all 0.55s cubic-bezier(0.77,0,0.18,1)",
+      borderRadius: 16,
+      overflow: "hidden",
+    },
+  };
+
+  const styleMap = isMobile ? mobileStyles : desktopStyles;
+
   return (
-    <section className="py-16 overflow-hidden">
+    <section className="py-12 lg:py-16 overflow-hidden">
       {/* Header */}
       <div
         style={{ borderBottom: "1px solid var(--border)" }}
-        className="flex justify-between items-end pb-4 mb-10 flex-wrap gap-3 px-10"
+        className="flex justify-between items-end pb-4 mb-8 lg:mb-10 flex-wrap gap-3 px-5 sm:px-10"
       >
         <div>
           <p
@@ -146,7 +211,7 @@ export default function WorkSection() {
               color: "var(--text)",
               lineHeight: 1,
             }}
-            className="text-[clamp(2.5rem,6vw,4.5rem)] tracking-wide"
+            className="text-[clamp(2rem,6vw,4.5rem)] tracking-wide"
           >
             Our Projects
           </h2>
@@ -164,14 +229,15 @@ export default function WorkSection() {
       </div>
 
       {/* Carousel */}
-      <div className="relative w-full" style={{ height: 480 }}>
+      <div className="relative w-full" style={{ height: isMobile ? 400 : 480 }}>
         {projects.map((p, i) => {
           const state = getState(i);
           const hiddenLeft =
             (current - 2 + projects.length) % projects.length === i;
+
           const style: React.CSSProperties = {
-            ...stateStyles[state],
-            ...(state === "hidden"
+            ...styleMap[state],
+            ...(!isMobile && state === "hidden"
               ? { left: hiddenLeft ? "-10%" : "110%" }
               : {}),
           };
@@ -191,14 +257,15 @@ export default function WorkSection() {
                     style={{
                       fontFamily: "var(--font-bebas)",
                       color: "rgba(0,0,0,0.07)",
+                      fontSize: isMobile ? "6rem" : "7rem",
                     }}
-                    className="absolute inset-0 flex items-center justify-center text-[7rem] select-none"
+                    className="absolute inset-0 flex items-center justify-center select-none"
                   >
                     {p.name.slice(0, 2).toUpperCase()}
                   </div>
 
                   {/* Info */}
-                  <div className="absolute inset-0 flex items-end p-5">
+                  <div className="absolute inset-0 flex items-end p-5 sm:p-6">
                     <div>
                       <p
                         style={{ color: "rgba(0,0,0,0.5)" }}
@@ -212,7 +279,7 @@ export default function WorkSection() {
                           color: "#111",
                           lineHeight: 1,
                         }}
-                        className="text-3xl tracking-wide"
+                        className="text-3xl sm:text-4xl tracking-wide"
                       >
                         {p.name}
                       </h3>
@@ -225,7 +292,7 @@ export default function WorkSection() {
                     </div>
                   </div>
 
-                  {/* Hover overlay — only center */}
+                  {/* Hover overlay */}
                   {state === "center" && (
                     <div className="absolute inset-0 flex items-center justify-center group-hover:bg-black/10 transition-all duration-300">
                       <span
@@ -243,8 +310,8 @@ export default function WorkSection() {
                 </div>
               </Link>
 
-              {/* Side card click to focus */}
-              {state !== "center" && (
+              {/* Side card click (desktop only) */}
+              {!isMobile && state !== "center" && (
                 <div
                   className="absolute inset-0 cursor-pointer"
                   onClick={() => {
@@ -265,20 +332,20 @@ export default function WorkSection() {
           }}
           style={{
             position: "absolute",
-            left: "29.5%",
+            left: isMobile ? "2%" : "29.5%",
             top: "50%",
             transform: "translateY(-50%)",
             zIndex: 20,
-            background: "rgba(255,255,255,0.85)",
+            background: "rgba(255,255,255,0.9)",
             border: "1px solid #d8d5cc",
             borderRadius: "50%",
-            width: 36,
-            height: 36,
+            width: isMobile ? 40 : 36,
+            height: isMobile ? 40 : 36,
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "1.1rem",
+            fontSize: "1.2rem",
           }}
         >
           ‹
@@ -290,20 +357,20 @@ export default function WorkSection() {
           }}
           style={{
             position: "absolute",
-            right: "29.5%",
+            right: isMobile ? "2%" : "29.5%",
             top: "50%",
             transform: "translateY(-50%)",
             zIndex: 20,
-            background: "rgba(255,255,255,0.85)",
+            background: "rgba(255,255,255,0.9)",
             border: "1px solid #d8d5cc",
             borderRadius: "50%",
-            width: 36,
-            height: 36,
+            width: isMobile ? 40 : 36,
+            height: isMobile ? 40 : 36,
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "1.1rem",
+            fontSize: "1.2rem",
           }}
         >
           ›

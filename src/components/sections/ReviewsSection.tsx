@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const reviews = [
   {
@@ -61,11 +61,6 @@ const reviews = [
   },
 ];
 
-// Split into 3 columns
-const col1 = reviews.slice(0, 3);
-const col2 = reviews.slice(3, 6);
-const col3 = reviews.slice(6, 8).concat(reviews.slice(0, 1));
-
 function ReviewCard({ r }: { r: (typeof reviews)[0] }) {
   return (
     <div
@@ -73,9 +68,11 @@ function ReviewCard({ r }: { r: (typeof reviews)[0] }) {
         background: "var(--bg)",
         border: "1px solid var(--border)",
         borderRadius: 16,
-        padding: "1.5rem",
+        padding: "1.25rem",
         marginBottom: "1rem",
         flexShrink: 0,
+        width: "100%",
+        boxSizing: "border-box",
       }}
     >
       <div className="flex gap-1 text-amber-400 text-sm mb-3">★★★★★</div>
@@ -92,23 +89,39 @@ function ReviewCard({ r }: { r: (typeof reviews)[0] }) {
         <div
           style={{
             background: r.color,
-            width: 36,
-            height: 36,
+            width: 38,
+            height: 38,
             borderRadius: "50%",
             fontFamily: "var(--font-bebas)",
             color: "#fff",
-            fontSize: "0.9rem",
+            fontSize: "0.85rem",
             flexShrink: 0,
           }}
           className="flex items-center justify-center"
         >
           {r.initials}
         </div>
-        <div>
-          <p style={{ color: "var(--text)" }} className="text-sm font-semibold">
+        <div style={{ minWidth: 0 }}>
+          <p
+            style={{
+              color: "var(--text)",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            className="text-sm font-semibold"
+          >
             {r.name}
           </p>
-          <p style={{ color: "var(--muted)" }} className="text-xs mt-0.5">
+          <p
+            style={{
+              color: "var(--muted)",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            className="text-xs mt-0.5"
+          >
             {r.company}
           </p>
         </div>
@@ -119,12 +132,12 @@ function ReviewCard({ r }: { r: (typeof reviews)[0] }) {
 
 function ScrollColumn({
   reviews,
-  duration,
   direction = "up",
+  columnHeight,
 }: {
   reviews: typeof col1;
-  duration: number;
   direction?: "up" | "down";
+  columnHeight: number;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const posRef = useRef(0);
@@ -134,7 +147,6 @@ function ScrollColumn({
     const track = trackRef.current;
     if (!track) return;
 
-    // Start from middle for seamless loop
     const halfH = track.scrollHeight / 2;
     posRef.current = direction === "up" ? 0 : halfH;
 
@@ -154,7 +166,6 @@ function ScrollColumn({
 
     animRef.current = requestAnimationFrame(animate);
 
-    // Pause on hover
     const pause = () => cancelAnimationFrame(animRef.current!);
     const resume = () => {
       animRef.current = requestAnimationFrame(animate);
@@ -169,11 +180,13 @@ function ScrollColumn({
     };
   }, [direction]);
 
-  // Duplicate for seamless loop
   const doubled = [...reviews, ...reviews, ...reviews];
 
   return (
-    <div className="overflow-hidden flex-1" style={{ height: 600 }}>
+    <div
+      className="overflow-hidden flex-1"
+      style={{ height: columnHeight, minWidth: 0 }}
+    >
       <div ref={trackRef}>
         {doubled.map((r, i) => (
           <ReviewCard key={i} r={r} />
@@ -183,13 +196,45 @@ function ScrollColumn({
   );
 }
 
+// Column data
+const col1 = reviews.slice(0, 3);
+const col2 = reviews.slice(3, 6);
+const col3 = reviews.slice(6, 8).concat(reviews.slice(0, 1));
+
 export default function ReviewsSection() {
+  const [cols, setCols] = useState(3);
+
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 640) setCols(1);
+      else if (w < 1024) setCols(2);
+      else setCols(3);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Column height: smaller on mobile
+  const colHeight = cols === 1 ? 500 : cols === 2 ? 550 : 600;
+
+  // Which columns to show
+  const visibleCols = [
+    { data: col1, direction: "up" as const },
+    { data: col2, direction: "down" as const },
+    { data: col3, direction: "up" as const },
+  ].slice(0, cols);
+
   return (
-    <section style={{ background: "var(--bg2)" }} className="px-10 py-16">
+    <section
+      style={{ background: "var(--bg2)" }}
+      className="px-4 sm:px-8 lg:px-10 py-12 lg:py-16"
+    >
       {/* Header */}
       <div
         style={{ borderBottom: "1px solid var(--border)" }}
-        className="flex justify-between items-end pb-4 mb-10 flex-wrap gap-3"
+        className="flex justify-between items-end pb-4 mb-8 flex-wrap gap-3"
       >
         <div>
           <p
@@ -204,7 +249,7 @@ export default function ReviewsSection() {
               color: "var(--text)",
               lineHeight: 1,
             }}
-            className="text-[clamp(2.5rem,6vw,4.5rem)] tracking-wide"
+            className="text-[clamp(2rem,6vw,4.5rem)] tracking-wide"
           >
             What Clients{" "}
             <em
@@ -222,19 +267,24 @@ export default function ReviewsSection() {
         </p>
       </div>
 
-      {/* 3 columns — top mask + bottom mask for fade effect */}
+      {/* Columns */}
       <div
-        className="flex gap-4"
+        className="flex gap-3 sm:gap-4"
         style={{
           maskImage:
-            "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+            "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+            "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
         }}
       >
-        <ScrollColumn reviews={col1} duration={20} direction="up" />
-        <ScrollColumn reviews={col2} duration={25} direction="down" />
-        <ScrollColumn reviews={col3} duration={22} direction="up" />
+        {visibleCols.map((col, i) => (
+          <ScrollColumn
+            key={i}
+            reviews={col.data}
+            direction={col.direction}
+            columnHeight={colHeight}
+          />
+        ))}
       </div>
     </section>
   );
