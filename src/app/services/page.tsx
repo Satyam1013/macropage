@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 const services = [
@@ -6,7 +8,15 @@ const services = [
     name: "Web Development",
     slug: "web-development",
     detail:
-      "Modern web applications built with the latest tech stack. From landing pages to complex dashboards — responsive, fast, and SEO-ready.",
+      "Modern web applications built with the latest tech stack. From landing pages to complex dashboards — responsive, fast, and SEO-ready. We architect systems that scale with your business and delight your users.",
+    process: [
+      "Discovery & Requirements",
+      "Architecture & Tech Stack",
+      "UI/UX Design & Prototyping",
+      "Development & Testing",
+      "Deployment & CI/CD",
+      "Post-Launch Support",
+    ],
     tech: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"],
   },
   {
@@ -14,7 +24,15 @@ const services = [
     name: "App Development",
     slug: "app-development",
     detail:
-      "Cross-platform mobile apps that feel native. One codebase, two platforms — delivered faster without compromising quality.",
+      "Cross-platform mobile apps that feel native. One codebase, two platforms — delivered faster without compromising quality or performance.",
+    process: [
+      "Platform Strategy",
+      "UX Wireframing",
+      "Native-feel UI Design",
+      "Cross-platform Development",
+      "App Store Submission",
+      "Analytics & Monitoring",
+    ],
     tech: ["React Native", "Flutter", "Expo", "Firebase"],
   },
   {
@@ -22,7 +40,15 @@ const services = [
     name: "AI Integration",
     slug: "ai-integration",
     detail:
-      "Supercharge your product with AI. Chatbots, document analysis, recommendation systems, and custom LLM workflows.",
+      "Supercharge your product with AI. Chatbots, document analysis, recommendation systems, and custom LLM workflows tailored to your business.",
+    process: [
+      "Use Case Analysis",
+      "Model Selection",
+      "Data Pipeline Setup",
+      "API Integration",
+      "Testing & Fine-tuning",
+      "Deployment & Monitoring",
+    ],
     tech: ["OpenAI", "LangChain", "Python", "Pinecone"],
   },
   {
@@ -30,7 +56,15 @@ const services = [
     name: "Business Automation",
     slug: "business-automation",
     detail:
-      "Connect your tools, automate repetitive tasks, and free your team to focus on what matters.",
+      "Connect your tools, automate repetitive tasks, and free your team to focus on what matters. We map, build, and deploy end-to-end workflows.",
+    process: [
+      "Process Audit",
+      "Workflow Mapping",
+      "Tool Integration",
+      "Automation Build",
+      "Testing & QA",
+      "Handoff & Training",
+    ],
     tech: ["n8n", "Zapier", "Make", "REST APIs"],
   },
   {
@@ -38,7 +72,15 @@ const services = [
     name: "UI/UX Designing",
     slug: "ui-ux-designing",
     detail:
-      "From wireframes to high-fidelity prototypes. Design that balances beauty with usability.",
+      "From wireframes to high-fidelity prototypes. Design that balances beauty with usability — every pixel purposeful.",
+    process: [
+      "Research & Audit",
+      "Information Architecture",
+      "Wireframing",
+      "Visual Design",
+      "Prototyping",
+      "Design Handoff",
+    ],
     tech: ["Figma", "Framer", "Adobe XD", "Prototyping"],
   },
   {
@@ -46,86 +88,257 @@ const services = [
     name: "Cloud Services",
     slug: "cloud-services",
     detail:
-      "Deploy with confidence. Scalable cloud infrastructure, automated pipelines, and monitoring.",
+      "Deploy with confidence. Scalable cloud infrastructure, automated pipelines, and 24/7 monitoring so you never miss a beat.",
+    process: [
+      "Infrastructure Audit",
+      "Cloud Architecture",
+      "Container Setup",
+      "CI/CD Pipelines",
+      "Security & Scaling",
+      "Monitoring & Alerts",
+    ],
     tech: ["AWS", "GCP", "Docker", "GitHub Actions"],
+  },
+  {
+    num: "07",
+    name: "Digital Marketing",
+    slug: "digital-marketing",
+    detail:
+      "Data-driven digital marketing that brings real results. SEO, paid ads, email campaigns, and conversion optimization — all aligned to your growth goals.",
+    process: [
+      "Market & Competitor Research",
+      "Strategy & Goal Setting",
+      "SEO & Content Planning",
+      "Paid Ads Setup",
+      "Analytics & Tracking",
+      "Reporting & Optimization",
+    ],
+    tech: ["Google Ads", "SEO", "Meta Ads", "Google Analytics"],
+  },
+  {
+    num: "08",
+    name: "Social Media Marketing",
+    slug: "social-media-marketing",
+    detail:
+      "Build a brand people follow. We create scroll-stopping content, manage your presence, and run campaigns that turn followers into customers.",
+    process: [
+      "Brand Voice & Audit",
+      "Platform Strategy",
+      "Content Calendar",
+      "Creative Production",
+      "Community Management",
+      "Performance Reporting",
+    ],
+    tech: ["Instagram", "LinkedIn", "Meta Business", "Canva Pro"],
   },
 ];
 
 export default function ServicesPage() {
   return (
-    <section className="px-10 py-16 max-w-5xl mx-auto">
-      <p
-        style={{ color: "var(--muted)" }}
-        className="text-xs tracking-widest uppercase mb-2"
+    <main>
+      {/* ── Header ── */}
+      <section
+        style={{ borderBottom: "1px solid var(--border)" }}
+        className="px-6 sm:px-10 pt-14 pb-10"
       >
-        What We Do
-      </p>
-      <h1
-        style={{
-          fontFamily: "var(--font-bebas)",
-          color: "var(--text)",
-          lineHeight: 1,
-        }}
-        className="text-[clamp(3rem,8vw,6rem)] tracking-wide mb-12"
-      >
-        Our Services
-      </h1>
-
-      {services.map((s) => (
-        <Link key={s.num} href={`/services/${s.slug}`} className="block group">
-          {" "}
-          {/* 👈 wrap in Link */}
-          <div
-            style={{ borderBottom: "1px solid var(--border)" }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 py-10 transition-all duration-200 group-hover:pl-2"
+        <p
+          style={{ color: "var(--muted)" }}
+          className="text-xs tracking-widest uppercase mb-3"
+        >
+          [ 03 ] What We Do
+        </p>
+        <h1
+          style={{
+            fontFamily: "var(--font-bebas)",
+            color: "var(--text)",
+            lineHeight: 0.9,
+          }}
+          className="text-[clamp(4rem,12vw,10rem)] tracking-wide"
+        >
+          Our{" "}
+          <em
+            style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}
           >
-            {/* Left */}
-            <div>
-              <p style={{ color: "var(--muted)" }} className="text-xs mb-3">
+            Services
+          </em>
+        </h1>
+      </section>
+
+      {/* ── Stacking scroll sections ── */}
+      {services.map((s, i) => (
+        <div
+          key={s.num}
+          style={{
+            position: "sticky",
+            top: "60px", // navbar height
+            zIndex: i + 1,
+            background: "var(--bg)",
+            borderBottom: "1px solid var(--border)",
+            minHeight: "calc(100vh - 60px)", // 👈 full screen
+          }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr_320px] h-full min-h-[calc(100vh-60px)]">
+            {/* ── Col 1 — Service list ── */}
+            <aside
+              style={{ borderRight: "1px solid var(--border)" }}
+              className="px-6 sm:px-8 py-10 hidden lg:block"
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-bebas)",
+                  color: "var(--text)",
+                  fontSize: "clamp(3rem,5vw,4rem)",
+                  lineHeight: 1,
+                }}
+              >
+                {s.num}
+              </div>
+              <div className="flex flex-col mt-4 gap-1">
+                {services.map((item) => (
+                  <span
+                    key={item.num}
+                    style={{
+                      color:
+                        item.num === s.num ? "var(--text)" : "var(--muted)",
+                      fontWeight: item.num === s.num ? 500 : 400,
+                    }}
+                    className="text-xs uppercase tracking-widest py-1"
+                  >
+                    {item.name}
+                  </span>
+                ))}
+              </div>
+            </aside>
+
+            {/* ── Col 2 — Detail ── */}
+            <section className="px-6 sm:px-10 py-10">
+              {/* Mobile number */}
+              <p
+                style={{ color: "var(--accent)" }}
+                className="text-xs font-mono mb-3 lg:hidden"
+              >
                 {s.num}
               </p>
+
               <h2
                 style={{
                   fontFamily: "var(--font-bebas)",
                   color: "var(--text)",
-                  lineHeight: 1,
+                  lineHeight: 0.92,
                 }}
-                className="text-[clamp(2rem,4vw,3rem)] tracking-wide mb-4"
+                className="text-[clamp(2.5rem,6vw,5rem)] tracking-wide mb-6"
               >
-                {s.name}
-                <span
-                  style={{ color: "var(--muted)" }}
-                  className="text-2xl ml-3 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 inline-block"
-                >
-                  ↗
-                </span>
+                {s.name.toUpperCase()}
               </h2>
+
               <p
                 style={{ color: "var(--muted)" }}
-                className="text-sm leading-relaxed"
+                className="text-sm leading-relaxed max-w-xl mb-8"
               >
                 {s.detail}
               </p>
-            </div>
 
-            {/* Right — tech tags */}
-            <div className="flex flex-wrap gap-2 content-start md:justify-end">
-              {s.tech.map((t) => (
+              {/* Tech tags */}
+              <div className="flex flex-wrap gap-2 mb-10">
+                {s.tech.map((t) => (
+                  <span
+                    key={t}
+                    style={{
+                      border: "1px solid var(--border)",
+                      color: "var(--muted)",
+                    }}
+                    className="text-xs px-3 py-1.5 rounded-full"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* Visual placeholder */}
+              <div
+                style={{
+                  background: "var(--bg2)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 16,
+                  height: 500,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                }}
+              >
                 <span
-                  key={t}
                   style={{
-                    border: "1px solid var(--border)",
-                    color: "var(--muted)",
+                    fontFamily: "var(--font-bebas)",
+                    color: "var(--border)",
+                    fontSize: "clamp(5rem,12vw,10rem)",
+                    letterSpacing: 2,
                   }}
-                  className="text-xs px-3 py-1.5 rounded-full"
                 >
-                  {t}
+                  {s.name.slice(0, 2).toUpperCase()}
                 </span>
-              ))}
-            </div>
+              </div>
+            </section>
+
+            {/* ── Col 3 — Process ── */}
+            <aside
+              style={{ borderLeft: "1px solid var(--border)" }}
+              className="px-6 sm:px-8 py-10 hidden lg:flex flex-col justify-between"
+            >
+              <div>
+                <p
+                  style={{ color: "var(--muted)" }}
+                  className="text-xs tracking-widest uppercase mb-6"
+                >
+                  Our Process
+                </p>
+                <div className="flex flex-col">
+                  {s.process.map((step, j) => (
+                    <div
+                      key={j}
+                      style={{ borderBottom: "1px solid var(--border)" }}
+                      className="py-4 flex items-center gap-4"
+                    >
+                      <span
+                        style={{ color: "var(--accent)" }}
+                        className="text-xs font-mono flex-shrink-0"
+                      >
+                        {String(j + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        style={{ color: "var(--text)" }}
+                        className="text-xs uppercase tracking-wide"
+                      >
+                        {step}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA — only last card pe */}
+              {i === services.length - 1 && (
+                <Link
+                  href="/contact"
+                  style={{
+                    background: "var(--btn-bg)",
+                    color: "var(--btn-text)",
+                  }}
+                  className="mt-10 w-full text-center py-4 rounded-xl text-sm font-semibold transition-all relative overflow-hidden group block"
+                >
+                  <span
+                    style={{ background: "var(--accent)" }}
+                    className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-xl"
+                  />
+                  <span className="relative z-10">
+                    Let&apos;s Build Together →
+                  </span>
+                </Link>
+              )}
+            </aside>
           </div>
-        </Link>
+        </div>
       ))}
-    </section>
+    </main>
   );
 }

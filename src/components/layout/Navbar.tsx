@@ -45,9 +45,13 @@ export default function Navbar() {
             <Link
               href={link.href}
               style={{ color: "var(--muted)" }}
-              className="text-xs font-medium tracking-widest uppercase hover:opacity-100 transition-opacity"
+              className="text-xs font-medium tracking-widest uppercase transition-opacity relative group"
             >
               {link.label}
+              <span
+                style={{ background: "var(--accent)" }}
+                className="absolute -bottom-1 left-0 h-[1.5px] w-0 group-hover:w-full transition-all duration-300 ease-out"
+              />
             </Link>
           </li>
         ))}
@@ -66,9 +70,13 @@ export default function Navbar() {
         <Link
           href="/contact"
           style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-          className="text-xs font-semibold px-5 py-2 rounded-full hover:opacity-80 transition-all tracking-wide"
+          className="text-xs font-semibold px-5 py-2 rounded-full transition-all tracking-wide relative overflow-hidden group"
         >
-          Let&apos;s Talk
+          <span
+            style={{ background: "var(--accent)" }}
+            className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+          />
+          <span className="relative z-10">Let&apos;s Talk</span>
         </Link>
       </div>
     </nav>

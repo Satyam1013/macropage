@@ -39,8 +39,10 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem={false}
         >
-          <Navbar />
-          <main>{children}</main>
+          <div className="relative z-10" style={{ background: "var(--bg)" }}>
+            <Navbar />
+            <main>{children}</main>
+          </div>
           <Footer />
         </ThemeProvider>
       </body>
