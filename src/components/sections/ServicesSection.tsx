@@ -341,17 +341,27 @@ function ServiceCard({
             background: "var(--bg)",
             border: "1px solid var(--border)",
             borderRadius: 20,
-            minHeight: 320, // 👈 zyada height
+            minHeight: 320,
+            position: "relative",
+            overflow: "hidden",
           }}
-          className="p-8 flex flex-col justify-between h-full   
-            transition-all duration-300
-            group-hover:-translate-y-2 group-hover:shadow-xl"
+          className="p-8 flex flex-col justify-between h-full transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl"
         >
-          <div style={{ color: "#e05a2b" }} className="mb-12">
-            {" "}
-            {/* 👈 icon ke neeche zyada space */}
+          {/* Icon */}
+          <div
+            style={{
+              color: "var(--accent)",
+              width: 90,
+              height: 90,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            className="mb-12 [&>svg]:w-24 [&>svg]:h-24"
+          >
             {service.icon}
           </div>
+
           <div>
             <h3
               style={{ color: "var(--text)" }}
@@ -373,7 +383,6 @@ function ServiceCard({
 }
 
 export default function ServicesSection() {
-  // Split into rows of COLS
   const rows: (typeof services)[] = [];
   for (let i = 0; i < services.length; i += COLS) {
     rows.push(services.slice(i, i + COLS));
@@ -381,9 +390,6 @@ export default function ServicesSection() {
 
   return (
     <section style={{ background: "var(--bg2)" }} className="px-10 py-24">
-      {" "}
-      {/* py-16 → py-24 */}
-      {/* Header */}
       <div
         style={{ borderBottom: "1px solid var(--border)" }}
         className="flex justify-between items-end pb-4 mb-10 flex-wrap gap-3"

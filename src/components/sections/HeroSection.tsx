@@ -10,7 +10,7 @@ function TechIllustration() {
       viewBox="0 0 500 420"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ width: "100%", maxWidth: 520, opacity: 0.12 }}
+      style={{ width: "100%", maxWidth: 550, opacity: 1 }}
     >
       {/* Browser window */}
       <rect
@@ -601,7 +601,7 @@ export default function HeroSection() {
               "radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%)",
             WebkitMaskImage:
               "radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%)",
-            color: "var(--text)",
+            color: "var(--accent)",
           }}
         >
           <TechIllustration />
