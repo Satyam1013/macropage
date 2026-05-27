@@ -26,3 +26,4 @@ coverage/
 *.env.local
 *.env.development       
 .next
+package-lock.json
