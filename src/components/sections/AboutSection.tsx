@@ -47,7 +47,7 @@ export default function AboutSection() {
           transition={{ delay: 0.15 }}
         >
           <p style={{ color: "var(--muted)" }} className="text-base leading-relaxed mb-4">
-            MacroPage is a tech studio based in Aligarh, India. We partner with startups, founders,
+            MacroPage is a tech studio based in Raigarh, India. We partner with startups, founders,
             and businesses to build digital products that stand out — products that are bold,
             functional, and built to last.
           </p>

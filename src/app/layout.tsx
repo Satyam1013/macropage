@@ -3,18 +3,19 @@ import { ThemeProvider } from "next-themes";
 import "@/styles/globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "MacroPage — Tech Studio India",
   description:
     "MacroPage builds bold digital products — web apps, mobile apps, AI integration, automation, and cloud infrastructure.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://macropage.in",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in",
   ),
   openGraph: {
     title: "MacroPage — Tech Studio India",
     description: "We build digital products that scale.",
-    url: "https://macropage.in",
+    url: "https://www.macropage.in",
     siteName: "MacroPage",
     locale: "en_IN",
     type: "website",
@@ -45,6 +46,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -132,7 +132,7 @@ export default function ContactPage() {
                 style={{ color: "var(--text)" }}
                 className="text-lg font-medium"
               >
-                Aligarh, Uttar Pradesh, India
+                Raigarh, Chattisgarh, India
               </p>
             </div>
 

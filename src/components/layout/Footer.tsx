@@ -159,7 +159,7 @@ export default function Footer() {
         className="flex flex-wrap justify-between items-center gap-3 px-6 sm:px-10 py-5 w-full"
       >
         <p style={{ color: "var(--muted)" }} className="text-xs">
-          Aligarh, Uttar Pradesh, India
+          Raigarh, Chattisgarh, India
         </p>
         <p style={{ color: "var(--muted)" }} className="text-xs">
           © {new Date().getFullYear()} MacroPage. All rights reserved.

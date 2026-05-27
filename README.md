@@ -186,5 +186,5 @@ Sanity Studio se add karo — automatically website par show hoga.
 
 ## Contact
 
-MacroPage · Aligarh, UP, India  
+MacroPage · Raigarh, CG, India  
 hello@macropage.in
