@@ -2138,3 +2138,362 @@ export function SocialMediaIllustration() {
     </svg>
   );
 }
+
+export function WhatsAppIllustration() {
+  return (
+    <svg
+      viewBox="0 0 600 400"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full h-full"
+    >
+      {/* Phone frame */}
+      <rect
+        x="180"
+        y="20"
+        width="240"
+        height="360"
+        rx="28"
+        fill="currentColor"
+        opacity="0.12"
+        stroke="currentColor"
+        strokeOpacity="0.2"
+        strokeWidth="2"
+      />
+      <rect
+        x="194"
+        y="44"
+        width="212"
+        height="312"
+        rx="8"
+        fill="currentColor"
+        opacity="0.06"
+      />
+      <rect
+        x="262"
+        y="30"
+        width="76"
+        height="12"
+        rx="6"
+        fill="currentColor"
+        opacity="0.2"
+      />
+
+      {/* WhatsApp header bar */}
+      <rect
+        x="194"
+        y="44"
+        width="212"
+        height="48"
+        rx="8"
+        fill="currentColor"
+        opacity="0.25"
+      />
+      <circle cx="218" cy="68" r="14" fill="currentColor" opacity="0.3" />
+      <rect
+        x="240"
+        y="60"
+        width="80"
+        height="9"
+        rx="4"
+        fill="currentColor"
+        opacity="0.35"
+      />
+      <rect
+        x="240"
+        y="75"
+        width="50"
+        height="7"
+        rx="3"
+        fill="currentColor"
+        opacity="0.2"
+      />
+
+      {/* Chat bubbles — received */}
+      <rect
+        x="202"
+        y="106"
+        width="130"
+        height="38"
+        rx="10"
+        fill="currentColor"
+        opacity="0.18"
+      />
+      <rect
+        x="214"
+        y="116"
+        width="100"
+        height="8"
+        rx="4"
+        fill="currentColor"
+        opacity="0.3"
+      />
+      <rect
+        x="214"
+        y="129"
+        width="70"
+        height="7"
+        rx="3"
+        fill="currentColor"
+        opacity="0.2"
+      />
+
+      {/* Chat bubbles — sent */}
+      <rect
+        x="262"
+        y="158"
+        width="136"
+        height="38"
+        rx="10"
+        fill="currentColor"
+        opacity="0.28"
+      />
+      <rect
+        x="274"
+        y="168"
+        width="108"
+        height="8"
+        rx="4"
+        fill="currentColor"
+        opacity="0.35"
+      />
+      <rect
+        x="274"
+        y="181"
+        width="80"
+        height="7"
+        rx="3"
+        fill="currentColor"
+        opacity="0.2"
+      />
+
+      {/* Received */}
+      <rect
+        x="202"
+        y="210"
+        width="150"
+        height="50"
+        rx="10"
+        fill="currentColor"
+        opacity="0.18"
+      />
+      <rect
+        x="214"
+        y="220"
+        width="120"
+        height="8"
+        rx="4"
+        fill="currentColor"
+        opacity="0.3"
+      />
+      <rect
+        x="214"
+        y="233"
+        width="90"
+        height="7"
+        rx="3"
+        fill="currentColor"
+        opacity="0.2"
+      />
+      <rect
+        x="214"
+        y="245"
+        width="110"
+        height="7"
+        rx="3"
+        fill="currentColor"
+        opacity="0.15"
+      />
+
+      {/* Sent */}
+      <rect
+        x="256"
+        y="274"
+        width="142"
+        height="38"
+        rx="10"
+        fill="currentColor"
+        opacity="0.28"
+      />
+      <rect
+        x="268"
+        y="284"
+        width="112"
+        height="8"
+        rx="4"
+        fill="currentColor"
+        opacity="0.35"
+      />
+      <rect
+        x="268"
+        y="297"
+        width="80"
+        height="7"
+        rx="3"
+        fill="currentColor"
+        opacity="0.2"
+      />
+
+      {/* Input bar */}
+      <rect
+        x="194"
+        y="326"
+        width="212"
+        height="30"
+        rx="15"
+        fill="currentColor"
+        opacity="0.15"
+        stroke="currentColor"
+        strokeOpacity="0.15"
+        strokeWidth="1"
+      />
+      <rect
+        x="210"
+        y="337"
+        width="100"
+        height="8"
+        rx="4"
+        fill="currentColor"
+        opacity="0.15"
+      />
+      <circle cx="384" cy="341" r="10" fill="currentColor" opacity="0.25" />
+
+      {/* Floating stat cards */}
+      <rect
+        x="22"
+        y="100"
+        width="130"
+        height="56"
+        rx="10"
+        fill="currentColor"
+        opacity="0.07"
+        stroke="currentColor"
+        strokeOpacity="0.15"
+        strokeWidth="1"
+      />
+      <text
+        x="38"
+        y="126"
+        fontSize="15"
+        fill="currentColor"
+        fillOpacity="0.35"
+        fontFamily="monospace"
+        fontWeight="bold"
+      >
+        📨 98%
+      </text>
+      <text
+        x="38"
+        y="146"
+        fontSize="10"
+        fill="currentColor"
+        fillOpacity="0.2"
+        fontFamily="monospace"
+      >
+        Open Rate
+      </text>
+
+      <rect
+        x="448"
+        y="100"
+        width="130"
+        height="56"
+        rx="10"
+        fill="currentColor"
+        opacity="0.07"
+        stroke="currentColor"
+        strokeOpacity="0.15"
+        strokeWidth="1"
+      />
+      <text
+        x="464"
+        y="126"
+        fontSize="15"
+        fill="currentColor"
+        fillOpacity="0.35"
+        fontFamily="monospace"
+        fontWeight="bold"
+      >
+        🤖 Auto
+      </text>
+      <text
+        x="464"
+        y="146"
+        fontSize="10"
+        fill="currentColor"
+        fillOpacity="0.2"
+        fontFamily="monospace"
+      >
+        Bot Replies
+      </text>
+
+      <rect
+        x="22"
+        y="240"
+        width="130"
+        height="56"
+        rx="10"
+        fill="currentColor"
+        opacity="0.07"
+        stroke="currentColor"
+        strokeOpacity="0.15"
+        strokeWidth="1"
+      />
+      <text
+        x="38"
+        y="266"
+        fontSize="15"
+        fill="currentColor"
+        fillOpacity="0.35"
+        fontFamily="monospace"
+        fontWeight="bold"
+      >
+        📢 Bulk
+      </text>
+      <text
+        x="38"
+        y="286"
+        fontSize="10"
+        fill="currentColor"
+        fillOpacity="0.2"
+        fontFamily="monospace"
+      >
+        Broadcast
+      </text>
+
+      <rect
+        x="448"
+        y="240"
+        width="130"
+        height="56"
+        rx="10"
+        fill="currentColor"
+        opacity="0.07"
+        stroke="currentColor"
+        strokeOpacity="0.15"
+        strokeWidth="1"
+      />
+      <text
+        x="464"
+        y="266"
+        fontSize="15"
+        fill="currentColor"
+        fillOpacity="0.35"
+        fontFamily="monospace"
+        fontWeight="bold"
+      >
+        🔗 CRM
+      </text>
+      <text
+        x="464"
+        y="286"
+        fontSize="10"
+        fill="currentColor"
+        fillOpacity="0.2"
+        fontFamily="monospace"
+      >
+        Integration
+      </text>
+    </svg>
+  );
+}

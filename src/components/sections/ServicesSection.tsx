@@ -260,20 +260,21 @@ const services = [
   },
   {
     num: "07",
-    slug: "digital-marketing",
-    name: "Digital Marketing",
-    desc: "SEO, Google Ads, email campaigns — data-driven marketing that brings the right audience.",
+    slug: "whatsapp-api",
+    name: "WhatsApp API Integration",
+    desc: "Automate customer conversations, send bulk messages, and build chatbots via the official WhatsApp Business API.",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="18" fill="currentColor" opacity="0.15" />
         <path
-          d="M8 34l10-12 8 6 8-14 8 8"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M24 8C15.16 8 8 15.16 8 24c0 2.82.74 5.46 2.02 7.76L8 40l8.48-2.18A15.93 15.93 0 0024 40c8.84 0 16-7.16 16-16S32.84 8 24 8z"
+          fill="currentColor"
+          opacity="0.9"
         />
-        <circle cx="8" cy="34" r="3" fill="currentColor" />
-        <circle cx="40" cy="22" r="3" fill="currentColor" opacity="0.5" />
+        <path
+          d="M32 27.6c-.4-.2-2.34-1.16-2.7-1.28-.36-.14-.62-.2-.88.2-.26.4-1.02 1.28-1.24 1.54-.22.26-.46.28-.86.1-.4-.2-1.68-.62-3.2-1.98-1.18-1.06-1.98-2.36-2.22-2.76-.22-.4-.02-.62.18-.82.18-.18.4-.46.6-.7.2-.22.26-.4.4-.66.14-.26.06-.5-.02-.7-.1-.2-.88-2.12-1.2-2.9-.32-.76-.64-.66-.88-.66h-.74c-.26 0-.68.1-1.04.5-.36.38-1.36 1.32-1.36 3.22s1.4 3.74 1.58 4c.2.26 2.74 4.18 6.64 5.86 3.9 1.66 3.9 1.1 4.6 1.04.7-.08 2.26-.92 2.58-1.82.32-.88.32-1.64.22-1.8-.08-.18-.34-.28-.74-.48z"
+          fill="white"
+        />
       </svg>
     ),
   },

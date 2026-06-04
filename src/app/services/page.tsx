@@ -8,8 +8,8 @@ import {
   AutomationIllustration,
   UIUXIllustration,
   CloudIllustration,
-  MarketingIllustration,
   SocialMediaIllustration,
+  WhatsAppIllustration,
 } from "@/components/ui/ServiceIllustrations";
 
 const services = [
@@ -45,7 +45,7 @@ const services = [
       "Analytics & Monitoring",
     ],
     tech: ["React Native", "Flutter", "Expo", "Firebase"],
-    Illustration: AppDevIllustration,
+    Illustration: WhatsAppIllustration,
   },
   {
     num: "03",
@@ -117,20 +117,25 @@ const services = [
   },
   {
     num: "07",
-    name: "Digital Marketing",
-    slug: "digital-marketing",
+    name: "WhatsApp API",
+    slug: "whatsapp-api",
     detail:
-      "Data-driven digital marketing that brings real results. SEO, paid ads, email campaigns, and conversion optimization — all aligned to your growth goals.",
+      "Connect with customers instantly using the official WhatsApp Business API. From automated replies and bulk messaging to full chatbot flows — we build WhatsApp solutions that drive engagement and sales.",
     process: [
-      "Market & Competitor Research",
-      "Strategy & Goal Setting",
-      "SEO & Content Planning",
-      "Paid Ads Setup",
-      "Analytics & Tracking",
-      "Reporting & Optimization",
+      "Business API Account Setup",
+      "Use Case & Flow Planning",
+      "Chatbot & Automation Design",
+      "CRM & Tool Integration",
+      "Testing & Compliance Check",
+      "Launch & Performance Monitoring",
     ],
-    tech: ["Google Ads", "SEO", "Meta Ads", "Google Analytics"],
-    Illustration: MarketingIllustration,
+    tech: [
+      "WhatsApp Business API",
+      "Twilio",
+      "360dialog",
+      "Webhook / REST API",
+    ],
+    Illustration: AppDevIllustration,
   },
   {
     num: "08",

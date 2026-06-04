@@ -5,7 +5,7 @@ const items = [
   "Business Automation",
   "UI/UX Designing",
   "Cloud Services",
-  "Digital Marketing",
+  "Whats App",
   "Social Media Marketing",
   // Duplicate for infinite loop
   "Web Development",
@@ -14,7 +14,7 @@ const items = [
   "Business Automation",
   "UI/UX Designing",
   "Cloud Services",
-  "Digital Marketing",
+  "Whats App",
   "Social Media Marketing",
 ];
 

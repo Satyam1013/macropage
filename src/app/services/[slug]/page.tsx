@@ -148,6 +148,48 @@ const services: Record<
       "Ongoing Support",
     ],
   },
+  "whatsapp-api": {
+    num: "07",
+    name: "WhatsApp API",
+    tagline: "Connect with customers instantly at scale.",
+    description:
+      "Connect with customers instantly using the official WhatsApp Business API. From automated replies and bulk messaging to full chatbot flows — we build WhatsApp solutions that drive engagement and sales.",
+    tech: [
+      "WhatsApp Business API",
+      "Twilio",
+      "360dialog",
+      "Webhook / REST API",
+    ],
+    process: [
+      "Business API Account Setup",
+      "Use Case & Flow Planning",
+      "Chatbot & Automation Design",
+      "CRM & Tool Integration",
+      "Testing & Compliance Check",
+      "Launch & Performance Monitoring",
+    ],
+  },
+  "social-media-marketing": {
+    num: "08",
+    name: "Social Media Marketing",
+    tagline: "Build a brand people follow.",
+    description:
+      "We create scroll-stopping content, manage your social presence, and run campaigns that turn followers into customers. From strategy to creative production — we handle it all.",
+    tech: [
+      "Instagram",
+      "LinkedIn",
+      "Meta Business",
+      "Canva Pro",
+    ],
+    process: [
+      "Brand Voice & Audit",
+      "Platform Strategy",
+      "Content Calendar",
+      "Creative Production",
+      "Community Management",
+      "Performance Reporting",
+    ],
+  },
 };
 
 export default function ServiceDetailPage({

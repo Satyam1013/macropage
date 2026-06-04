@@ -28,7 +28,7 @@ const tickerItems = [
   "Business Automation",
   "UI/UX Design",
   "Cloud Services",
-  "Digital Marketing",
+  "WhatsApp API",
   "Social Media",
 ];
 
