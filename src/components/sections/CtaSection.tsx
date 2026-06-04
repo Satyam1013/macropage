@@ -35,7 +35,7 @@ export default function CtaSection() {
       </Link>
 
       <p style={{ opacity: 0.4 }} className="text-sm mt-6">
-        New Business: hello@macropage.in
+        New Business: info@macropage.in
       </p>
     </section>
   );

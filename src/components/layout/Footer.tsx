@@ -12,7 +12,16 @@ const socialLinks = [
   { href: "https://instagram.com", label: "Instagram" },
   { href: "https://linkedin.com", label: "LinkedIn" },
   { href: "https://twitter.com", label: "X (Twitter)" },
-  { href: "mailto:hello@macropage.in", label: "Email" },
+  { href: "mailto:info@macropage.in", label: "Email" },
+];
+
+const legalLinks = [
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms-and-conditions", label: "Terms & Conditions" },
+  { href: "/refund-policy", label: "Refund Policy" },
+  { href: "/cookie-policy", label: "Cookie Policy" },
+  { href: "/msa", label: "MSA" },
+  { href: "/dpa", label: "DPA" },
 ];
 
 function HoverLink({ href, label }: { href: string; label: string }) {
@@ -43,7 +52,7 @@ export default function Footer() {
     >
       <div
         style={{ borderBottom: "1px solid var(--border)" }}
-        className="grid grid-cols-1 sm:grid-cols-3 gap-10 px-6 sm:px-10 py-12 w-full"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6 sm:px-10 py-12 w-full"
       >
         {/* Col 1 — tagline + CTA */}
         <div className="flex flex-col justify-between gap-8">
@@ -88,11 +97,11 @@ export default function Footer() {
               New Business
             </p>
             <a
-              href="mailto:hello@macropage.in"
+              href="mailto:info@macropage.in"
               style={{ color: "var(--text)" }}
               className="text-sm hover:opacity-60 transition-opacity"
             >
-              hello@macropage.in
+              info@macropage.in
             </a>
           </div>
         </div>
@@ -112,7 +121,22 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Col 3 — Social */}
+        {/* Col 3 — Legal */}
+        <div>
+          <p
+            style={{ color: "var(--muted)" }}
+            className="text-xs uppercase tracking-widest mb-6"
+          >
+            Legal
+          </p>
+          <div className="flex flex-col gap-4">
+            {legalLinks.map((l) => (
+              <HoverLink key={l.href} href={l.href} label={l.label} />
+            ))}
+          </div>
+        </div>
+
+        {/* Col 4 — Social */}
         <div>
           <p
             style={{ color: "var(--muted)" }}

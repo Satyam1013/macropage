@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: "MacroPage Contact <noreply@macropage.in>",
-      to: process.env.CONTACT_EMAIL || "hello@macropage.in",
+      to: process.env.CONTACT_EMAIL || "info@macropage.in",
       reply_to: email,
       subject: `New inquiry from ${name}`,
       html: `

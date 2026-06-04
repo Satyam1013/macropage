@@ -113,11 +113,11 @@ export default function ContactPage() {
                 Email
               </p>
               <a
-                href="mailto:hello@macropage.in"
+                href="mailto:info@macropage.in"
                 style={{ color: "var(--text)" }}
                 className="text-lg font-medium hover:opacity-60 transition-opacity"
               >
-                hello@macropage.in
+                info@macropage.in
               </a>
             </div>
 
@@ -299,7 +299,7 @@ export default function ContactPage() {
 
               {status === "error" && (
                 <p className="text-red-500 text-sm">
-                  Something went wrong. Email us at hello@macropage.in
+                  Something went wrong. Email us at info@macropage.in
                 </p>
               )}
             </form>
