@@ -3,7 +3,7 @@ import Link from "next/link";
 const sections = [
   {
     title: "1. Introduction",
-    body: 'Welcome to Macropage ("Company", "we", "our", or "us"), a brand operated by MR TECH SOLUTION PVT LTD.\n\nBy accessing or using our website, services, software, applications, automation solutions, WhatsApp API services, ERP/CRM systems, AI integrations, web development, app development, and related services, you agree to these Terms & Conditions.',
+    body: 'Welcome to Macropage ("Company", "we", "our", or "us"), a brand operated by MR TECH SOLUTIONS PVT LTD.\n\nBy accessing or using our website, services, software, applications, automation solutions, WhatsApp API services, ERP/CRM systems, AI integrations, web development, app development, and related services, you agree to these Terms & Conditions.',
   },
   {
     title: "2. Services",
@@ -23,7 +23,7 @@ const sections = [
   },
   {
     title: "6. Limitation of Liability",
-    body: "MR TECH SOLUTION PVT LTD shall not be liable for:\n• Indirect damages\n• Loss of profits\n• Business interruptions\n• Third-party platform failures\n• WhatsApp/Meta policy changes\n\nOur maximum liability shall not exceed the fees paid for the affected service.",
+    body: "MR TECH SOLUTIONS PVT LTD shall not be liable for:\n• Indirect damages\n• Loss of profits\n• Business interruptions\n• Third-party platform failures\n• WhatsApp/Meta policy changes\n\nOur maximum liability shall not exceed the fees paid for the affected service.",
   },
   {
     title: "7. Termination",
@@ -35,7 +35,7 @@ const sections = [
   },
   {
     title: "9. Contact",
-    body: "MR TECH SOLUTION PVT LTD\nBrand: Macropage\nEmail: info@macropage.in\nWebsite: macropage.in",
+    body: "MR TECH SOLUTIONS PVT LTD\nBrand: Macropage\nEmail: info@macropage.in\nWebsite: macropage.in",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function TermsAndConditionsPage() {
         </h1>
         <p style={{ color: "var(--muted)" }} className="text-base max-w-xl leading-relaxed">
           By accessing or using our services, you agree to the following terms and conditions
-          governed under MR TECH SOLUTION PVT LTD.
+          governed under MR TECH SOLUTIONS PVT LTD.
         </p>
       </section>
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 const sections = [
   {
     title: "1. Parties",
-    body: "Data Controller: Client\n\nData Processor: MR TECH SOLUTION PVT LTD (Macropage)",
+    body: "Data Controller: Client\n\nData Processor: MR TECH SOLUTIONS PVT LTD (Macropage)",
   },
   {
     title: "2. Purpose",
@@ -47,7 +47,7 @@ const sections = [
   },
   {
     title: "Contact",
-    body: "MR TECH SOLUTION PVT LTD\nBrand: Macropage\nEmail: info@macropage.in\nWebsite: macropage.in",
+    body: "MR TECH SOLUTIONS PVT LTD\nBrand: Macropage\nEmail: info@macropage.in\nWebsite: macropage.in",
   },
 ];
 
@@ -63,7 +63,7 @@ export default function DPAPage() {
           style={{ color: "var(--muted)" }}
           className="text-xs tracking-widest uppercase mb-3"
         >
-          Legal · MR TECH SOLUTION PVT LTD
+          Legal · MR TECH SOLUTIONS PVT LTD
         </p>
         <h1
           style={{

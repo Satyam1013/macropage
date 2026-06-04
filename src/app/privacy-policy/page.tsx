@@ -47,7 +47,7 @@ const sections = [
   },
   {
     title: "12. Contact Information",
-    body: "Company Name: MR TECH SOLUTION PVT LTD\nBrand Name: Macropage\nWebsite: macropage.in\nEmail: info@macropage.in\n\nBy using our website and services, you acknowledge that you have read and understood this Privacy Policy.",
+    body: "Company Name: MR TECH SOLUTIONS PVT LTD\nBrand Name: Macropage\nWebsite: macropage.in\nEmail: info@macropage.in\n\nBy using our website and services, you acknowledge that you have read and understood this Privacy Policy.",
   },
 ];
 
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
           </em>
         </h1>
         <p style={{ color: "var(--muted)" }} className="text-base max-w-xl leading-relaxed">
-          Macropage is a brand operated by MR TECH SOLUTION PVT LTD. This policy explains how
+          Macropage is a brand operated by MR TECH SOLUTIONS PVT LTD. This policy explains how
           we collect, use, store, disclose, and protect your information.
         </p>
       </section>

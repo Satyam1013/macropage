@@ -55,7 +55,7 @@ export default function MSAPage() {
           style={{ color: "var(--muted)" }}
           className="text-xs tracking-widest uppercase mb-3"
         >
-          Legal · MR TECH SOLUTION PVT LTD
+          Legal · MR TECH SOLUTIONS PVT LTD
         </p>
         <h1
           style={{

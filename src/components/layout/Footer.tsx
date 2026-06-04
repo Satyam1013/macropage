@@ -154,23 +154,31 @@ export default function Footer() {
 
       {/* ── Big brand name — truly full width ── */}
       <div
-        className="w-full overflow-hidden select-none px-6 flex-1 flex items-end"
-        style={{ lineHeight: 0.82 }}
+        className="flex-1 relative w-full overflow-hidden select-none"
       >
         <svg
-          viewBox="0 0 1000 160"
+          viewBox="0 0 1000 150"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
           preserveAspectRatio="none"
-          style={{ display: "block" }}
+          style={{
+            display: "block",
+            position: "absolute",
+            top: 0,
+            left: "1.5rem",
+            bottom: 0,
+            width: "calc(100% - 1.5rem)",
+            height: "100%",
+          }}
         >
           <text
             x="0"
-            y="148"
+            y="130"
             fontFamily="'Bebas Neue', sans-serif"
-            fontSize="165"
+            fontSize="160"
             fill="currentColor"
-            letterSpacing="50"
+            letterSpacing={"5"}
+            textLength="1000"
+            lengthAdjust="spacingAndGlyphs"
           >
             MACROPAGE
           </text>
@@ -186,7 +194,7 @@ export default function Footer() {
           Raigarh, Chattisgarh, India
         </p>
         <p style={{ color: "var(--muted)" }} className="text-xs">
-          © {new Date().getFullYear()} MacroPage. All rights reserved.
+          © {new Date().getFullYear()} MR Tech Solutions Pvt Ltd. All rights reserved.
         </p>
       </div>
     </footer>
