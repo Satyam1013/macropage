@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const { name, email, message } = schema.parse(body);
 
     await resend.emails.send({
-      from: "MacroPage Contact <noreply@macropage.in>",
+      from: "MacroPage Contact <info@macropage.in>",
       to: process.env.CONTACT_EMAIL || "info@macropage.in",
       reply_to: email,
       subject: `New inquiry from ${name}`,

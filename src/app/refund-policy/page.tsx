@@ -107,11 +107,11 @@ export default function RefundPolicyPage() {
         <Link
           href="/contact"
           style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-          className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold relative overflow-hidden group transition-all flex-shrink-0"
+          className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold relative overflow-hidden group transition-all active:scale-95 flex-shrink-0"
         >
           <span
             style={{ background: "var(--accent)" }}
-            className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+            className="absolute inset-0 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
           />
           <span className="relative z-10">Contact Us →</span>
         </Link>

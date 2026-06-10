@@ -29,9 +29,13 @@ export default function CtaSection() {
       <Link
         href="/contact"
         style={{ background: "var(--bg)", color: "var(--text)" }}
-        className="inline-block px-10 py-4 rounded-full text-sm font-semibold hover:opacity-80 transition-all"
+        className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95"
       >
-        Let&apos;s Talk →
+        <span
+          style={{ background: "var(--accent)", color: "var(--btn-text)" }}
+          className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+        />
+        <span className="relative z-10">Let&apos;s Talk →</span>
       </Link>
 
       <p style={{ opacity: 0.4 }} className="text-sm mt-6">

@@ -1,33 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-const faqs = [
-  {
-    q: "What services does MacroPage provide?",
-    a: "We build web apps, mobile apps, AI integrations, cloud infrastructure, business automation, and complete digital products from scratch.",
-  },
-  {
-    q: "How does your development process work?",
-    a: "We start with a discovery call, then move to design, development, testing, and launch — all with clear communication at every step.",
-  },
-  {
-    q: "What is the typical project timeline?",
-    a: "Simple websites take 2–3 weeks. Complex web apps or mobile apps typically take 6–12 weeks depending on scope.",
-  },
-  {
-    q: "How much does a project cost?",
-    a: "Projects start from ₹30,000 for landing pages and go up based on complexity. We provide a detailed quote after the discovery call.",
-  },
-  {
-    q: "Can I see examples of your past work?",
-    a: "Yes! Check out our Work page for case studies and live project links.",
-  },
-  {
-    q: "Do you offer post-launch support?",
-    a: "Absolutely. We offer maintenance packages and are available for ongoing support, updates, and scaling.",
-  },
-];
+import { faqs } from "@/data/content";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -292,9 +266,15 @@ export default function ContactPage() {
                   background: "var(--btn-bg)",
                   color: "var(--btn-text)",
                 }}
-                className="self-start px-8 py-3 rounded-full text-sm font-semibold hover:opacity-80 transition-all disabled:opacity-50"
+                className="self-start px-8 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 disabled:opacity-50"
               >
-                {status === "sending" ? "Sending..." : "Send Message →"}
+                <span
+                  style={{ background: "var(--accent)" }}
+                  className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+                />
+                <span className="relative z-10">
+                  {status === "sending" ? "Sending..." : "Send Message →"}
+                </span>
               </button>
 
               {status === "error" && (

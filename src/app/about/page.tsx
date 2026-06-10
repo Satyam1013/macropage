@@ -2,35 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-
-const stats = [
-  { num: "50+", label: "Web Apps Delivered" },
-  { num: "30+", label: "Mobile Apps" },
-  { num: "100+", label: "Projects Completed" },
-  { num: "20+", label: "AI Integrations" },
-  { num: "15+", label: "Automation Workflows" },
-  { num: "5★", label: "Client Rating" },
-];
-
-const team = [
-  { name: "Satyam Rawat", role: "Founder & Tech Lead" },
-  { name: "Priya Singh", role: "UI/UX Designer" },
-  { name: "Rahul Verma", role: "Backend Engineer" },
-  { name: "Ankit Sharma", role: "Mobile Developer" },
-  { name: "Neha Gupta", role: "AI Engineer" },
-  { name: "Vikram Joshi", role: "DevOps Engineer" },
-];
-
-const tickerItems = [
-  "Web Development",
-  "App Development",
-  "AI Integration",
-  "Business Automation",
-  "UI/UX Design",
-  "Cloud Services",
-  "WhatsApp API",
-  "Social Media",
-];
+import { stats, team, tickerItems } from "@/data/content";
 
 function AutoTicker() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -239,11 +211,11 @@ export default function AboutPage() {
           <Link
             href="/contact"
             style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-            className="self-start px-8 py-3 rounded-full text-sm font-semibold relative overflow-hidden group transition-all"
+            className="self-start px-8 py-3 rounded-full text-sm font-semibold relative overflow-hidden group transition-all active:scale-95"
           >
             <span
               style={{ background: "var(--accent)" }}
-              className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+              className="absolute inset-0 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
             />
             <span className="relative z-10">Contact Us →</span>
           </Link>
@@ -389,11 +361,11 @@ export default function AboutPage() {
         <Link
           href="/contact"
           style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-          className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold relative overflow-hidden group transition-all flex-shrink-0"
+          className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold relative overflow-hidden group transition-all active:scale-95 flex-shrink-0"
         >
           <span
             style={{ background: "var(--accent)" }}
-            className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+            className="absolute inset-0 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
           />
           <span className="relative z-10">Let&apos;s Talk →</span>
         </Link>

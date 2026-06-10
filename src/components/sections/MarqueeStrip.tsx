@@ -1,22 +1,6 @@
-const items = [
-  "Web Development",
-  "App Development",
-  "AI Integration",
-  "Business Automation",
-  "UI/UX Designing",
-  "Cloud Services",
-  "Whats App",
-  "Social Media Marketing",
-  // Duplicate for infinite loop
-  "Web Development",
-  "App Development",
-  "AI Integration",
-  "Business Automation",
-  "UI/UX Designing",
-  "Cloud Services",
-  "Whats App",
-  "Social Media Marketing",
-];
+import { marqueeItems } from "@/data/content";
+
+const items = [...marqueeItems, ...marqueeItems];
 
 export default function MarqueeStrip() {
   return (

@@ -2,43 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-
-const projects = [
-  {
-    slug: "shopease",
-    name: "ShopEase",
-    year: "2025",
-    category: "E-Commerce",
-    tags: "Web App · UI/UX",
-    color: "#e2dfd8",
-  },
-  {
-    slug: "finbot-ai",
-    name: "FinBot AI",
-    year: "2025",
-    category: "Fintech",
-    tags: "AI Integration · Automation",
-    color: "#d8dce2",
-  },
-  {
-    slug: "carelink",
-    name: "CareLink",
-    year: "2025",
-    category: "Healthcare",
-    tags: "Mobile App · Cloud",
-    color: "#dde2d8",
-  },
-  {
-    slug: "logidash",
-    name: "LogiDash",
-    year: "2025",
-    category: "Logistics",
-    tags: "Dashboard · Automation",
-    color: "#e2d8dc",
-  },
-];
-
-const HOLD = 2800;
+import { workSectionProjects as projects } from "@/data/projects";
+import { HOLD } from "@/constants";
 
 export default function WorkSection() {
   const [current, setCurrent] = useState(0);

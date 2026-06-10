@@ -1,196 +1,5 @@
 import Link from "next/link";
-
-const services: Record<
-  string,
-  {
-    num: string;
-    name: string;
-    tagline: string;
-    description: string;
-    tech: string[];
-    process: string[];
-  }
-> = {
-  "web-development": {
-    num: "01",
-    name: "Web Development",
-    tagline: "Fast, modern, SEO-ready websites & web apps.",
-    description:
-      "We build production-grade web applications using Next.js, React, and Node.js. Every project is optimized for speed, SEO, and scalability — from simple landing pages to complex SaaS platforms.",
-    tech: [
-      "Next.js 14",
-      "React 18",
-      "TypeScript",
-      "Node.js",
-      "PostgreSQL",
-      "Tailwind CSS",
-      "Vercel",
-    ],
-    process: [
-      "Discovery & Planning",
-      "Wireframe & Design",
-      "Development",
-      "Testing & QA",
-      "Deploy & Monitor",
-    ],
-  },
-  "app-development": {
-    num: "02",
-    name: "App Development",
-    tagline: "iOS & Android apps that users love.",
-    description:
-      "Cross-platform mobile apps built with React Native and Flutter. One codebase, two platforms — delivered faster without compromising on performance or user experience.",
-    tech: [
-      "React Native",
-      "Flutter",
-      "Expo",
-      "Firebase",
-      "Redux",
-      "App Store",
-      "Play Store",
-    ],
-    process: [
-      "UX Research",
-      "UI Design",
-      "Development",
-      "Testing on Devices",
-      "Store Launch",
-    ],
-  },
-  "ai-integration": {
-    num: "03",
-    name: "AI Integration",
-    tagline: "LLMs, chatbots & automation that actually work.",
-    description:
-      "We integrate AI into your existing product or build AI-native tools from scratch. From chatbots and document analysis to recommendation engines and custom LLM workflows — we make AI practical.",
-    tech: [
-      "OpenAI GPT-4",
-      "LangChain",
-      "Python",
-      "Pinecone",
-      "Hugging Face",
-      "FastAPI",
-      "RAG",
-    ],
-    process: [
-      "Use Case Analysis",
-      "Model Selection",
-      "Integration",
-      "Fine-tuning",
-      "Monitoring",
-    ],
-  },
-  "business-automation": {
-    num: "04",
-    name: "Business Automation",
-    tagline: "Save hundreds of hours every month.",
-    description:
-      "We connect your tools and automate repetitive workflows so your team can focus on what matters. Custom pipelines, API integrations, and no-code/low-code solutions tailored to your business.",
-    tech: [
-      "n8n",
-      "Zapier",
-      "Make",
-      "REST APIs",
-      "Webhooks",
-      "Python",
-      "Cron Jobs",
-    ],
-    process: [
-      "Workflow Audit",
-      "Tool Mapping",
-      "Pipeline Build",
-      "Testing",
-      "Handover & Docs",
-    ],
-  },
-  "ui-ux-designing": {
-    num: "05",
-    name: "UI/UX Designing",
-    tagline: "Designs that look great and convert.",
-    description:
-      "Figma-first design process. We create wireframes, prototypes, and pixel-perfect UI that balances aesthetics with usability — tested and approved before a single line of code is written.",
-    tech: [
-      "Figma",
-      "Framer",
-      "Adobe XD",
-      "Prototyping",
-      "User Testing",
-      "Design Systems",
-    ],
-    process: [
-      "Research",
-      "Wireframes",
-      "Visual Design",
-      "Prototype",
-      "Handoff to Dev",
-    ],
-  },
-  "cloud-services": {
-    num: "06",
-    name: "Cloud Services",
-    tagline: "Infrastructure built to scale reliably.",
-    description:
-      "We set up and manage cloud infrastructure on AWS, GCP, or Azure. Automated CI/CD pipelines, Docker containers, monitoring, and security — so you ship faster and sleep better.",
-    tech: [
-      "AWS",
-      "GCP",
-      "Docker",
-      "Kubernetes",
-      "GitHub Actions",
-      "Cloudflare",
-      "Terraform",
-    ],
-    process: [
-      "Architecture Planning",
-      "Setup & Config",
-      "CI/CD Pipeline",
-      "Monitoring",
-      "Ongoing Support",
-    ],
-  },
-  "whatsapp-api": {
-    num: "07",
-    name: "WhatsApp API",
-    tagline: "Connect with customers instantly at scale.",
-    description:
-      "Connect with customers instantly using the official WhatsApp Business API. From automated replies and bulk messaging to full chatbot flows — we build WhatsApp solutions that drive engagement and sales.",
-    tech: [
-      "WhatsApp Business API",
-      "Twilio",
-      "360dialog",
-      "Webhook / REST API",
-    ],
-    process: [
-      "Business API Account Setup",
-      "Use Case & Flow Planning",
-      "Chatbot & Automation Design",
-      "CRM & Tool Integration",
-      "Testing & Compliance Check",
-      "Launch & Performance Monitoring",
-    ],
-  },
-  "social-media-marketing": {
-    num: "08",
-    name: "Social Media Marketing",
-    tagline: "Build a brand people follow.",
-    description:
-      "We create scroll-stopping content, manage your social presence, and run campaigns that turn followers into customers. From strategy to creative production — we handle it all.",
-    tech: [
-      "Instagram",
-      "LinkedIn",
-      "Meta Business",
-      "Canva Pro",
-    ],
-    process: [
-      "Brand Voice & Audit",
-      "Platform Strategy",
-      "Content Calendar",
-      "Creative Production",
-      "Community Management",
-      "Performance Reporting",
-    ],
-  },
-};
+import { servicesDetail as services } from "@/data/services-detail";
 
 export default function ServiceDetailPage({
   params,
@@ -201,148 +10,302 @@ export default function ServiceDetailPage({
 
   if (!service) {
     return (
-      <section className="px-10 py-16 text-center">
-        <h1
-          style={{ fontFamily: "var(--font-bebas)", color: "var(--text)" }}
-          className="text-6xl mb-4"
+      <main>
+        <section
+          style={{ borderBottom: "1px solid var(--border)" }}
+          className="px-6 sm:px-10 pt-14 pb-10 text-center"
         >
-          Service Not Found
-        </h1>
-        <Link
-          href="/services"
-          style={{ color: "var(--muted)" }}
-          className="text-sm underline"
-        >
-          ← Back to Services
-        </Link>
-      </section>
+          <h1
+            style={{ fontFamily: "var(--font-bebas)", color: "var(--text)" }}
+            className="text-[clamp(3rem,10vw,8rem)] tracking-wide mb-6"
+          >
+            Service Not Found
+          </h1>
+          <Link
+            href="/services"
+            style={{ color: "var(--muted)" }}
+            className="text-sm uppercase tracking-widest hover:opacity-60 transition-opacity"
+          >
+            ← Back to Services
+          </Link>
+        </section>
+      </main>
     );
   }
 
   return (
-    <section className="px-10 py-16 max-w-4xl mx-auto">
-      {/* Back */}
-      <Link
-        href="/services"
-        style={{ color: "var(--muted)" }}
-        className="text-xs uppercase tracking-widest hover:opacity-100 transition-all mb-10 inline-block"
+    <main>
+      {/* ── Hero ── */}
+      <section
+        style={{ borderBottom: "1px solid var(--border)" }}
+        className="px-6 sm:px-10 pt-14 pb-10"
       >
-        ← All Services
-      </Link>
+        <div className="flex items-center gap-4 mb-4">
+          <Link
+            href="/services"
+            style={{ color: "var(--muted)" }}
+            className="text-xs uppercase tracking-widest hover:opacity-60 transition-opacity"
+          >
+            ← Services
+          </Link>
+          <span style={{ color: "var(--border)" }}>|</span>
+          <p
+            style={{ color: "var(--muted)" }}
+            className="text-xs uppercase tracking-widest"
+          >
+            [ {service.num} ]
+          </p>
+        </div>
 
-      {/* Header */}
-      <p
-        style={{ color: "var(--muted)" }}
-        className="text-xs tracking-widest uppercase mb-3"
-      >
-        {service.num} · Service
-      </p>
-      <h1
-        style={{
-          fontFamily: "var(--font-bebas)",
-          color: "var(--text)",
-          lineHeight: 0.95,
-        }}
-        className="text-[clamp(3rem,8vw,6rem)] tracking-wide mb-4"
-      >
-        {service.name}
-      </h1>
-      <p style={{ color: "var(--muted)" }} className="text-lg mb-12 italic">
-        {service.tagline}
-      </p>
+        <h1
+          style={{
+            fontFamily: "var(--font-bebas)",
+            color: "var(--text)",
+            lineHeight: 0.9,
+          }}
+          className="text-[clamp(3.5rem,10vw,8rem)] tracking-wide mb-5"
+        >
+          {service.name}
+        </h1>
 
-      {/* Description */}
-      <div
-        style={{ borderTop: "1px solid var(--border)" }}
-        className="pt-8 mb-12"
+        <p
+          style={{
+            fontFamily: "var(--font-playfair)",
+            color: "var(--muted)",
+            fontStyle: "italic",
+          }}
+          className="text-xl max-w-lg"
+        >
+          {service.tagline}
+        </p>
+      </section>
+
+      {/* ── Description + Tech ── */}
+      <section
+        style={{ borderBottom: "1px solid var(--border)" }}
+        className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-0"
+      >
+        {/* Description */}
+        <div
+          style={{ borderRight: "1px solid var(--border)" }}
+          className="px-6 sm:px-10 py-14"
+        >
+          <p
+            style={{ color: "var(--muted)" }}
+            className="text-xs uppercase tracking-widest mb-6"
+          >
+            Overview
+          </p>
+          <p
+            style={{ color: "var(--text)" }}
+            className="text-base leading-relaxed max-w-2xl"
+          >
+            {service.description}
+          </p>
+        </div>
+
+        {/* Tech Stack */}
+        <div className="px-6 sm:px-8 py-14">
+          <p
+            style={{ color: "var(--muted)" }}
+            className="text-xs uppercase tracking-widest mb-6"
+          >
+            Tech Stack
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {service.tech.map((t) => (
+              <span
+                key={t}
+                style={{
+                  border: "1px solid var(--border)",
+                  color: "var(--text)",
+                  background: "var(--bg2)",
+                }}
+                className="text-xs px-3 py-1.5 rounded-full font-medium"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Process ── */}
+      <section
+        style={{ borderBottom: "1px solid var(--border)" }}
+        className="px-6 sm:px-10 py-14"
       >
         <p
           style={{ color: "var(--muted)" }}
-          className="text-base leading-relaxed max-w-2xl"
-        >
-          {service.description}
-        </p>
-      </div>
-
-      {/* Tech Stack */}
-      <div className="mb-12">
-        <p
-          style={{ color: "var(--text)" }}
-          className="text-xs tracking-widest uppercase mb-4 font-semibold"
-        >
-          Technologies
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {service.tech.map((t) => (
-            <span
-              key={t}
-              style={{
-                border: "1px solid var(--border)",
-                color: "var(--muted)",
-                background: "var(--bg2)",
-              }}
-              className="text-sm px-4 py-1.5 rounded-full"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Process */}
-      <div>
-        <p
-          style={{ color: "var(--text)" }}
-          className="text-xs tracking-widest uppercase mb-6 font-semibold"
+          className="text-xs uppercase tracking-widest mb-10"
         >
           Our Process
         </p>
-        <div className="flex flex-wrap gap-3">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
+          style={{
+            border: "1px solid var(--border)",
+            background: "var(--border)",
+          }}
+        >
           {service.process.map((step, i) => (
-            <div key={step} className="flex items-center gap-3">
-              <div
+            <div
+              key={step}
+              style={{ background: "var(--bg)" }}
+              className="px-6 py-8 flex flex-col gap-3"
+            >
+              <span
                 style={{
-                  background: "var(--bg2)",
-                  border: "1px solid var(--border)",
-                  borderRadius: 10,
+                  fontFamily: "var(--font-bebas)",
+                  color: "var(--accent)",
+                  lineHeight: 1,
                 }}
-                className="px-4 py-2.5 flex items-center gap-2"
+                className="text-3xl"
               >
-                <span style={{ color: "var(--muted)" }} className="text-xs">
-                  {i + 1}.
-                </span>
-                <span
-                  style={{ color: "var(--text)" }}
-                  className="text-sm font-medium"
-                >
-                  {step}
-                </span>
-              </div>
-              {i < service.process.length - 1 && (
-                <span style={{ color: "var(--border)" }}>→</span>
-              )}
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span
+                style={{ color: "var(--text)" }}
+                className="text-sm font-medium leading-snug"
+              >
+                {step}
+              </span>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <div
-        style={{ borderTop: "1px solid var(--border)" }}
-        className="mt-16 pt-8 flex items-center justify-between flex-wrap gap-4"
-      >
-        <p style={{ color: "var(--muted)" }} className="text-sm">
-          Interested in {service.name}?
-        </p>
+      {/* ── Macropage Connect Product Spotlight (WhatsApp API only) ── */}
+      {service.product && (
+        <section
+          style={{ borderBottom: "1px solid var(--border)" }}
+          className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-0"
+        >
+          <div
+            style={{
+              background: "var(--bg2)",
+              borderRight: "1px solid var(--border)",
+            }}
+            className="px-6 sm:px-8 py-14 flex flex-col justify-between gap-8"
+          >
+            <div>
+              <p
+                style={{ color: "var(--muted)" }}
+                className="text-xs uppercase tracking-widest mb-4"
+              >
+                [ Built by us ]
+              </p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-bebas)",
+                  color: "var(--text)",
+                  lineHeight: 1,
+                }}
+                className="text-4xl tracking-wide mb-2"
+              >
+                {service.product.name}
+              </h2>
+              <p
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  color: "var(--muted)",
+                  fontStyle: "italic",
+                }}
+                className="text-sm"
+              >
+                {service.product.tagline}
+              </p>
+            </div>
+            <a
+              href={service.product.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+              className="inline-flex items-center justify-between px-5 py-3.5 rounded-xl text-sm font-semibold relative overflow-hidden group transition-all active:scale-95 w-full"
+            >
+              <span
+                style={{ background: "var(--accent)" }}
+                className="absolute inset-0 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-xl"
+              />
+              <span className="relative z-10">Visit Platform</span>
+              <span className="relative z-10">↗</span>
+            </a>
+          </div>
+
+          <div className="px-6 sm:px-10 py-14">
+            <p
+              style={{ color: "var(--text)" }}
+              className="text-base leading-relaxed mb-8"
+            >
+              {service.product.description}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {[
+                { stat: "1-Click", label: "WhatsApp onboarding" },
+                { stat: "360°", label: "Customer conversation view" },
+                { stat: "Live", label: "Broadcast & automation" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  style={{
+                    border: "1px solid var(--border)",
+                    borderRadius: 12,
+                  }}
+                  className="px-5 py-6"
+                >
+                  <p
+                    style={{
+                      fontFamily: "var(--font-bebas)",
+                      color: "var(--accent)",
+                      lineHeight: 1,
+                    }}
+                    className="text-3xl mb-1"
+                  >
+                    {item.stat}
+                  </p>
+                  <p
+                    style={{ color: "var(--muted)" }}
+                    className="text-xs leading-snug"
+                  >
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── CTA ── */}
+      <section className="px-6 sm:px-10 py-16 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
+        <h2
+          style={{
+            fontFamily: "var(--font-bebas)",
+            color: "var(--text)",
+            lineHeight: 0.95,
+          }}
+          className="text-[clamp(2.5rem,7vw,6rem)] tracking-wide"
+        >
+          Interested in{" "}
+          <em
+            style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}
+          >
+            {service.name}?
+          </em>
+        </h2>
         <Link
           href="/contact"
           style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-          className="px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-80 transition-all"
+          className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold relative overflow-hidden group transition-all active:scale-95 flex-shrink-0"
         >
-          Start a Project →
+          <span
+            style={{ background: "var(--accent)" }}
+            className="absolute inset-0 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+          />
+          <span className="relative z-10">Let&apos;s Try →</span>
         </Link>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

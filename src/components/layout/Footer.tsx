@@ -1,28 +1,5 @@
 import Link from "next/link";
-
-const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
-  { href: "/design-news", label: "Design News" },
-];
-
-const socialLinks = [
-  { href: "https://instagram.com", label: "Instagram" },
-  { href: "https://linkedin.com", label: "LinkedIn" },
-  { href: "https://twitter.com", label: "X (Twitter)" },
-  { href: "mailto:info@macropage.in", label: "Email" },
-];
-
-const legalLinks = [
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms-and-conditions", label: "Terms & Conditions" },
-  { href: "/refund-policy", label: "Refund Policy" },
-  { href: "/cookie-policy", label: "Cookie Policy" },
-  { href: "/msa", label: "MSA" },
-  { href: "/dpa", label: "DPA" },
-];
+import { footerNavLinks as navLinks, socialLinks, legalLinks } from "@/data/navigation";
 
 function HoverLink({ href, label }: { href: string; label: string }) {
   return (
@@ -79,11 +56,11 @@ export default function Footer() {
           <Link
             href="/contact"
             style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-            className="inline-flex items-center justify-between px-6 py-4 rounded-xl text-sm font-semibold transition-all relative overflow-hidden group w-full sm:max-w-[260px]"
+            className="inline-flex items-center justify-between px-6 py-4 rounded-xl text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 w-full sm:max-w-[260px]"
           >
             <span
               style={{ background: "var(--accent)" }}
-              className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-xl"
+              className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-xl"
             />
             <span className="relative z-10">Let&apos;s Talk</span>
             <span className="relative z-10">→</span>

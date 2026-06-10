@@ -3,108 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const projects = [
-  {
-    slug: "shopease",
-    name: "ShopEase",
-    year: "2025",
-    category: "E-Commerce",
-    filter: "WEB APP",
-    tags: "Web App · UI/UX",
-    color: "#e8e4dc",
-    aspect: "aspect-[4/3]",
-    span: "col-span-2",
-  },
-  {
-    slug: "finbot-ai",
-    name: "FinBot AI",
-    year: "2025",
-    category: "Fintech",
-    filter: "AI",
-    tags: "AI Integration",
-    color: "#dce0e8",
-    aspect: "aspect-[3/4]",
-    span: "col-span-1",
-  },
-  {
-    slug: "carelink",
-    name: "CareLink",
-    year: "2025",
-    category: "Healthcare",
-    filter: "MOBILE APP",
-    tags: "Mobile App · Cloud",
-    color: "#dce8e0",
-    aspect: "aspect-[3/4]",
-    span: "col-span-1",
-  },
-  {
-    slug: "logidash",
-    name: "LogiDash",
-    year: "2025",
-    category: "Logistics",
-    filter: "WEB APP",
-    tags: "Dashboard · Automation",
-    color: "#e8dce0",
-    aspect: "aspect-[4/3]",
-    span: "col-span-2",
-  },
-  {
-    slug: "rideswift",
-    name: "RideSwift",
-    year: "2025",
-    category: "Transport",
-    filter: "MOBILE APP",
-    tags: "Mobile App · Flutter",
-    color: "#e8e8dc",
-    aspect: "aspect-[4/3]",
-    span: "col-span-1",
-  },
-  {
-    slug: "datastack",
-    name: "DataStack",
-    year: "2025",
-    category: "SaaS",
-    filter: "AI",
-    tags: "Cloud · AI Integration",
-    color: "#dce8e8",
-    aspect: "aspect-[4/3]",
-    span: "col-span-1",
-  },
-  {
-    slug: "edureach",
-    name: "EduReach",
-    year: "2025",
-    category: "EdTech",
-    filter: "WEB APP",
-    tags: "Web App · UI/UX",
-    color: "#e8dce8",
-    aspect: "aspect-[4/3]",
-    span: "col-span-1",
-  },
-  {
-    slug: "quickbite",
-    name: "QuickBite",
-    year: "2025",
-    category: "Food Tech",
-    filter: "MOBILE APP",
-    tags: "Mobile App · Automation",
-    color: "#e8e0dc",
-    aspect: "aspect-[4/3]",
-    span: "col-span-1",
-  },
-];
+import { workPageProjects as projects } from "@/data/projects";
 
 const filters = [
   { label: "ALL", count: projects.length },
-  {
-    label: "WEB APP",
-    count: projects.filter((p) => p.filter === "WEB APP").length,
-  },
-  {
-    label: "MOBILE APP",
-    count: projects.filter((p) => p.filter === "MOBILE APP").length,
-  },
+  { label: "WEB APP", count: projects.filter((p) => p.filter === "WEB APP").length },
+  { label: "MOBILE APP", count: projects.filter((p) => p.filter === "MOBILE APP").length },
   { label: "AI", count: projects.filter((p) => p.filter === "AI").length },
 ];
 
