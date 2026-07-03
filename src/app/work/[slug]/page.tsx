@@ -1,4 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const project = projects[params.slug];
+  if (!project) return { title: "Project Not Found" };
+  return {
+    title: project.name,
+    description: project.description,
+    keywords: [project.name, project.category, project.tags, "MacroPage portfolio"],
+    openGraph: {
+      title: `${project.name} — MacroPage Work`,
+      description: project.description,
+      url: `${SITE_URL}/work/${params.slug}`,
+    },
+    alternates: { canonical: `${SITE_URL}/work/${params.slug}` },
+  };
+}
 
 const projects: Record<
   string,

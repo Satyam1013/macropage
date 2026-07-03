@@ -1,5 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { servicesDetail as services } from "@/data/services-detail";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const service = services[params.slug];
+  if (!service) return { title: "Service Not Found" };
+  return {
+    title: service.name,
+    description: service.description,
+    keywords: [`${service.name} India`, `${service.name} agency`, ...service.tech],
+    openGraph: {
+      title: `${service.name} — MacroPage`,
+      description: service.tagline,
+      url: `${SITE_URL}/services/${params.slug}`,
+    },
+    alternates: { canonical: `${SITE_URL}/services/${params.slug}` },
+  };
+}
 
 export default function ServiceDetailPage({
   params,
