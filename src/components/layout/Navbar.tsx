@@ -29,21 +29,9 @@ export default function Navbar() {
       >
         {/* Brand */}
         <Link href="/" className="flex items-center" onClick={() => setMenuOpen(false)}>
-          {/* Mobile: circular logo */}
-          <div className="md:hidden w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-            <Image
-              src="/logo.png"
-              alt="MACROPAGE"
-              width={36}
-              height={36}
-              className="object-cover"
-              style={{ mixBlendMode: theme === "dark" ? "normal" : "multiply" }}
-            />
-          </div>
-          {/* Desktop: text */}
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--text)" }}
-            className="hidden md:block text-2xl tracking-widest"
+            className="text-2xl tracking-widest"
           >
             MACROPAGE
           </span>
@@ -92,18 +80,19 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile right — Let's Talk icon + Hamburger */}
+        {/* Mobile right — Let's Talk + Hamburger */}
         <div className="md:hidden flex items-center gap-3">
-          {/* Chat icon */}
+          {/* Let's Talk button */}
           <Link
             href="/contact"
-            style={{ color: "var(--text)" }}
-            className="hover:opacity-50 transition-opacity"
-            aria-label="Contact us"
+            style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+            className="text-xs font-semibold px-4 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
+            <span
+              style={{ background: "var(--accent)" }}
+              className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+            />
+            <span className="relative z-10">Let&apos;s Talk</span>
           </Link>
 
           {/* Hamburger */}
