@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { z } from "zod";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const schema = z.object({
   name: z.string().min(2).max(100),
@@ -15,10 +13,18 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { name, email, message } = schema.parse(body);
 
-    await resend.emails.send({
-      from: "MacroPage Contact <info@macropage.in>",
-      to: process.env.CONTACT_EMAIL || "info@macropage.in",
-      reply_to: email,
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    });
+
+    await transporter.sendMail({
+      from: `"MacroPage Contact" <${process.env.GMAIL_USER}>`,
+      to: process.env.CONTACT_EMAIL || process.env.GMAIL_USER,
+      replyTo: email,
       subject: `New inquiry from ${name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px;">

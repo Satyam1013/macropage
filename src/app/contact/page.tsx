@@ -5,29 +5,67 @@ import { faqs } from "@/data/content";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
-    "idle",
-  );
+  const [status, setStatus] = useState<"idle" | "sending_otp" | "otp_sent" | "verifying" | "sent" | "error">("idle");
+  const [otp, setOtp] = useState("");
+  const [token, setToken] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("sending");
+    setStatus("sending_otp");
+    setErrorMsg("");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/contact/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+      const data = await res.json();
       if (res.ok) {
-        setStatus("sent");
-        setForm({ name: "", email: "", message: "" });
+        setToken(data.token);
+        setStatus("otp_sent");
       } else {
+        setErrorMsg(data.error || "Failed to send code.");
         setStatus("error");
       }
     } catch {
+      setErrorMsg("Something went wrong. Please try again.");
       setStatus("error");
     }
+  };
+
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("verifying");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/contact/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, otp }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+        setOtp("");
+        setToken("");
+      } else {
+        setErrorMsg(data.error || "Verification failed.");
+        setStatus("otp_sent");
+      }
+    } catch {
+      setErrorMsg("Something went wrong. Please try again.");
+      setStatus("otp_sent");
+    }
+  };
+
+  const handleResend = () => {
+    setOtp("");
+    setToken("");
+    setErrorMsg("");
+    setStatus("idle");
   };
 
   return (
@@ -151,6 +189,7 @@ export default function ContactPage() {
 
         {/* Right — form */}
         <div className="px-6 sm:px-10 py-14">
+          {/* ── Step 3: Success ── */}
           {status === "sent" ? (
             <div
               style={{ color: "var(--text)" }}
@@ -181,46 +220,98 @@ export default function ContactPage() {
                 We&apos;ll respond within 24 hours.
               </p>
             </div>
+
+          ) : status === "otp_sent" || status === "verifying" ? (
+            /* ── Step 2: OTP Verification ── */
+            <form onSubmit={handleVerify} className="flex flex-col gap-6 max-w-lg">
+              <div>
+                <p style={{ color: "var(--muted)" }} className="text-xs tracking-widest uppercase mb-2">
+                  Verify Your Email
+                </p>
+                <p style={{ color: "var(--text)" }} className="text-sm leading-relaxed">
+                  We sent a 6-digit code to{" "}
+                  <span style={{ color: "var(--accent)" }} className="font-medium">{form.email}</span>.
+                  Enter it below to submit your message.
+                </p>
+              </div>
+
+              <div>
+                <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
+                  Verification Code
+                </label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  placeholder="000000"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                  required
+                  autoFocus
+                  style={{
+                    background: "var(--bg2)",
+                    border: "1px solid var(--border)",
+                    color: "var(--text)",
+                    borderRadius: 8,
+                    fontSize: "1.8rem",
+                    letterSpacing: "0.4em",
+                    textAlign: "center",
+                    fontFamily: "var(--font-bebas)",
+                  }}
+                  className="w-full px-4 py-4 outline-none focus:border-current placeholder:opacity-20 transition-all"
+                />
+              </div>
+
+              {errorMsg && (
+                <p className="text-red-500 text-sm">{errorMsg}</p>
+              )}
+
+              <div className="flex items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={otp.length < 6 || status === "verifying"}
+                  style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+                  className="px-8 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 disabled:opacity-50"
+                >
+                  <span
+                    style={{ background: "var(--accent)" }}
+                    className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+                  />
+                  <span className="relative z-10">
+                    {status === "verifying" ? "Verifying..." : "Verify & Send →"}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleResend}
+                  style={{ color: "var(--muted)" }}
+                  className="text-sm hover:opacity-60 transition-opacity underline underline-offset-4"
+                >
+                  Resend code
+                </button>
+              </div>
+            </form>
+
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-6 max-w-lg"
-            >
-              <p
-                style={{ color: "var(--muted)" }}
-                className="text-xs tracking-widest uppercase mb-2"
-              >
+            /* ── Step 1: Contact Form ── */
+            <form onSubmit={handleSendOtp} className="flex flex-col gap-6 max-w-lg">
+              <p style={{ color: "var(--muted)" }} className="text-xs tracking-widest uppercase mb-2">
                 Send a Message
               </p>
 
               {[
-                {
-                  id: "name",
-                  label: "Your Name",
-                  type: "text",
-                  placeholder: "Rahul Sharma",
-                },
-                {
-                  id: "email",
-                  label: "Email Address",
-                  type: "email",
-                  placeholder: "rahul@company.com",
-                },
+                { id: "name", label: "Your Name", type: "text", placeholder: "Rahul Sharma" },
+                { id: "email", label: "Email Address", type: "email", placeholder: "rahul@company.com" },
               ].map((field) => (
                 <div key={field.id}>
-                  <label
-                    style={{ color: "var(--muted)" }}
-                    className="text-xs uppercase tracking-widest block mb-2"
-                  >
+                  <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
                     {field.label}
                   </label>
                   <input
                     type={field.type}
                     placeholder={field.placeholder}
                     value={form[field.id as keyof typeof form]}
-                    onChange={(e) =>
-                      setForm({ ...form, [field.id]: e.target.value })
-                    }
+                    onChange={(e) => setForm({ ...form, [field.id]: e.target.value })}
                     required
                     style={{
                       background: "var(--bg2)",
@@ -234,19 +325,14 @@ export default function ContactPage() {
               ))}
 
               <div>
-                <label
-                  style={{ color: "var(--muted)" }}
-                  className="text-xs uppercase tracking-widest block mb-2"
-                >
+                <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
                   Your Message
                 </label>
                 <textarea
                   rows={5}
                   placeholder="Tell us about your project..."
                   value={form.message}
-                  onChange={(e) =>
-                    setForm({ ...form, message: e.target.value })
-                  }
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
                   style={{
                     background: "var(--bg2)",
@@ -259,13 +345,14 @@ export default function ContactPage() {
                 />
               </div>
 
+              {errorMsg && (
+                <p className="text-red-500 text-sm">{errorMsg}</p>
+              )}
+
               <button
                 type="submit"
-                disabled={status === "sending"}
-                style={{
-                  background: "var(--btn-bg)",
-                  color: "var(--btn-text)",
-                }}
+                disabled={status === "sending_otp"}
+                style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
                 className="self-start px-8 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 disabled:opacity-50"
               >
                 <span
@@ -273,15 +360,9 @@ export default function ContactPage() {
                   className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
                 />
                 <span className="relative z-10">
-                  {status === "sending" ? "Sending..." : "Send Message →"}
+                  {status === "sending_otp" ? "Sending Code..." : "Send Message →"}
                 </span>
               </button>
-
-              {status === "error" && (
-                <p className="text-red-500 text-sm">
-                  Something went wrong. Email us at info@macropage.in
-                </p>
-              )}
             </form>
           )}
         </div>
