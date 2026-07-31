@@ -14,14 +14,8 @@ const servicesSlugs = [
 ];
 
 const workSlugs = [
-  "shopease",
-  "finbot-ai",
-  "carelink",
-  "logidash",
-  "rideswift",
-  "datastack",
-  "edureach",
-  "quickbite",
+  "macropage-connect",
+  "mr-fuels-transact",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

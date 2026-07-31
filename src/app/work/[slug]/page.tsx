@@ -38,192 +38,53 @@ const projects: Record<
     nextColor: string;
   }
 > = {
-  shopease: {
-    name: "ShopEase",
+  "macropage-connect": {
+    name: "Macropage Connect",
     year: "2025",
-    category: "E-Commerce",
-    client: "ShopEase India",
-    tags: "Web App · UI/UX",
-    color: "#e8e4dc",
+    category: "SaaS · CRM",
+    client: "MacroPage",
+    tags: "Web App · WhatsApp API",
+    color: "#d4e8df",
     description:
-      "A full-stack e-commerce platform built with Next.js and Stripe integration. Fast, SEO-optimized, and mobile-first design that converts visitors into customers.",
+      "WhatsApp Business API CRM platform — manage conversations, run broadcast campaigns, and automate customer interactions from a unified dashboard.",
     challenge:
-      "The client needed a complete e-commerce overhaul — their old platform was slow, hard to navigate, and losing customers at checkout. Mobile experience was broken on most devices.",
+      "Businesses managing customer support on WhatsApp had no way to handle high volumes. Chats were scattered across multiple personal phones with no tracking, no automation, and no team collaboration.",
     solution:
-      "We rebuilt the entire platform from scratch using Next.js 14 with App Router, Stripe for payments, and a headless CMS for product management. Result: 3x faster load times and 40% better conversion.",
+      "Built Macropage Connect — a full-featured WhatsApp CRM. Unified team inbox, broadcast scheduling, automation flows, and real-time analytics. Deployed via WhatsApp Business API for enterprise-grade reliability.",
     deliverables: [
-      "Web Design",
-      "Frontend Dev",
-      "Backend API",
-      "Payment Integration",
+      "Web Platform",
+      "WhatsApp API Integration",
+      "Team Inbox",
+      "Broadcast & Automation",
     ],
-    tech: ["Next.js", "TypeScript", "Stripe", "PostgreSQL", "Tailwind CSS"],
-    nextSlug: "finbot-ai",
-    nextName: "FinBot AI",
-    nextColor: "#dce0e8",
+    tech: ["Next.js", "Node.js", "WhatsApp Business API", "PostgreSQL", "Redis"],
+    nextSlug: "mr-fuels-transact",
+    nextName: "Mr Fuels Transact",
+    nextColor: "#e8e0d4",
   },
-  "finbot-ai": {
-    name: "FinBot AI",
+  "mr-fuels-transact": {
+    name: "Mr Fuels Transact",
     year: "2025",
-    category: "Fintech",
-    client: "FinBot Technologies",
-    tags: "AI Integration · Automation",
-    color: "#dce0e8",
+    category: "Fuel Tech",
+    client: "Mr Fuels",
+    tags: "Web App · Automation",
+    color: "#e8e0d4",
     description:
-      "AI-powered financial assistant with LLM integration. Automated customer support and real-time transaction analysis for a growing fintech startup.",
+      "End-to-end fuel transaction and fleet management platform. Real-time dispensing records, vendor management, and automated billing — replacing paper ledgers with digital precision.",
     challenge:
-      "Customer support team was overwhelmed with repetitive queries. 80% of tickets were basic account and transaction questions that didn't need human agents.",
+      "Fuel dispensing was tracked manually on paper. Reconciliation took days, discrepancies were common, and fleet operators had zero real-time visibility into fuel usage across sites.",
     solution:
-      "We integrated GPT-4 with their existing backend to build an AI assistant that handles tier-1 support, transaction summaries, and anomaly detection — cutting support load by 60%.",
+      "Built a digital transaction platform with real-time dispensing records, automated reconciliation, and a vendor portal. Fleet operators now get live dashboards and automated billing — reducing manual work by 90%.",
     deliverables: [
-      "AI Integration",
-      "Chatbot UI",
-      "Dashboard",
-      "API Development",
+      "Transaction Platform",
+      "Fleet Dashboard",
+      "Vendor Portal",
+      "Billing Automation",
     ],
-    tech: ["OpenAI GPT-4", "LangChain", "Python", "React", "FastAPI"],
-    nextSlug: "carelink",
-    nextName: "CareLink",
-    nextColor: "#dce8e0",
-  },
-  carelink: {
-    name: "CareLink",
-    year: "2025",
-    category: "Healthcare",
-    client: "CareLink Health",
-    tags: "Mobile App · Cloud",
-    color: "#dce8e0",
-    description:
-      "Cross-platform healthcare app built with Flutter. Patient management, appointment booking, and real-time cloud sync across all devices.",
-    challenge:
-      "Doctors and patients had no unified system — appointments were managed on WhatsApp, records were scattered across spreadsheets, and follow-ups were missed constantly.",
-    solution:
-      "Built a Flutter app for iOS and Android with real-time sync on AWS. Doctors get a clean dashboard, patients get a simple booking interface, and everything stays in sync.",
-    deliverables: [
-      "Mobile App (iOS + Android)",
-      "Cloud Infrastructure",
-      "UI/UX Design",
-      "AWS Deployment",
-    ],
-    tech: ["Flutter", "Dart", "AWS", "Firebase", "Figma"],
-    nextSlug: "logidash",
-    nextName: "LogiDash",
-    nextColor: "#e8dce0",
-  },
-  logidash: {
-    name: "LogiDash",
-    year: "2025",
-    category: "Logistics",
-    client: "LogiDash Co.",
-    tags: "Dashboard · Automation",
-    color: "#e8dce0",
-    description:
-      "Real-time logistics dashboard with automated workflow management, route optimization, and live tracking for a fleet of 500+ vehicles.",
-    challenge:
-      "Operations team was juggling 4 different tools — no single view of fleet status, manual route assignment, and zero automation on repetitive dispatch tasks.",
-    solution:
-      "Built a unified dashboard with live GPS tracking, automated dispatch logic via n8n, and a reporting layer that saves the ops team 20+ hours per week.",
-    deliverables: [
-      "Dashboard UI",
-      "Automation Pipelines",
-      "Data Visualization",
-      "API Integration",
-    ],
-    tech: ["React", "Node.js", "n8n", "PostgreSQL", "Mapbox"],
-    nextSlug: "shopease",
-    nextName: "ShopEase",
-    nextColor: "#e8e4dc",
-  },
-  rideswift: {
-    name: "RideSwift",
-    year: "2025",
-    category: "Transport",
-    client: "RideSwift Inc.",
-    tags: "Mobile App · Flutter",
-    color: "#e8e8dc",
-    description:
-      "On-demand ride booking app built with Flutter. Real-time driver tracking, surge pricing, and seamless UX for riders and drivers alike.",
-    challenge:
-      "Existing app had 2.8 star rating due to poor UI and frequent crashes. Driver onboarding took 45 minutes and riders abandoned the app before completing first booking.",
-    solution:
-      "Complete redesign and rebuild in Flutter. Driver app and rider app unified in one codebase. Onboarding reduced to 8 minutes. Rating went from 2.8 to 4.6 in 3 months.",
-    deliverables: ["Rider App", "Driver App", "Admin Panel", "UI/UX Design"],
-    tech: ["Flutter", "Firebase", "Google Maps", "Stripe", "Node.js"],
-    nextSlug: "datastack",
-    nextName: "DataStack",
-    nextColor: "#dce8e8",
-  },
-  datastack: {
-    name: "DataStack",
-    year: "2025",
-    category: "SaaS",
-    client: "DataStack Co.",
-    tags: "Cloud · AI Integration",
-    color: "#dce8e8",
-    description:
-      "AI-powered data pipeline SaaS platform. Connect any data source, transform with AI, and push to any destination — no code required.",
-    challenge:
-      "Data teams were spending 60% of time on ETL pipelines. Every new data source required custom engineering work that took weeks to build and maintain.",
-    solution:
-      "Built a visual pipeline builder with AI-assisted transformations. 50+ pre-built connectors, drag-and-drop interface, and GPT-powered data cleaning suggestions.",
-    deliverables: [
-      "SaaS Platform",
-      "AI Integration",
-      "Pipeline Builder",
-      "Developer API",
-    ],
-    tech: ["Next.js", "Python", "OpenAI", "PostgreSQL", "AWS Lambda"],
-    nextSlug: "shopease",
-    nextName: "ShopEase",
-    nextColor: "#e8e4dc",
-  },
-  edureach: {
-    name: "EduReach",
-    year: "2025",
-    category: "EdTech",
-    client: "EduReach India",
-    tags: "Web App · UI/UX",
-    color: "#e8dce8",
-    description:
-      "Online learning platform for Tier 2 and 3 cities. Vernacular content, offline mode, and gamified learning paths for students aged 10-18.",
-    challenge:
-      "Existing platforms were built for metro users with fast internet. 70% of target students had 2G connectivity and devices with limited storage.",
-    solution:
-      "Built with progressive web app (PWA) technology. Content downloads for offline use, ultra-compressed video, and a gamification system that increased daily active usage by 85%.",
-    deliverables: [
-      "Web App (PWA)",
-      "Content CMS",
-      "Gamification System",
-      "Analytics Dashboard",
-    ],
-    tech: ["Next.js", "PWA", "Sanity CMS", "Vercel", "Tailwind CSS"],
-    nextSlug: "quickbite",
-    nextName: "QuickBite",
-    nextColor: "#e8e0dc",
-  },
-  quickbite: {
-    name: "QuickBite",
-    year: "2025",
-    category: "Food Tech",
-    client: "QuickBite Foods",
-    tags: "Mobile App · Automation",
-    color: "#e8e0dc",
-    description:
-      "Cloud kitchen ordering platform with real-time order management, automated kitchen display, and smart delivery zone optimization.",
-    challenge:
-      "Cloud kitchen was losing 30% of orders due to manual order management. Kitchen staff were overwhelmed during peak hours and delivery estimates were wildly inaccurate.",
-    solution:
-      "Built an end-to-end platform — customer app, kitchen display system (KDS), and delivery optimization engine. Order accuracy went from 70% to 97% in the first month.",
-    deliverables: [
-      "Customer App",
-      "Kitchen Display System",
-      "Delivery Optimization",
-      "Admin Dashboard",
-    ],
-    tech: ["React Native", "Node.js", "Redis", "PostgreSQL", "Google Maps API"],
-    nextSlug: "shopease",
-    nextName: "ShopEase",
-    nextColor: "#e8e4dc",
+    tech: ["React", "Node.js", "PostgreSQL", "AWS", "REST APIs"],
+    nextSlug: "macropage-connect",
+    nextName: "Macropage Connect",
+    nextColor: "#d4e8df",
   },
 };
 
