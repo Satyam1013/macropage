@@ -17,7 +17,7 @@
   --card: #f0f0f0;
   --btn-bg: #111111;
   --btn-text: #ffffff;
-  --accent: #ff4208;
+  --accent: #1c76f2;
 }
 
 .dark {
@@ -29,7 +29,7 @@
   --card: #1a1a1a;
   --btn-bg: #ffffff;
   --btn-text: #0e0e0e;
-  --accent: #ff4208;
+  --accent: #1c76f2;
 }
 
 * {

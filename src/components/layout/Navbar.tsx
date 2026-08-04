@@ -6,6 +6,13 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { navLinks } from "@/data/navigation";
 
+// macropage-logo-1.svg is one flat image (icon + "Macro" + "page"); these are the
+// horizontal crop boundaries (as fractions of total width) so "Macro" can be
+// recolored for dark mode independently of the icon and "page", which stay brand blue.
+const LOGO_RATIO = 1672 / 941;
+const LOGO_ICON_END = 0.332;
+const LOGO_TEXT_END = 0.643;
+
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -25,16 +32,48 @@ export default function Navbar() {
       {/* ── Top Navbar ── */}
       <nav
         style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
-        className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 py-5 backdrop-blur-sm"
+        className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 h-20 backdrop-blur-sm"
       >
         {/* Brand */}
         <Link href="/" className="flex items-center" onClick={() => setMenuOpen(false)}>
-          <span
-            style={{ fontFamily: "var(--font-bebas)", color: "var(--text)" }}
-            className="text-2xl tracking-widest"
+          {/* Logo split into 3 crops of the same image: icon + "Macro" (theme-aware) + "page" (always brand blue) */}
+          <div
+            role="img"
+            aria-label="MacroPage"
+            className="flex items-center h-20 sm:h-28 [--logo-h:5rem] sm:[--logo-h:7rem] overflow-hidden"
           >
-            MACROPAGE
-          </span>
+            {[
+              { start: 0, end: LOGO_ICON_END, themed: false },
+              { start: LOGO_ICON_END, end: LOGO_TEXT_END, themed: true },
+              { start: LOGO_TEXT_END, end: 1, themed: false },
+            ].map(({ start, end, themed }, i) => (
+              <div
+                key={i}
+                style={{
+                  width: `calc(var(--logo-h) * ${LOGO_RATIO} * ${end - start})`,
+                  height: "var(--logo-h)",
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/macropage-logo-1.svg"
+                  alt=""
+                  style={{
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    left: `calc(var(--logo-h) * ${LOGO_RATIO} * ${-start})`,
+                    height: "var(--logo-h)",
+                    width: `calc(var(--logo-h) * ${LOGO_RATIO})`,
+                    maxWidth: "none",
+                    filter: themed && mounted && theme === "dark" ? "brightness(0) invert(1)" : "none",
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </Link>
 
         {/* Desktop nav links */}
@@ -132,7 +171,7 @@ export default function Navbar() {
           <Link href="/" onClick={() => setMenuOpen(false)}>
             <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
               <Image
-                src="/logo.png"
+                src="/mobile-logo.png"
                 alt="MACROPAGE"
                 width={36}
                 height={36}

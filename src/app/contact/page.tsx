@@ -1,7 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { faqs } from "@/data/content";
+
+const OTP_TTL_SECONDS = 5 * 60;
+
+function formatCountdown(seconds: number) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -10,6 +18,14 @@ export default function ContactPage() {
   const [token, setToken] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [secondsLeft, setSecondsLeft] = useState(0);
+
+  useEffect(() => {
+    if (status !== "otp_sent" && status !== "verifying") return;
+    if (secondsLeft <= 0) return;
+    const id = setInterval(() => setSecondsLeft((s) => s - 1), 1000);
+    return () => clearInterval(id);
+  }, [status, secondsLeft]);
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +40,7 @@ export default function ContactPage() {
       const data = await res.json();
       if (res.ok) {
         setToken(data.token);
+        setSecondsLeft(OTP_TTL_SECONDS);
         setStatus("otp_sent");
       } else {
         setErrorMsg(data.error || "Failed to send code.");
@@ -65,6 +82,7 @@ export default function ContactPage() {
     setOtp("");
     setToken("");
     setErrorMsg("");
+    setSecondsLeft(0);
     setStatus("idle");
   };
 
@@ -236,9 +254,17 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
-                  Verification Code
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest">
+                    Verification Code
+                  </label>
+                  <span
+                    style={{ color: secondsLeft > 0 ? "var(--muted)" : "#ef4444" }}
+                    className="text-xs font-medium tabular-nums"
+                  >
+                    {secondsLeft > 0 ? `Expires in ${formatCountdown(secondsLeft)}` : "Code expired"}
+                  </span>
+                </div>
                 <input
                   type="text"
                   inputMode="numeric"
@@ -269,7 +295,7 @@ export default function ContactPage() {
               <div className="flex items-center gap-4">
                 <button
                   type="submit"
-                  disabled={otp.length < 6 || status === "verifying"}
+                  disabled={otp.length < 6 || status === "verifying" || secondsLeft <= 0}
                   style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
                   className="px-8 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 disabled:opacity-50"
                 >
