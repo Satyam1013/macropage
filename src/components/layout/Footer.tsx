@@ -5,8 +5,7 @@ function HoverLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      style={{ color: "var(--text)" }}
-      className="text-xs uppercase tracking-widest overflow-hidden relative h-4 flex flex-col group w-fit"
+      className="text-[color:var(--text)] hover:text-[#1c76f2] transition-colors duration-300 text-xs uppercase tracking-widest overflow-hidden relative h-4 flex flex-col group w-fit"
     >
       <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full">
         {label}
@@ -130,9 +129,7 @@ export default function Footer() {
       </div>
 
       {/* ── Big brand name — truly full width ── */}
-      <div
-        className="flex-1 relative w-full overflow-hidden select-none"
-      >
+      <div className="flex-1 relative w-full overflow-hidden select-none">
         <svg
           viewBox="0 0 1000 150"
           xmlns="http://www.w3.org/2000/svg"
@@ -152,12 +149,18 @@ export default function Footer() {
             y="130"
             fontFamily="'Bebas Neue', sans-serif"
             fontSize="160"
-            fill="currentColor"
             letterSpacing={"5"}
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
           >
-            MACROPAGE
+            {"MACROPAGE".split("").map((char, i) => (
+              <tspan
+                key={i}
+                className="fill-[color:var(--text)] hover:fill-[#1c76f2] transition-colors duration-200"
+              >
+                {char}
+              </tspan>
+            ))}
           </text>
         </svg>
       </div>

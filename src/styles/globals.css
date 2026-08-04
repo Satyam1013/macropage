@@ -18,6 +18,8 @@
   --btn-bg: #111111;
   --btn-text: #ffffff;
   --accent: #1c76f2;
+  --logo-gradient-start: #0a1c52;
+  --logo-gradient-end: #1c76f2;
 }
 
 .dark {
@@ -30,6 +32,8 @@
   --btn-bg: #ffffff;
   --btn-text: #0e0e0e;
   --accent: #1c76f2;
+  --logo-gradient-start: #4d7dfa;
+  --logo-gradient-end: #1c76f2;
 }
 
 * {

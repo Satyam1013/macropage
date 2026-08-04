@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/mobile-logo.png",
+    apple: "/mobile-logo.png",
   },
   openGraph: {
     title: "MacroPage — Tech Studio India",
@@ -50,13 +50,13 @@ export const metadata: Metadata = {
     siteName: "MacroPage",
     locale: "en_IN",
     type: "website",
-    images: [{ url: "/logo.png", width: 800, height: 800, alt: "MacroPage" }],
+    images: [{ url: "/mobile-logo.png", width: 800, height: 800, alt: "MacroPage" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "MacroPage — Tech Studio India",
     description: "Bold digital products — Web, App, AI, Cloud & Automation.",
-    images: ["/logo.png"],
+    images: ["/mobile-logo.png"],
   },
   alternates: { canonical: SITE_URL },
 };
@@ -70,7 +70,7 @@ const jsonLd = {
       name: "MacroPage",
       legalName: "MR Tech Solution Pvt Ltd",
       url: SITE_URL,
-      logo: `${SITE_URL}/logo.png`,
+      logo: `${SITE_URL}/mobile-logo.png`,
       email: "info@macropage.in",
       address: {
         "@type": "PostalAddress",

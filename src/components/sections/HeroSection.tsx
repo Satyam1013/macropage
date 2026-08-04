@@ -585,7 +585,17 @@ export default function HeroSection() {
               Design,
             </em>
             <br />
-            Performance
+            <span
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-end))",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              Performance
+            </span>
           </motion.h1>
         </div>
 
