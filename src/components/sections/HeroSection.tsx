@@ -629,8 +629,9 @@ export default function HeroSection() {
           style={{ color: "var(--muted)" }}
           className="text-base max-w-sm leading-relaxed"
         >
-          We are a tech studio that helps businesses build bold digital products
-          — fast, scalable, and designed to grow.
+          We are a tech studio that pairs strategy, design, and performance —
+          helping businesses build bold digital products that are fast, scalable,
+          and built to grow.
         </p>
         <Link
           href="/contact"

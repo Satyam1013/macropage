@@ -14,7 +14,11 @@ export default function MarqueeStrip() {
     >
       <div className="flex gap-12 w-max animate-marquee">
         {items.map((item, i) => (
-          <span key={i} className="flex items-center gap-12">
+          <span
+            key={i}
+            aria-hidden={i >= marqueeItems.length}
+            className="flex items-center gap-12"
+          >
             <span
               style={{ color: "var(--text)" }}
               className="text-xs font-semibold tracking-widest uppercase whitespace-nowrap"

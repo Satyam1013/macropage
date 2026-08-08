@@ -3,9 +3,10 @@
 import { useRef, useEffect, useState } from "react";
 import { reviews } from "@/data/reviews";
 
-function ReviewCard({ r }: { r: (typeof reviews)[0] }) {
+function ReviewCard({ r, hidden }: { r: (typeof reviews)[0]; hidden?: boolean }) {
   return (
     <div
+      aria-hidden={hidden}
       style={{
         background: "var(--bg)",
         border: "1px solid var(--border)",
@@ -122,7 +123,10 @@ function ScrollColumn({
     };
   }, [direction]);
 
-  const doubled = [...reviews, ...reviews, ...reviews];
+  // Exactly 2 copies is the minimum needed for a seamless loop (reset at
+  // the halfway point); the second copy is a visual clone only, so it's
+  // hidden from assistive tech and doesn't duplicate real page content.
+  const doubled = [...reviews, ...reviews];
 
   return (
     <div
@@ -131,7 +135,7 @@ function ScrollColumn({
     >
       <div ref={trackRef}>
         {doubled.map((r, i) => (
-          <ReviewCard key={i} r={r} />
+          <ReviewCard key={i} r={r} hidden={i >= reviews.length} />
         ))}
       </div>
     </div>

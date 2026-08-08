@@ -211,6 +211,7 @@ export default function WorkSection() {
             <div key={p.slug} style={style}>
               <Link
                 href={`/work/${p.slug}`}
+                aria-label={`View ${p.name} project`}
                 className="block w-full h-full group"
               >
                 <div
@@ -219,6 +220,7 @@ export default function WorkSection() {
                 >
                   {/* Big bg letters */}
                   <div
+                    aria-hidden="true"
                     style={{
                       fontFamily: "var(--font-bebas)",
                       color: "rgba(0,0,0,0.07)",
@@ -259,7 +261,10 @@ export default function WorkSection() {
 
                   {/* Hover overlay */}
                   {state === "center" && (
-                    <div className="absolute inset-0 flex items-center justify-center group-hover:bg-black/10 transition-all duration-300">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 flex items-center justify-center group-hover:bg-black/10 transition-all duration-300"
+                    >
                       <span
                         style={{
                           background: "rgba(0,0,0,0.75)",

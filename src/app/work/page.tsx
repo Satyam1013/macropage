@@ -132,7 +132,11 @@ export default function WorkPage() {
                   p.span === "col-span-2" ? "lg:col-span-2" : "col-span-1"
                 }
               >
-                <Link href={`/work/${p.slug}`} className="block group">
+                <Link
+                  href={`/work/${p.slug}`}
+                  aria-label={`View ${p.name} project`}
+                  className="block group"
+                >
                   {/* Image area */}
                   <div
                     style={{
@@ -145,6 +149,7 @@ export default function WorkPage() {
                   >
                     {/* Big letters */}
                     <div
+                      aria-hidden="true"
                       style={{
                         fontFamily: "var(--font-bebas)",
                         color: "rgba(0,0,0,0.06)",
@@ -162,7 +167,10 @@ export default function WorkPage() {
                     </div>
 
                     {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-400 flex items-center justify-center">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-400 flex items-center justify-center"
+                    >
                       <span
                         style={{
                           background: "rgba(0,0,0,0.85)",
