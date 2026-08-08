@@ -47,7 +47,7 @@ const projects: Record<
     category: "SaaS · CRM",
     client: "MacroPage",
     tags: "Website · WhatsApp API",
-    color: "#d4e8df",
+    color: "#0f4c3a",
     image: "/projects/macropage-connect.png",
     liveUrl: "https://www.macropageconnect.com",
     description:
@@ -63,35 +63,35 @@ const projects: Record<
       "Trust Badges",
     ],
     tech: ["Next.js", "Tailwind CSS"],
-    nextSlug: "macropage-connect-app",
-    nextName: "Macropage Connect App",
-    nextColor: "#c3ded0",
+    nextSlug: "macropage-connect-portal",
+    nextName: "Macropage Connect Portal",
+    nextColor: "#123a6b",
   },
-  "macropage-connect-app": {
-    name: "Macropage Connect App",
+  "macropage-connect-portal": {
+    name: "Macropage Connect Portal",
     year: "2025",
     category: "SaaS · CRM",
     client: "MacroPage",
-    tags: "Web App · WhatsApp API",
-    color: "#c3ded0",
+    tags: "Website · Features & Story",
+    color: "#123a6b",
     image: "/projects/macropage-connect-portal.png",
-    liveUrl: "https://app.macropageconnect.com",
+    liveUrl: "https://www.macropageconnect.com",
     description:
-      "WhatsApp Business API CRM platform — manage conversations, run broadcast campaigns, and automate customer interactions from a unified dashboard.",
+      "The 'About' portal for Macropage Connect — the story behind the product, platform stats, and a deeper look at what it does for businesses on WhatsApp.",
     challenge:
-      "Businesses managing customer support on WhatsApp had no way to handle high volumes. Chats were scattered across multiple personal phones with no tracking, no automation, and no team collaboration.",
+      "Visitors who landed on the homepage and wanted more depth — the mission, the numbers, the team — had nowhere dedicated to go for that story before deciding to sign up.",
     solution:
-      "Built Macropage Connect — a full-featured WhatsApp CRM. Unified team inbox, broadcast scheduling, automation flows, and real-time analytics. Deployed via WhatsApp Business API for enterprise-grade reliability.",
+      "Built a dedicated About/Portal page: mission statement, live platform stats (businesses onboarded, uptime, support response time), and a path to meet the team.",
     deliverables: [
-      "Web Platform",
-      "WhatsApp API Integration",
-      "Team Inbox",
-      "Broadcast & Automation",
+      "About Page",
+      "Platform Stats",
+      "Brand Story",
+      "Team Section",
     ],
-    tech: ["Next.js", "Node.js", "WhatsApp Business API", "PostgreSQL", "Redis"],
+    tech: ["Next.js", "Tailwind CSS"],
     nextSlug: "tritju",
     nextName: "Tritju",
-    nextColor: "#f5e6c8",
+    nextColor: "#a14e00",
   },
   tritju: {
     name: "Tritju",
@@ -99,7 +99,7 @@ const projects: Record<
     category: "HealthTech",
     client: "Tritju",
     tags: "Web App · Healthcare",
-    color: "#f5e6c8",
+    color: "#a14e00",
     image: "/projects/tritju.png",
     description:
       "Healthcare platform connecting patients with doctors, labs, and hospitals — book appointments, manage visits, and access care from one place.",
@@ -116,7 +116,7 @@ const projects: Record<
     tech: ["React", "Node.js", "MongoDB"],
     nextSlug: "mr-fuels-transact",
     nextName: "Mr Fuels Transact",
-    nextColor: "#e8e0d4",
+    nextColor: "#111111",
   },
   "mr-fuels-transact": {
     name: "Mr Fuels Transact",
@@ -124,7 +124,7 @@ const projects: Record<
     category: "Fuel Tech",
     client: "Mr Fuels",
     tags: "Website · Dashboard",
-    color: "#e8e0d4",
+    color: "#111111",
     image: "/projects/mr-fuels-transact-portal.png",
     liveUrl: "https://www.mrfuelstransact.com",
     description:
@@ -142,7 +142,7 @@ const projects: Record<
     tech: ["React", "Node.js", "PostgreSQL"],
     nextSlug: "mr-fuels-transact-app",
     nextName: "Mr Fuels Transact App",
-    nextColor: "#dcd3c4",
+    nextColor: "#6b1d1d",
   },
   "mr-fuels-transact-app": {
     name: "Mr Fuels Transact App",
@@ -150,7 +150,7 @@ const projects: Record<
     category: "Fuel Tech",
     client: "Mr Fuels",
     tags: "Mobile App · Automation",
-    color: "#dcd3c4",
+    color: "#6b1d1d",
     image: "/projects/mr-fuels-transact.png",
     description:
       "End-to-end fuel transaction app for the station floor. Real-time dispensing records, collections, and shift tracking — replacing paper ledgers with digital precision.",
@@ -167,7 +167,7 @@ const projects: Record<
     tech: ["React Native", "Node.js", "PostgreSQL"],
     nextSlug: "macropage-connect",
     nextName: "Macropage Connect",
-    nextColor: "#d4e8df",
+    nextColor: "#0f4c3a",
   },
 };
 
@@ -491,7 +491,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         >
           <div>
             <p
-              style={{ color: "rgba(0,0,0,0.45)" }}
+              style={{ color: "rgba(255,255,255,0.6)" }}
               className="text-xs uppercase tracking-widest mb-2"
             >
               Next Project
@@ -499,7 +499,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <h2
               style={{
                 fontFamily: "var(--font-bebas)",
-                color: "#111",
+                color: "#fff",
                 lineHeight: 1,
               }}
               className="text-[clamp(3rem,8vw,7rem)] tracking-wide"
@@ -512,15 +512,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               width: 64,
               height: 64,
               borderRadius: "50%",
-              background: "rgba(0,0,0,0.1)",
+              background: "rgba(255,255,255,0.15)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: "1.5rem",
-              color: "#111",
+              color: "#fff",
               transition: "all 0.3s",
             }}
-            className="group-hover:bg-black/20 group-hover:scale-110 flex-shrink-0"
+            className="group-hover:bg-white/25 group-hover:scale-110 flex-shrink-0"
           >
             →
           </div>
