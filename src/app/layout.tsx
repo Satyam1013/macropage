@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | MacroPage",
   },
   description:
-    "MacroPage is a tech studio in India building bold digital products — web apps, mobile apps, AI integration, business automation, and cloud infrastructure for startups and businesses.",
+    "MacroPage is an Indian tech studio building web apps, mobile apps, AI integrations, automation, and cloud solutions for startups and businesses.",
   keywords: [
     "web development India",
     "mobile app development",
@@ -79,9 +79,8 @@ const jsonLd = {
         addressCountry: "IN",
       },
       sameAs: [
-        "https://instagram.com",
-        "https://linkedin.com",
-        "https://twitter.com",
+        "https://www.instagram.com/macropage_official",
+        "https://www.youtube.com/@macropageconnect",
       ],
     },
     {

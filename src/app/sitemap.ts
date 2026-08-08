@@ -1,22 +1,11 @@
 import type { MetadataRoute } from "next";
+import { servicesDetail } from "@/data/services-detail";
+import { workPageProjects } from "@/data/projects";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
 
-const servicesSlugs = [
-  "web-development",
-  "app-development",
-  "ai-integration",
-  "business-automation",
-  "ui-ux-designing",
-  "cloud-services",
-  "whatsapp-api",
-  "social-media-marketing",
-];
-
-const workSlugs = [
-  "macropage-connect",
-  "mr-fuels-transact",
-];
+const servicesSlugs = Object.keys(servicesDetail);
+const workSlugs = workPageProjects.map((project) => project.slug);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

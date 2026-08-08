@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description:
+    "The terms and conditions governing use of MacroPage's website and services.",
+  alternates: { canonical: `${SITE_URL}/terms-and-conditions` },
+  openGraph: {
+    title: "Terms & Conditions | MacroPage",
+    description:
+      "The terms and conditions governing use of MacroPage's website and services.",
+    url: `${SITE_URL}/terms-and-conditions`,
+  },
+};
 
 const sections = [
   {

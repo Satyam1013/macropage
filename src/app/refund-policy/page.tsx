@@ -1,4 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export const metadata: Metadata = {
+  title: "Refund Policy",
+  description: "MacroPage's refund and cancellation policy for projects and services.",
+  alternates: { canonical: `${SITE_URL}/refund-policy` },
+  openGraph: {
+    title: "Refund Policy | MacroPage",
+    description: "MacroPage's refund and cancellation policy for projects and services.",
+    url: `${SITE_URL}/refund-policy`,
+  },
+};
 
 const sections = [
   {

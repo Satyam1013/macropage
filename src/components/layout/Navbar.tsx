@@ -35,11 +35,17 @@ export default function Navbar() {
         className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 h-20 backdrop-blur-sm"
       >
         {/* Brand */}
-        <Link href="/" className="flex items-center" onClick={() => setMenuOpen(false)}>
-          {/* Logo split into 3 crops of the same image: icon + "Macro" (theme-aware) + "page" (always brand blue) */}
+        <Link
+          href="/"
+          aria-label="MacroPage — Home"
+          className="flex items-center"
+          onClick={() => setMenuOpen(false)}
+        >
+          {/* Logo split into 3 crops of the same image: icon + "Macro" (theme-aware) + "page" (always brand blue).
+              Accessible name lives on the Link above; this group is hidden from assistive tech to avoid
+              announcing the same logo three times, but each crop still carries a real alt for image search/SEO. */}
           <div
-            role="img"
-            aria-label="MacroPage"
+            aria-hidden="true"
             className="flex items-center h-20 sm:h-28 [--logo-h:5rem] sm:[--logo-h:7rem] overflow-hidden"
           >
             {[
@@ -59,7 +65,7 @@ export default function Navbar() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/macropage-logo-1.svg"
-                  alt=""
+                  alt="MacroPage logo"
                   style={{
                     display: "block",
                     position: "absolute",

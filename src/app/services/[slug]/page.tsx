@@ -52,8 +52,33 @@ export default function ServiceDetailPage({
     );
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: service.name,
+        description: service.description,
+        provider: { "@type": "Organization", name: "MacroPage", url: SITE_URL },
+        areaServed: "IN",
+        url: `${SITE_URL}/services/${params.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Services", item: `${SITE_URL}/services` },
+          { "@type": "ListItem", position: 2, name: service.name, item: `${SITE_URL}/services/${params.slug}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ── Hero ── */}
       <section
         style={{ borderBottom: "1px solid var(--border)" }}

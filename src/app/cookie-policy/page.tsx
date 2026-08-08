@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export const metadata: Metadata = {
+  title: "Cookie Policy",
+  description:
+    "How MacroPage uses cookies and similar tracking technologies on this website.",
+  alternates: { canonical: `${SITE_URL}/cookie-policy` },
+  openGraph: {
+    title: "Cookie Policy | MacroPage",
+    description:
+      "How MacroPage uses cookies and similar tracking technologies on this website.",
+    url: `${SITE_URL}/cookie-policy`,
+  },
+};
 
 const sections = [
   {

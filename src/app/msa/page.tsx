@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export const metadata: Metadata = {
+  title: "Master Service Agreement",
+  description:
+    "The Master Service Agreement (MSA) outlining the terms between MacroPage and its clients.",
+  alternates: { canonical: `${SITE_URL}/msa` },
+  openGraph: {
+    title: "Master Service Agreement | MacroPage",
+    description:
+      "The Master Service Agreement (MSA) outlining the terms between MacroPage and its clients.",
+    url: `${SITE_URL}/msa`,
+  },
+};
 
 const sections = [
   {

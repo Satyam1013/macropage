@@ -111,8 +111,33 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     );
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        name: project.name,
+        description: project.description,
+        creator: { "@type": "Organization", name: "MacroPage", url: SITE_URL },
+        about: project.category,
+        url: `${SITE_URL}/work/${params.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Work", item: `${SITE_URL}/work` },
+          { "@type": "ListItem", position: 2, name: project.name, item: `${SITE_URL}/work/${params.slug}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ── Hero ── */}
       <section className="px-6 sm:px-10 pt-14 pb-0">
         {/* Breadcrumb */}
@@ -184,6 +209,43 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               <p style={{ color: "var(--text)" }} className="text-sm">
                 {project.tags}
               </p>
+            </div>
+            <div>
+              <p
+                style={{ color: "var(--muted)" }}
+                className="text-xs uppercase tracking-widest mb-1"
+              >
+                Share
+              </p>
+              <div className="flex gap-3">
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(`${project.name} — ${SITE_URL}/work/${params.slug}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--text)" }}
+                  className="text-sm hover:opacity-60 transition-opacity"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${SITE_URL}/work/${params.slug}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--text)" }}
+                  className="text-sm hover:opacity-60 transition-opacity"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(project.name)}&url=${encodeURIComponent(`${SITE_URL}/work/${params.slug}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--text)" }}
+                  className="text-sm hover:opacity-60 transition-opacity"
+                >
+                  X
+                </a>
+              </div>
             </div>
           </div>
         </div>

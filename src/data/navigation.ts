@@ -10,15 +10,11 @@ export const navLinks: NavLink[] = [
   { href: "/contact", label: "Contact" },
 ];
 
-export const footerNavLinks: NavLink[] = [
-  ...navLinks,
-  { href: "/design-news", label: "Design News" },
-];
+export const footerNavLinks: NavLink[] = [...navLinks];
 
 export const socialLinks: NavLink[] = [
-  { href: "https://instagram.com", label: "Instagram" },
-  { href: "https://linkedin.com", label: "LinkedIn" },
-  { href: "https://twitter.com", label: "X (Twitter)" },
+  { href: "https://www.instagram.com/macropage_official", label: "Instagram" },
+  { href: "https://www.youtube.com/@macropageconnect", label: "YouTube" },
   { href: "mailto:info@macropage.in", label: "Email" },
 ];
 

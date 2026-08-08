@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export const metadata: Metadata = {
+  title: "Data Processing Agreement",
+  description:
+    "MacroPage's Data Processing Agreement (DPA) detailing how client and user data is processed.",
+  alternates: { canonical: `${SITE_URL}/dpa` },
+  openGraph: {
+    title: "Data Processing Agreement | MacroPage",
+    description:
+      "MacroPage's Data Processing Agreement (DPA) detailing how client and user data is processed.",
+    url: `${SITE_URL}/dpa`,
+  },
+};
 
 const sections = [
   {

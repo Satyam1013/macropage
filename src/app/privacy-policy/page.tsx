@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "How MacroPage collects, uses, and protects your personal and business information across our website and services.",
+  alternates: { canonical: `${SITE_URL}/privacy-policy` },
+  openGraph: {
+    title: "Privacy Policy | MacroPage",
+    description:
+      "How MacroPage collects, uses, and protects your personal and business information across our website and services.",
+    url: `${SITE_URL}/privacy-policy`,
+  },
+};
 
 const sections = [
   {
