@@ -367,7 +367,7 @@ export default function AboutPage() {
             style={{ background: "var(--accent)" }}
             className="absolute inset-0 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
           />
-          <span className="relative z-10">Let&apos;s Talk →</span>
+          <span className="relative z-10">Reach Out →</span>
         </Link>
       </section>
     </main>

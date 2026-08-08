@@ -61,7 +61,7 @@ export default function Footer() {
               style={{ background: "var(--accent)" }}
               className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-xl"
             />
-            <span className="relative z-10">Let&apos;s Talk</span>
+            <span className="relative z-10">Get in Touch</span>
             <span className="relative z-10">→</span>
           </Link>
 

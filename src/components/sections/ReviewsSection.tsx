@@ -85,8 +85,14 @@ function ScrollColumn({
   const trackRef = useRef<HTMLDivElement>(null);
   const posRef = useRef(0);
   const animRef = useRef<number>();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     const track = trackRef.current;
     if (!track) return;
 
@@ -121,12 +127,12 @@ function ScrollColumn({
       track.parentElement?.removeEventListener("mouseenter", pause);
       track.parentElement?.removeEventListener("mouseleave", resume);
     };
-  }, [direction]);
+  }, [mounted, direction]);
 
-  // Exactly 2 copies is the minimum needed for a seamless loop (reset at
-  // the halfway point); the second copy is a visual clone only, so it's
-  // hidden from assistive tech and doesn't duplicate real page content.
-  const doubled = [...reviews, ...reviews];
+  // Server-rendered HTML gets a single copy of each review — the clone
+  // needed for a seamless loop is only added client-side after mount, so
+  // crawlers/scanners reading raw HTML never see the review text repeated.
+  const doubled = mounted ? [...reviews, ...reviews] : reviews;
 
   return (
     <div
@@ -142,10 +148,11 @@ function ScrollColumn({
   );
 }
 
-// Column data
+// Column data — col3 only has 2 reviews (8 total, not evenly divisible by
+// 3); padding it with a repeat from col1 would duplicate that review's text.
 const col1 = reviews.slice(0, 3);
 const col2 = reviews.slice(3, 6);
-const col3 = reviews.slice(6, 8).concat(reviews.slice(0, 1));
+const col3 = reviews.slice(6, 8);
 
 export default function ReviewsSection() {
   const [cols, setCols] = useState(3);

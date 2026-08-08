@@ -125,9 +125,11 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile right — Let's Talk + Hamburger */}
+        {/* Mobile right — Contact + Hamburger */}
         <div className="md:hidden flex items-center gap-3">
-          {/* Let's Talk button */}
+          {/* Contact button — both this and the desktop "Let's Talk" link exist in the
+              same rendered HTML at all times (only CSS display toggles between them),
+              so they need distinct text to avoid duplicate anchor text on every page. */}
           <Link
             href="/contact"
             style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
@@ -137,7 +139,7 @@ export default function Navbar() {
               style={{ background: "var(--accent)" }}
               className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
             />
-            <span className="relative z-10">Let&apos;s Talk</span>
+            <span className="relative z-10">Contact</span>
           </Link>
 
           {/* Hamburger */}
