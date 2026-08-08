@@ -6,8 +6,7 @@ export interface WorkPageProject {
   filter: string;
   tags: string;
   color: string;
-  aspect: string;
-  span: string;
+  image: string;
 }
 
 export interface WorkSectionProject {
@@ -17,6 +16,7 @@ export interface WorkSectionProject {
   category: string;
   tags: string;
   color: string;
+  image: string;
 }
 
 export const workPageProjects: WorkPageProject[] = [
@@ -26,10 +26,29 @@ export const workPageProjects: WorkPageProject[] = [
     year: "2025",
     category: "SaaS · CRM",
     filter: "WEB APP",
-    tags: "Web App · WhatsApp API",
+    tags: "Website · WhatsApp API",
     color: "#d4e8df",
-    aspect: "aspect-[4/3]",
-    span: "col-span-2",
+    image: "/projects/macropage-connect.png",
+  },
+  {
+    slug: "macropage-connect-app",
+    name: "Macropage Connect App",
+    year: "2025",
+    category: "SaaS · CRM",
+    filter: "WEB APP",
+    tags: "Web App · WhatsApp API",
+    color: "#c3ded0",
+    image: "/projects/macropage-connect-portal.png",
+  },
+  {
+    slug: "tritju",
+    name: "Tritju",
+    year: "2025",
+    category: "HealthTech",
+    filter: "WEB APP",
+    tags: "Web App · Healthcare",
+    color: "#f5e6c8",
+    image: "/projects/tritju.png",
   },
   {
     slug: "mr-fuels-transact",
@@ -37,28 +56,28 @@ export const workPageProjects: WorkPageProject[] = [
     year: "2025",
     category: "Fuel Tech",
     filter: "WEB APP",
-    tags: "Web App · Automation",
+    tags: "Website · Dashboard",
     color: "#e8e0d4",
-    aspect: "aspect-[3/4]",
-    span: "col-span-1",
+    image: "/projects/mr-fuels-transact-portal.png",
+  },
+  {
+    slug: "mr-fuels-transact-app",
+    name: "Mr Fuels Transact App",
+    year: "2025",
+    category: "Fuel Tech",
+    filter: "MOBILE APP",
+    tags: "Mobile App · Automation",
+    color: "#dcd3c4",
+    image: "/projects/mr-fuels-transact.png",
   },
 ];
 
-export const workSectionProjects: WorkSectionProject[] = [
-  {
-    slug: "macropage-connect",
-    name: "Macropage Connect",
-    year: "2025",
-    category: "SaaS · CRM",
-    tags: "Web App · WhatsApp API",
-    color: "#d4e8df",
-  },
-  {
-    slug: "mr-fuels-transact",
-    name: "Mr Fuels Transact",
-    year: "2025",
-    category: "Fuel Tech",
-    tags: "Web App · Automation",
-    color: "#e8e0d4",
-  },
-];
+export const workSectionProjects: WorkSectionProject[] = workPageProjects.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  year: p.year,
+  category: p.category,
+  tags: p.tags,
+  color: p.color,
+  image: p.image,
+}));

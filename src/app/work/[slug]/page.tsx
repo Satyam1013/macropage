@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.macropage.in";
@@ -28,6 +29,8 @@ const projects: Record<
     client: string;
     tags: string;
     color: string;
+    image: string;
+    liveUrl?: string;
     description: string;
     challenge: string;
     solution: string;
@@ -43,8 +46,36 @@ const projects: Record<
     year: "2025",
     category: "SaaS · CRM",
     client: "MacroPage",
-    tags: "Web App · WhatsApp API",
+    tags: "Website · WhatsApp API",
     color: "#d4e8df",
+    image: "/projects/macropage-connect.png",
+    liveUrl: "https://www.macropageconnect.com",
+    description:
+      "Marketing website for Macropage Connect — a WhatsApp Business API CRM. Showcases the product and drives sign-ups for the platform.",
+    challenge:
+      "The product had no dedicated site to explain what it does, who it's for, or why WhatsApp Business API matters — leads had nowhere to land and evaluate the platform before signing up.",
+    solution:
+      "Built a focused marketing site around Connect — a clear feature breakdown, WhatsApp/Meta and Shopify partner trust signals, and a direct path to the free trial.",
+    deliverables: [
+      "Marketing Website",
+      "Feature Pages",
+      "Trial Signup Flow",
+      "Trust Badges",
+    ],
+    tech: ["Next.js", "Tailwind CSS"],
+    nextSlug: "macropage-connect-app",
+    nextName: "Macropage Connect App",
+    nextColor: "#c3ded0",
+  },
+  "macropage-connect-app": {
+    name: "Macropage Connect App",
+    year: "2025",
+    category: "SaaS · CRM",
+    client: "MacroPage",
+    tags: "Web App · WhatsApp API",
+    color: "#c3ded0",
+    image: "/projects/macropage-connect-portal.png",
+    liveUrl: "https://app.macropageconnect.com",
     description:
       "WhatsApp Business API CRM platform — manage conversations, run broadcast campaigns, and automate customer interactions from a unified dashboard.",
     challenge:
@@ -58,6 +89,31 @@ const projects: Record<
       "Broadcast & Automation",
     ],
     tech: ["Next.js", "Node.js", "WhatsApp Business API", "PostgreSQL", "Redis"],
+    nextSlug: "tritju",
+    nextName: "Tritju",
+    nextColor: "#f5e6c8",
+  },
+  tritju: {
+    name: "Tritju",
+    year: "2025",
+    category: "HealthTech",
+    client: "Tritju",
+    tags: "Web App · Healthcare",
+    color: "#f5e6c8",
+    image: "/projects/tritju.png",
+    description:
+      "Healthcare platform connecting patients with doctors, labs, and hospitals — book appointments, manage visits, and access care from one place.",
+    challenge:
+      "Patients had no single place to find doctors, book lab tests, or discover nearby hospitals — appointments were scattered across phone calls and walk-ins with zero tracking or visibility.",
+    solution:
+      "Built Tritju — a unified healthcare booking platform. Patients can find expert doctors, book lab services, and locate nearby hospitals from one dashboard, with every appointment tracked end-to-end.",
+    deliverables: [
+      "Web Platform",
+      "Doctor & Lab Booking",
+      "Hospital Directory",
+      "Appointment Tracking",
+    ],
+    tech: ["React", "Node.js", "MongoDB"],
     nextSlug: "mr-fuels-transact",
     nextName: "Mr Fuels Transact",
     nextColor: "#e8e0d4",
@@ -67,21 +123,48 @@ const projects: Record<
     year: "2025",
     category: "Fuel Tech",
     client: "Mr Fuels",
-    tags: "Web App · Automation",
+    tags: "Website · Dashboard",
     color: "#e8e0d4",
+    image: "/projects/mr-fuels-transact-portal.png",
+    liveUrl: "https://www.mrfuelstransact.com",
     description:
-      "End-to-end fuel transaction and fleet management platform. Real-time dispensing records, vendor management, and automated billing — replacing paper ledgers with digital precision.",
+      "Website and web dashboard for Mr Fuels Transact — track fuel sales, manage tanks and staff, and view reports from any device.",
     challenge:
-      "Fuel dispensing was tracked manually on paper. Reconciliation took days, discrepancies were common, and fleet operators had zero real-time visibility into fuel usage across sites.",
+      "Fuel station owners needed to check business performance and manage operations without opening the full app — from a laptop, tablet, or on the go.",
     solution:
-      "Built a digital transaction platform with real-time dispensing records, automated reconciliation, and a vendor portal. Fleet operators now get live dashboards and automated billing — reducing manual work by 90%.",
+      "Built a responsive web dashboard covering sales, tank & stock levels, expenses, staff & shifts, and reports — fully synced with the mobile app.",
     deliverables: [
-      "Transaction Platform",
-      "Fleet Dashboard",
-      "Vendor Portal",
-      "Billing Automation",
+      "Web Dashboard",
+      "Sales & Stock Reports",
+      "Staff Management",
+      "Cross-Device Sync",
     ],
-    tech: ["React", "Node.js", "PostgreSQL", "AWS", "REST APIs"],
+    tech: ["React", "Node.js", "PostgreSQL"],
+    nextSlug: "mr-fuels-transact-app",
+    nextName: "Mr Fuels Transact App",
+    nextColor: "#dcd3c4",
+  },
+  "mr-fuels-transact-app": {
+    name: "Mr Fuels Transact App",
+    year: "2025",
+    category: "Fuel Tech",
+    client: "Mr Fuels",
+    tags: "Mobile App · Automation",
+    color: "#dcd3c4",
+    image: "/projects/mr-fuels-transact.png",
+    description:
+      "End-to-end fuel transaction app for the station floor. Real-time dispensing records, collections, and shift tracking — replacing paper ledgers with digital precision.",
+    challenge:
+      "Fuel dispensing was tracked manually on paper. Reconciliation took days, discrepancies were common, and station staff had no quick way to log sales or close a shift.",
+    solution:
+      "Built a mobile-first app for daily operations — real-time dispensing records, cash collection tracking, and shift closing, all from the fuel station floor.",
+    deliverables: [
+      "Mobile App",
+      "Real-Time Dispensing Records",
+      "Shift & Cash Tracking",
+      "Offline-Friendly Sync",
+    ],
+    tech: ["React Native", "Node.js", "PostgreSQL"],
     nextSlug: "macropage-connect",
     nextName: "Macropage Connect",
     nextColor: "#d4e8df",
@@ -199,6 +282,25 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 {project.client}
               </p>
             </div>
+            {project.liveUrl && (
+              <div>
+                <p
+                  style={{ color: "var(--muted)" }}
+                  className="text-xs uppercase tracking-widest mb-1"
+                >
+                  Live Site
+                </p>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--accent)" }}
+                  className="text-sm font-medium hover:opacity-70 transition-opacity"
+                >
+                  Visit Site →
+                </a>
+              </div>
+            )}
             <div>
               <p
                 style={{ color: "var(--muted)" }}
@@ -254,23 +356,17 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* ── Hero image ── */}
       <div className="px-6 sm:px-10 pt-8">
         <div
-          style={{
-            background: project.color,
-            borderRadius: 16,
-            overflow: "hidden",
-          }}
-          className="w-full aspect-[16/8] relative flex items-center justify-center"
+          style={{ background: project.color, borderRadius: 16, overflow: "hidden" }}
+          className="w-full aspect-[16/8] relative"
         >
-          <span
-            style={{
-              fontFamily: "var(--font-bebas)",
-              color: "rgba(0,0,0,0.06)",
-              lineHeight: 1,
-            }}
-            className="text-[clamp(8rem,25vw,20rem)] select-none"
-          >
-            {project.name.slice(0, 2).toUpperCase()}
-          </span>
+          <Image
+            src={project.image}
+            alt={`${project.name} project screenshot`}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
         </div>
       </div>
 
@@ -355,38 +451,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </p>
         </div>
       </section>
-
-      {/* ── Second image ── */}
-      <div className="px-6 sm:px-10 py-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div
-          style={{ background: project.color, borderRadius: 16, opacity: 0.7 }}
-          className="aspect-[4/3] flex items-center justify-center"
-        >
-          <span
-            style={{
-              fontFamily: "var(--font-bebas)",
-              color: "rgba(0,0,0,0.07)",
-            }}
-            className="text-[8rem]"
-          >
-            {project.name.slice(0, 1)}
-          </span>
-        </div>
-        <div
-          style={{ background: project.color, borderRadius: 16, opacity: 0.5 }}
-          className="aspect-[4/3] flex items-center justify-center"
-        >
-          <span
-            style={{
-              fontFamily: "var(--font-bebas)",
-              color: "rgba(0,0,0,0.07)",
-            }}
-            className="text-[8rem]"
-          >
-            {project.name.slice(1, 2).toUpperCase()}
-          </span>
-        </div>
-      </div>
 
       {/* ── Tech Stack ── */}
       <section

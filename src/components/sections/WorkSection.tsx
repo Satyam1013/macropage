@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { workSectionProjects as projects } from "@/data/projects";
@@ -218,44 +219,37 @@ export default function WorkSection() {
                   className="w-full h-full relative"
                   style={{ background: p.color }}
                 >
-                  {/* Big bg letters */}
+                  <Image
+                    src={p.image}
+                    alt=""
+                    fill
+                    sizes={isMobile ? "85vw" : "42vw"}
+                    className="object-cover"
+                  />
+
+                  {/* Legibility scrim */}
                   <div
                     aria-hidden="true"
-                    style={{
-                      fontFamily: "var(--font-bebas)",
-                      color: "rgba(0,0,0,0.07)",
-                      fontSize: isMobile ? "6rem" : "7rem",
-                    }}
-                    className="absolute inset-0 flex items-center justify-center select-none"
-                  >
-                    {p.name.slice(0, 2).toUpperCase()}
-                  </div>
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"
+                  />
 
                   {/* Info */}
                   <div className="absolute inset-0 flex items-end p-5 sm:p-6">
                     <div>
-                      <p
-                        style={{ color: "rgba(0,0,0,0.5)" }}
-                        className="text-xs mb-1 tracking-wide"
-                      >
+                      <p className="text-white/70 text-xs mb-1 tracking-wide">
                         {p.year} · {p.category}
                       </p>
                       <h3
                         style={{
                           fontFamily: "var(--font-bebas)",
-                          color: "#111",
+                          color: "#fff",
                           lineHeight: 1,
                         }}
                         className="text-3xl sm:text-4xl tracking-wide"
                       >
                         {p.name}
                       </h3>
-                      <p
-                        style={{ color: "rgba(0,0,0,0.5)" }}
-                        className="text-xs mt-1"
-                      >
-                        {p.tags}
-                      </p>
+                      <p className="text-white/70 text-xs mt-1">{p.tags}</p>
                     </div>
                   </div>
 
