@@ -43,7 +43,7 @@ const projects: Record<
 > = {
   "macropage-connect": {
     name: "Macropage Connect",
-    year: "2025",
+    year: "2026",
     category: "SaaS · CRM",
     client: "MacroPage",
     tags: "Website · WhatsApp API",
@@ -69,7 +69,7 @@ const projects: Record<
   },
   "macropage-connect-portal": {
     name: "Macropage Connect Portal",
-    year: "2025",
+    year: "2026",
     category: "SaaS · CRM",
     client: "MacroPage",
     tags: "Website · Features & Story",
@@ -146,7 +146,7 @@ const projects: Record<
   },
   "mr-fuels-transact-app": {
     name: "Mr Fuels Transact App",
-    year: "2025",
+    year: "2026",
     category: "Fuel Tech",
     client: "Mr Fuels",
     tags: "Mobile App · Automation",

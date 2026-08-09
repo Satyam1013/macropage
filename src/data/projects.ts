@@ -13,7 +13,7 @@ export const workPageProjects: WorkPageProject[] = [
   {
     slug: "macropage-connect",
     name: "Macropage Connect",
-    year: "2025",
+    year: "2026",
     category: "SaaS · CRM",
     filter: "WEB APP",
     tags: "Website · WhatsApp API",
@@ -23,7 +23,7 @@ export const workPageProjects: WorkPageProject[] = [
   {
     slug: "macropage-connect-portal",
     name: "Macropage Connect Portal",
-    year: "2025",
+    year: "2026",
     category: "SaaS · CRM",
     filter: "WEB APP",
     tags: "Website · Features & Story",
@@ -43,7 +43,7 @@ export const workPageProjects: WorkPageProject[] = [
   {
     slug: "mr-fuels-transact",
     name: "Mr Fuels Transact",
-    year: "2025",
+    year: "2026",
     category: "Fuel Tech",
     filter: "WEB APP",
     tags: "Website · Dashboard",
