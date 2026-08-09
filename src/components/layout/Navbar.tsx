@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navLinks } from "@/data/navigation";
 
 // macropage-logo-1.svg is one flat image (icon + "Macro" + "page"); these are the
@@ -17,6 +17,8 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     setMounted(true);
@@ -27,12 +29,34 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY.current;
+      if (currentY < 80) {
+        setNavHidden(false);
+      } else if (diff > 5) {
+        setNavHidden(true);
+      } else if (diff < -5) {
+        setNavHidden(false);
+      }
+      lastScrollY.current = currentY;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       {/* ── Top Navbar ── */}
       <nav
-        style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
-        className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 h-20 backdrop-blur-sm"
+        style={{
+          background: "var(--bg)",
+          borderBottom: "1px solid var(--border)",
+          transform: navHidden && !menuOpen ? "translateY(-100%)" : "translateY(0)",
+        }}
+        className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 h-20 backdrop-blur-sm transition-transform duration-300 ease-out"
       >
         {/* Brand */}
         <Link
