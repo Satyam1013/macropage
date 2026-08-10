@@ -65,14 +65,6 @@ function ProjectRow({
         </h3>
       </div>
 
-      {/* Mobile-only inline thumbnail — no sticky split-view on narrow screens */}
-      <div
-        style={{ background: p.color }}
-        className="lg:hidden relative h-14 w-20 flex-shrink-0 overflow-hidden ml-4"
-      >
-        <Image src={p.imageMobile} alt="" fill sizes="80px" className="object-cover object-top" />
-      </div>
-
       <span
         style={{
           border: "1px solid var(--border)",
@@ -80,11 +72,67 @@ function ProjectRow({
           background: isActive ? "var(--text)" : "transparent",
           borderColor: isActive ? "var(--text)" : "var(--border)",
         }}
-        className="hidden lg:flex h-11 w-11 items-center justify-center text-lg flex-shrink-0 transition-all duration-400"
+        className="flex h-11 w-11 items-center justify-center text-lg flex-shrink-0 transition-all duration-400"
       >
         ↗
       </span>
     </Link>
+  );
+}
+
+// Mobile-only: each project is a full-screen card pinned via `position:
+// sticky` with an increasing z-index, so the next one scrolls up and covers
+// the previous instead of sliding in beside it — same technique as the
+// stacking sections on /services and the homepage's scroll showcase.
+const BUFFER_VH = 20;
+
+function MobileStack({ projects: list }: { projects: typeof projects }) {
+  return (
+    <div className="lg:hidden">
+      {list.map((p, i) => (
+        <div key={p.slug} style={{ position: "relative", height: `${100 + BUFFER_VH}dvh` }}>
+          <div style={{ position: "sticky", top: 0, zIndex: i + 1, height: "100dvh" }}>
+            <Link
+              href={`/work/${p.slug}`}
+              aria-label={`View ${p.name} project`}
+              style={{ background: p.color }}
+              className="group relative block h-full w-full"
+            >
+              <Image
+                src={p.imageMobile}
+                alt={`${p.name} project screenshot`}
+                fill
+                sizes="100vw"
+                priority={i === 0}
+                className="object-cover object-top"
+              />
+              <div
+                style={{ background: p.color }}
+                className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-6 py-7"
+              >
+                <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">
+                  {p.tags}
+                </span>
+                <div className="flex items-center justify-between">
+                  <h3
+                    style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
+                    className="text-[clamp(2rem,8vw,3.5rem)] tracking-wide"
+                  >
+                    {p.name}
+                  </h3>
+                  <span
+                    style={{ background: "#fff", color: "#111" }}
+                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-lg transition-transform duration-300 group-active:rotate-45"
+                  >
+                    ↗
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -158,8 +206,19 @@ export default function WorkPage() {
         ))}
       </div>
 
-      {/* ── Split view: sticky image panel (scroll-linked) + project list ── */}
-      <div className="px-6 sm:px-10 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+      {filtered.length === 0 && (
+        <div className="py-32 text-center">
+          <p style={{ color: "var(--muted)" }} className="text-sm">
+            No projects in this category yet.
+          </p>
+        </div>
+      )}
+
+      {/* ── Mobile: big overlapping full-screen cards ── */}
+      {filtered.length > 0 && <MobileStack projects={filtered} />}
+
+      {/* ── Desktop: split view — sticky image panel (scroll-linked) + project list ── */}
+      <div className="hidden lg:grid px-6 sm:px-10 py-10 lg:grid-cols-2 gap-10 lg:gap-16">
         {/* Left — sticky image, swaps as the active row changes on scroll */}
         <div className="hidden lg:block relative">
           <div className="sticky top-28 h-[65vh]">
@@ -210,14 +269,6 @@ export default function WorkPage() {
               onActivate={setActiveIndex}
             />
           ))}
-
-          {filtered.length === 0 && (
-            <div className="py-32 text-center">
-              <p style={{ color: "var(--muted)" }} className="text-sm">
-                No projects in this category yet.
-              </p>
-            </div>
-          )}
         </div>
       </div>
 
@@ -251,9 +302,13 @@ export default function WorkPage() {
             color: "var(--text)",
             borderRadius: 999,
           }}
-          className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold hover:opacity-80 transition-all flex-shrink-0"
+          className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold transition-all flex-shrink-0 relative overflow-hidden group active:scale-95"
         >
-          Start a Project →
+          <span
+            style={{ background: "var(--accent)" }}
+            className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+          />
+          <span className="relative z-10">Start a Project →</span>
         </Link>
       </section>
     </main>
