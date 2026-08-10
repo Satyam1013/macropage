@@ -70,7 +70,7 @@ function ProjectRow({
         style={{ background: p.color }}
         className="lg:hidden relative h-14 w-20 flex-shrink-0 overflow-hidden ml-4"
       >
-        <Image src={p.image} alt="" fill sizes="80px" className="object-cover object-top" />
+        <Image src={p.imageMobile} alt="" fill sizes="80px" className="object-cover object-top" />
       </div>
 
       <span

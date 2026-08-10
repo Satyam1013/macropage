@@ -7,19 +7,10 @@ export interface WorkPageProject {
   tags: string;
   color: string;
   image: string;
+  imageMobile: string;
 }
 
 export const workPageProjects: WorkPageProject[] = [
-  {
-    slug: "macropage-connect",
-    name: "Macropage Connect",
-    year: "2026",
-    category: "SaaS · CRM",
-    filter: "WEB APP",
-    tags: "Website · WhatsApp API",
-    color: "#0f4c3a",
-    image: "/projects/macropage-connect.png",
-  },
   {
     slug: "macropage-connect-portal",
     name: "Macropage Connect Portal",
@@ -29,6 +20,7 @@ export const workPageProjects: WorkPageProject[] = [
     tags: "Website · Features & Story",
     color: "#123a6b",
     image: "/projects/macropage-connect-portal.png",
+    imageMobile: "/projects/macropage-connect-portal-mobile.png",
   },
   {
     slug: "tritju",
@@ -39,6 +31,7 @@ export const workPageProjects: WorkPageProject[] = [
     tags: "Web App · Healthcare",
     color: "#a14e00",
     image: "/projects/tritju.png",
+    imageMobile: "/projects/tritju-mobile.png",
   },
   {
     slug: "mr-fuels-transact",
@@ -49,6 +42,7 @@ export const workPageProjects: WorkPageProject[] = [
     tags: "Website · Dashboard",
     color: "#111111",
     image: "/projects/mr-fuels-transact-portal.png",
+    imageMobile: "/projects/mr-fuels-transact-portal-mobile.png",
   },
   {
     slug: "mr-fuels-transact-app",
@@ -59,5 +53,6 @@ export const workPageProjects: WorkPageProject[] = [
     tags: "Mobile App · Automation",
     color: "#6b1d1d",
     image: "/projects/mr-fuels-transact.png",
+    imageMobile: "/projects/mr-fuels-transact-mobile.png",
   },
 ];

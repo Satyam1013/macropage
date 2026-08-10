@@ -30,6 +30,7 @@ const projects: Record<
     tags: string;
     color: string;
     image: string;
+    imageMobile: string;
     liveUrl?: string;
     description: string;
     challenge: string;
@@ -41,32 +42,6 @@ const projects: Record<
     nextColor: string;
   }
 > = {
-  "macropage-connect": {
-    name: "Macropage Connect",
-    year: "2026",
-    category: "SaaS · CRM",
-    client: "MacroPage",
-    tags: "Website · WhatsApp API",
-    color: "#0f4c3a",
-    image: "/projects/macropage-connect.png",
-    liveUrl: "https://www.macropageconnect.com",
-    description:
-      "Marketing website for Macropage Connect — a WhatsApp Business API CRM. Showcases the product and drives sign-ups for the platform.",
-    challenge:
-      "The product had no dedicated site to explain what it does, who it's for, or why WhatsApp Business API matters — leads had nowhere to land and evaluate the platform before signing up.",
-    solution:
-      "Built a focused marketing site around Connect — a clear feature breakdown, WhatsApp/Meta and Shopify partner trust signals, and a direct path to the free trial.",
-    deliverables: [
-      "Marketing Website",
-      "Feature Pages",
-      "Trial Signup Flow",
-      "Trust Badges",
-    ],
-    tech: ["Next.js", "Tailwind CSS"],
-    nextSlug: "macropage-connect-portal",
-    nextName: "Macropage Connect Portal",
-    nextColor: "#123a6b",
-  },
   "macropage-connect-portal": {
     name: "Macropage Connect Portal",
     year: "2026",
@@ -75,6 +50,7 @@ const projects: Record<
     tags: "Website · Features & Story",
     color: "#123a6b",
     image: "/projects/macropage-connect-portal.png",
+    imageMobile: "/projects/macropage-connect-portal-mobile.png",
     liveUrl: "https://www.macropageconnect.com",
     description:
       "The 'About' portal for Macropage Connect — the story behind the product, platform stats, and a deeper look at what it does for businesses on WhatsApp.",
@@ -101,6 +77,7 @@ const projects: Record<
     tags: "Web App · Healthcare",
     color: "#a14e00",
     image: "/projects/tritju.png",
+    imageMobile: "/projects/tritju-mobile.png",
     description:
       "Healthcare platform connecting patients with doctors, labs, and hospitals — book appointments, manage visits, and access care from one place.",
     challenge:
@@ -126,6 +103,7 @@ const projects: Record<
     tags: "Website · Dashboard",
     color: "#111111",
     image: "/projects/mr-fuels-transact-portal.png",
+    imageMobile: "/projects/mr-fuels-transact-portal-mobile.png",
     liveUrl: "https://www.mrfuelstransact.com",
     description:
       "Website and web dashboard for Mr Fuels Transact — track fuel sales, manage tanks and staff, and view reports from any device.",
@@ -152,6 +130,7 @@ const projects: Record<
     tags: "Mobile App · Automation",
     color: "#6b1d1d",
     image: "/projects/mr-fuels-transact.png",
+    imageMobile: "/projects/mr-fuels-transact-mobile.png",
     description:
       "End-to-end fuel transaction app for the station floor. Real-time dispensing records, collections, and shift tracking — replacing paper ledgers with digital precision.",
     challenge:
@@ -165,9 +144,9 @@ const projects: Record<
       "Offline-Friendly Sync",
     ],
     tech: ["React Native", "Node.js", "PostgreSQL"],
-    nextSlug: "macropage-connect",
-    nextName: "Macropage Connect",
-    nextColor: "#0f4c3a",
+    nextSlug: "macropage-connect-portal",
+    nextName: "Macropage Connect Portal",
+    nextColor: "#123a6b",
   },
 };
 
@@ -360,11 +339,19 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           className="w-full aspect-[16/8] relative"
         >
           <Image
+            src={project.imageMobile}
+            alt={`${project.name} project screenshot`}
+            fill
+            sizes="100vw"
+            className="object-cover sm:hidden"
+            priority
+          />
+          <Image
             src={project.image}
             alt={`${project.name} project screenshot`}
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-cover hidden sm:block"
             priority
           />
         </div>

@@ -15,11 +15,13 @@ function ProjectCard({
   style,
   className,
   priority,
+  mobileImage,
 }: {
   p: (typeof projects)[number];
   style?: React.CSSProperties;
   className: string;
   priority?: boolean;
+  mobileImage?: boolean;
 }) {
   return (
     <div
@@ -32,7 +34,7 @@ function ProjectCard({
         className="group block h-full w-full"
       >
         <Image
-          src={p.image}
+          src={mobileImage ? p.imageMobile : p.image}
           alt={`${p.name} project screenshot`}
           fill
           sizes="100vw"
@@ -164,7 +166,7 @@ function MobileShowcase() {
     <div>
       {projects.map((p, i) => (
         <StickyWrap key={p.slug} index={i}>
-          <ProjectCard p={p} className="h-full w-full" priority={i === 0} />
+          <ProjectCard p={p} className="h-full w-full" priority={i === 0} mobileImage />
         </StickyWrap>
       ))}
       <StickyWrap index={total - 1}>
