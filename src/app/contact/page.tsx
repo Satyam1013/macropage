@@ -27,92 +27,244 @@ const COUNTRY_CODES = [
 
 const INITIAL_FORM = { name: "", email: "", countryCode: "+91", phone: "", message: "" };
 
-export default function ContactPage() {
-  const [form, setForm] = useState(INITIAL_FORM);
-  const [sentTo, setSentTo] = useState<string[]>([]);
-  const [status, setStatus] = useState<"idle" | "sending_otp" | "otp_sent" | "verifying" | "sent" | "error">("idle");
-  const [otp, setOtp] = useState("");
+type VerifyStatus = "idle" | "sending" | "sent" | "verifying" | "verified";
+
+// One independent OTP flow per channel: send a code, check it, keep the proof
+// the backend hands back so the final submit can show it was verified.
+function useChannelVerification(channel: "email" | "phone") {
+  const [status, setStatus] = useState<VerifyStatus>("idle");
   const [token, setToken] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [proof, setProof] = useState("");
+  const [otp, setOtp] = useState("");
+  const [error, setError] = useState("");
   const [secondsLeft, setSecondsLeft] = useState(0);
 
   useEffect(() => {
-    if (status !== "otp_sent" && status !== "verifying") return;
+    if (status !== "sent" && status !== "verifying") return;
     if (secondsLeft <= 0) return;
     const id = setInterval(() => setSecondsLeft((s) => s - 1), 1000);
     return () => clearInterval(id);
   }, [status, secondsLeft]);
 
-  const handleSendOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("sending_otp");
-    setErrorMsg("");
+  const reset = () => {
+    setStatus("idle");
+    setToken("");
+    setProof("");
+    setOtp("");
+    setError("");
+    setSecondsLeft(0);
+  };
+
+  const send = async (payload: Record<string, string>) => {
+    setStatus("sending");
+    setError("");
+    setOtp("");
     try {
-      const res = await fetch("/api/contact/send-otp", {
+      const res = await fetch(`/api/contact/${channel}/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: `${form.countryCode}${form.phone.replace(/^0+/, "")}`,
-          message: form.message,
-        }),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (res.ok) {
         setToken(data.token);
-        setSentTo(data.sentTo ?? ["email"]);
         setSecondsLeft(OTP_TTL_SECONDS);
-        setStatus("otp_sent");
+        setStatus("sent");
       } else {
-        setErrorMsg(data.error || "Failed to send code.");
-        setStatus("error");
+        setError(data.error || "Failed to send code.");
+        setStatus("idle");
       }
     } catch {
-      setErrorMsg("Something went wrong. Please try again.");
-      setStatus("error");
+      setError("Something went wrong. Please try again.");
+      setStatus("idle");
     }
   };
 
-  const handleVerify = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const verify = async () => {
     setStatus("verifying");
-    setErrorMsg("");
+    setError("");
     try {
-      const res = await fetch("/api/contact/verify", {
+      const res = await fetch(`/api/contact/${channel}/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, otp }),
       });
       const data = await res.json();
       if (res.ok) {
-        setStatus("sent");
-        setForm(INITIAL_FORM);
-        setOtp("");
-        setToken("");
+        setProof(data.proof);
+        setStatus("verified");
       } else {
-        setErrorMsg(data.error || "Verification failed.");
-        setStatus("otp_sent");
+        setError(data.error || "Verification failed.");
+        setStatus("sent");
       }
     } catch {
-      setErrorMsg("Something went wrong. Please try again.");
-      setStatus("otp_sent");
+      setError("Something went wrong. Please try again.");
+      setStatus("sent");
     }
   };
 
-  const handleResend = () => {
-    setOtp("");
-    setToken("");
+  return { status, proof, otp, setOtp, error, secondsLeft, send, verify, reset };
+}
+
+type Verification = ReturnType<typeof useChannelVerification>;
+
+const inputStyle = {
+  background: "var(--bg2)",
+  border: "1px solid var(--border)",
+  color: "var(--text)",
+  borderRadius: 8,
+} as const;
+
+function OtpBox({
+  v,
+  canSend,
+  hint,
+  verifiedLabel,
+  onSend,
+}: {
+  v: Verification;
+  canSend: boolean;
+  hint: string;
+  verifiedLabel: string;
+  onSend: () => void;
+}) {
+  if (v.status === "verified") {
+    return (
+      <p style={{ color: "#12b76a" }} className="text-sm font-medium mt-3">
+        ✓ {verifiedLabel}
+      </p>
+    );
+  }
+
+  if (v.status === "idle" || v.status === "sending") {
+    return (
+      <div className="mt-3">
+        <button
+          type="button"
+          onClick={onSend}
+          disabled={!canSend || v.status === "sending"}
+          title={canSend ? undefined : hint}
+          style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+          className="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {v.status === "sending" ? "Sending..." : "Send Code"}
+        </button>
+        {v.error && <p className="text-red-500 text-sm mt-2">{v.error}</p>}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-3 flex flex-col gap-2">
+      <div className="flex items-center justify-between">
+        <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest">
+          Verification Code
+        </label>
+        <span
+          style={{ color: v.secondsLeft > 0 ? "var(--muted)" : "#ef4444" }}
+          className="text-xs font-medium tabular-nums"
+        >
+          {v.secondsLeft > 0 ? `Expires in ${formatCountdown(v.secondsLeft)}` : "Code expired"}
+        </span>
+      </div>
+      <div className="flex gap-3">
+        <input
+          type="text"
+          inputMode="numeric"
+          maxLength={6}
+          placeholder="000000"
+          value={v.otp}
+          onChange={(e) => v.setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              if (v.otp.length === 6) v.verify();
+            }
+          }}
+          style={{ ...inputStyle, letterSpacing: "0.4em" }}
+          className="w-full min-w-0 px-4 py-3 text-lg outline-none focus:border-current placeholder:opacity-20 transition-all"
+        />
+        <button
+          type="button"
+          onClick={v.verify}
+          disabled={v.otp.length < 6 || v.status === "verifying" || v.secondsLeft <= 0}
+          style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+          className="shrink-0 px-6 py-3 rounded-full text-sm font-semibold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {v.status === "verifying" ? "Verifying..." : "Verify"}
+        </button>
+      </div>
+      {v.error && <p className="text-red-500 text-sm">{v.error}</p>}
+      <button
+        type="button"
+        onClick={onSend}
+        style={{ color: "var(--muted)" }}
+        className="self-start text-sm hover:opacity-60 transition-opacity underline underline-offset-4"
+      >
+        Resend code
+      </button>
+    </div>
+  );
+}
+
+export default function ContactPage() {
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [status, setStatus] = useState<"idle" | "submitting" | "sent">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const emailV = useChannelVerification("email");
+  const phoneV = useChannelVerification("phone");
+
+  // The backend expects E.164 (+919876543210); leading zeros are trunk prefixes.
+  const fullPhone = `${form.countryCode}${form.phone.replace(/^0+/, "")}`;
+  const nameOk = form.name.trim().length >= 2;
+  const emailOk = /^\S+@\S+\.\S+$/.test(form.email.trim());
+  const phoneOk = form.phone.replace(/^0+/, "").length >= 6;
+  const bothVerified = emailV.status === "verified" && phoneV.status === "verified";
+
+  const sendEmailCode = () => emailV.send({ name: form.name.trim(), email: form.email.trim() });
+  const sendPhoneCode = () => phoneV.send({ name: form.name.trim(), phone: fullPhone });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!bothVerified) return;
+    setStatus("submitting");
     setErrorMsg("");
-    setSecondsLeft(0);
-    setStatus("idle");
+    try {
+      const res = await fetch("/api/contact/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: fullPhone,
+          message: form.message,
+          emailProof: emailV.proof,
+          phoneProof: phoneV.proof,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("sent");
+        setForm(INITIAL_FORM);
+        emailV.reset();
+        phoneV.reset();
+      } else {
+        setErrorMsg(data.error || "Something went wrong. Please try again.");
+        setStatus("idle");
+      }
+    } catch {
+      setErrorMsg("Something went wrong. Please try again.");
+      setStatus("idle");
+    }
   };
 
   const handleBack = () => {
     setForm(INITIAL_FORM);
-    setSentTo([]);
-    handleResend();
+    emailV.reset();
+    phoneV.reset();
+    setErrorMsg("");
+    setStatus("idle");
   };
 
   const faqJsonLd = {
@@ -291,126 +443,53 @@ export default function ContactPage() {
               </p>
             </div>
 
-          ) : status === "otp_sent" || status === "verifying" ? (
-            /* ── Step 2: OTP Verification ── */
-            <form onSubmit={handleVerify} className="flex flex-col gap-6 max-w-lg">
-              <div>
-                <p style={{ color: "var(--muted)" }} className="text-xs tracking-widest uppercase mb-2">
-                  Verify Your Details
-                </p>
-                <p style={{ color: "var(--text)" }} className="text-sm leading-relaxed">
-                  We sent a 6-digit code to{" "}
-                  {[
-                    sentTo.includes("email") && form.email,
-                    sentTo.includes("whatsapp") && `${form.countryCode} ${form.phone} on WhatsApp`,
-                  ]
-                    .filter(Boolean)
-                    .map((target, i) => (
-                      <span key={i}>
-                        {i > 0 && " and "}
-                        <span style={{ color: "var(--accent)" }} className="font-medium">{target}</span>
-                      </span>
-                    ))}
-                  . Enter it below to submit your message.
-                </p>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest">
-                    Verification Code
-                  </label>
-                  <span
-                    style={{ color: secondsLeft > 0 ? "var(--muted)" : "#ef4444" }}
-                    className="text-xs font-medium tabular-nums"
-                  >
-                    {secondsLeft > 0 ? `Expires in ${formatCountdown(secondsLeft)}` : "Code expired"}
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={6}
-                  placeholder="000000"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                  required
-                  autoFocus
-                  style={{
-                    background: "var(--bg2)",
-                    border: "1px solid var(--border)",
-                    color: "var(--text)",
-                    borderRadius: 8,
-                    fontSize: "1.8rem",
-                    letterSpacing: "0.4em",
-                    textAlign: "center",
-                    fontFamily: "var(--font-bebas)",
-                  }}
-                  className="w-full px-4 py-4 outline-none focus:border-current placeholder:opacity-20 transition-all"
-                />
-              </div>
-
-              {errorMsg && (
-                <p className="text-red-500 text-sm">{errorMsg}</p>
-              )}
-
-              <div className="flex items-center gap-4">
-                <button
-                  type="submit"
-                  disabled={otp.length < 6 || status === "verifying" || secondsLeft <= 0}
-                  style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-                  className="px-8 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 disabled:opacity-50"
-                >
-                  <span
-                    style={{ background: "var(--accent)" }}
-                    className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
-                  />
-                  <span className="relative z-10">
-                    {status === "verifying" ? "Verifying..." : "Verify & Send →"}
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleResend}
-                  style={{ color: "var(--muted)" }}
-                  className="text-sm hover:opacity-60 transition-opacity underline underline-offset-4"
-                >
-                  Resend code
-                </button>
-              </div>
-            </form>
-
           ) : (
-            /* ── Step 1: Contact Form ── */
-            <form onSubmit={handleSendOtp} className="flex flex-col gap-6 max-w-lg">
+            /* ── Contact Form (email + WhatsApp are verified inline) ── */
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 max-w-lg">
               <p style={{ color: "var(--muted)" }} className="text-xs tracking-widest uppercase mb-2">
                 Send a Message
               </p>
 
-              {[
-                { id: "name", label: "Your Name", type: "text", placeholder: "Rahul Sharma" },
-                { id: "email", label: "Email Address", type: "email", placeholder: "rahul@company.com" },
-              ].map((field) => (
-                <div key={field.id}>
-                  <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
-                    {field.label}
-                  </label>
-                  <input
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    value={form[field.id as keyof typeof form]}
-                    onChange={(e) => setForm({ ...form, [field.id]: e.target.value })}
-                    required
-                    style={{
-                      background: "var(--bg2)",
-                      border: "1px solid var(--border)",
-                      color: "var(--text)",
-                      borderRadius: 8,
-                    }}
-                    className="w-full px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
-                  />
-                </div>
-              ))}
+              <div>
+                <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Rahul Sharma"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  required
+                  style={inputStyle}
+                  className="w-full px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
+                />
+              </div>
+
+              <div>
+                <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  placeholder="rahul@company.com"
+                  value={form.email}
+                  readOnly={emailV.status === "verified"}
+                  onChange={(e) => {
+                    setForm({ ...form, email: e.target.value });
+                    if (emailV.status !== "idle") emailV.reset();
+                  }}
+                  required
+                  style={inputStyle}
+                  className="w-full px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
+                />
+                <OtpBox
+                  v={emailV}
+                  canSend={nameOk && emailOk}
+                  hint="Enter your name and a valid email first"
+                  verifiedLabel="Email verified"
+                  onSend={sendEmailCode}
+                />
+              </div>
 
               <div>
                 <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
@@ -420,13 +499,12 @@ export default function ContactPage() {
                   <select
                     aria-label="Country code"
                     value={form.countryCode}
-                    onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
-                    style={{
-                      background: "var(--bg2)",
-                      border: "1px solid var(--border)",
-                      color: "var(--text)",
-                      borderRadius: 8,
+                    disabled={phoneV.status === "verified"}
+                    onChange={(e) => {
+                      setForm({ ...form, countryCode: e.target.value });
+                      if (phoneV.status !== "idle") phoneV.reset();
                     }}
+                    style={inputStyle}
                     className="w-32 shrink-0 px-3 py-3 text-sm outline-none focus:border-current transition-all"
                   >
                     {COUNTRY_CODES.map((c) => (
@@ -443,17 +521,23 @@ export default function ContactPage() {
                     minLength={6}
                     maxLength={14}
                     value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "") })}
-                    required
-                    style={{
-                      background: "var(--bg2)",
-                      border: "1px solid var(--border)",
-                      color: "var(--text)",
-                      borderRadius: 8,
+                    readOnly={phoneV.status === "verified"}
+                    onChange={(e) => {
+                      setForm({ ...form, phone: e.target.value.replace(/\D/g, "") });
+                      if (phoneV.status !== "idle") phoneV.reset();
                     }}
+                    required
+                    style={inputStyle}
                     className="w-full min-w-0 px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
                   />
                 </div>
+                <OtpBox
+                  v={phoneV}
+                  canSend={nameOk && phoneOk}
+                  hint="Enter your name and WhatsApp number first"
+                  verifiedLabel="WhatsApp number verified"
+                  onSend={sendPhoneCode}
+                />
               </div>
 
               <div>
@@ -466,13 +550,7 @@ export default function ContactPage() {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
-                  style={{
-                    background: "var(--bg2)",
-                    border: "1px solid var(--border)",
-                    color: "var(--text)",
-                    borderRadius: 8,
-                    resize: "none",
-                  }}
+                  style={{ ...inputStyle, resize: "none" }}
                   className="w-full px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
                 />
               </div>
@@ -481,20 +559,27 @@ export default function ContactPage() {
                 <p className="text-red-500 text-sm">{errorMsg}</p>
               )}
 
-              <button
-                type="submit"
-                disabled={status === "sending_otp"}
-                style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-                className="self-start px-8 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 disabled:opacity-50"
-              >
-                <span
-                  style={{ background: "var(--accent)" }}
-                  className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
-                />
-                <span className="relative z-10">
-                  {status === "sending_otp" ? "Sending Code..." : "Send Message →"}
-                </span>
-              </button>
+              <div className="flex flex-col gap-2 items-start">
+                <button
+                  type="submit"
+                  disabled={status === "submitting" || !bothVerified}
+                  style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+                  className="px-8 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span
+                    style={{ background: "var(--accent)" }}
+                    className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full group-disabled:hidden"
+                  />
+                  <span className="relative z-10">
+                    {status === "submitting" ? "Sending..." : "Send Message →"}
+                  </span>
+                </button>
+                {!bothVerified && (
+                  <p style={{ color: "var(--muted)" }} className="text-xs">
+                    Verify your email and WhatsApp number to send your message.
+                  </p>
+                )}
+              </div>
             </form>
           )}
         </div>
