@@ -147,7 +147,7 @@ function OtpBox({
           style={{ border: "1px solid var(--border)", color: "var(--text)" }}
           className="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          {v.status === "sending" ? "Sending..." : "Send Code"}
+          {v.status === "sending" ? "Sending..." : "Verify"}
         </button>
         {v.error && <p className="text-red-500 text-sm mt-2">{v.error}</p>}
       </div>
