@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { faqs } from "@/data/content";
 
-const OTP_TTL_SECONDS = 5 * 60;
+const OTP_TTL_SECONDS = 10 * 60;
 
 function formatCountdown(seconds: number) {
   const m = Math.floor(seconds / 60);
