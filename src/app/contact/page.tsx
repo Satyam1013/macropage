@@ -109,6 +109,12 @@ export default function ContactPage() {
     setStatus("idle");
   };
 
+  const handleBack = () => {
+    setForm(INITIAL_FORM);
+    setSentTo([]);
+    handleResend();
+  };
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -248,8 +254,17 @@ export default function ContactPage() {
           {status === "sent" ? (
             <div
               style={{ color: "var(--text)" }}
-              className="flex flex-col items-center justify-center h-full gap-4 text-center"
+              className="relative flex flex-col items-center justify-center h-full gap-4 text-center"
             >
+              <button
+                type="button"
+                onClick={handleBack}
+                aria-label="Back to form"
+                style={{ color: "var(--muted)" }}
+                className="absolute top-0 left-0 text-sm hover:opacity-60 transition-opacity"
+              >
+                ← Back
+              </button>
               <div
                 style={{
                   background: "var(--accent)",
