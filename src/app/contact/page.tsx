@@ -11,16 +11,24 @@ function formatCountdown(seconds: number) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-// The backend expects E.164 (+919876543210); bare 10-digit numbers are treated as Indian.
-function toE164(input: string) {
-  const digits = input.replace(/\D/g, "");
-  if (input.trim().startsWith("+")) return `+${digits}`;
-  if (digits.length === 10) return `+91${digits}`;
-  return `+${digits}`;
-}
+const COUNTRY_CODES = [
+  { code: "+91", label: "🇮🇳 +91" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+971", label: "🇦🇪 +971" },
+  { code: "+966", label: "🇸🇦 +966" },
+  { code: "+65", label: "🇸🇬 +65" },
+  { code: "+61", label: "🇦🇺 +61" },
+  { code: "+49", label: "🇩🇪 +49" },
+  { code: "+977", label: "🇳🇵 +977" },
+  { code: "+880", label: "🇧🇩 +880" },
+  { code: "+94", label: "🇱🇰 +94" },
+];
+
+const INITIAL_FORM = { name: "", email: "", countryCode: "+91", phone: "", message: "" };
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState(INITIAL_FORM);
   const [sentTo, setSentTo] = useState<string[]>([]);
   const [status, setStatus] = useState<"idle" | "sending_otp" | "otp_sent" | "verifying" | "sent" | "error">("idle");
   const [otp, setOtp] = useState("");
@@ -44,7 +52,12 @@ export default function ContactPage() {
       const res = await fetch("/api/contact/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, phone: toE164(form.phone) }),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: `${form.countryCode}${form.phone.replace(/^0+/, "")}`,
+          message: form.message,
+        }),
       });
       const data = await res.json();
       if (res.ok) {
@@ -75,7 +88,7 @@ export default function ContactPage() {
       const data = await res.json();
       if (res.ok) {
         setStatus("sent");
-        setForm({ name: "", email: "", phone: "", message: "" });
+        setForm(INITIAL_FORM);
         setOtp("");
         setToken("");
       } else {
@@ -274,7 +287,7 @@ export default function ContactPage() {
                   We sent a 6-digit code to{" "}
                   {[
                     sentTo.includes("email") && form.email,
-                    sentTo.includes("whatsapp") && `${form.phone} on WhatsApp`,
+                    sentTo.includes("whatsapp") && `${form.countryCode} ${form.phone} on WhatsApp`,
                   ]
                     .filter(Boolean)
                     .map((target, i) => (
@@ -362,7 +375,6 @@ export default function ContactPage() {
               {[
                 { id: "name", label: "Your Name", type: "text", placeholder: "Rahul Sharma" },
                 { id: "email", label: "Email Address", type: "email", placeholder: "rahul@company.com" },
-                { id: "phone", label: "WhatsApp Number", type: "tel", placeholder: "+91 98765 43210" },
               ].map((field) => (
                 <div key={field.id}>
                   <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
@@ -384,6 +396,50 @@ export default function ContactPage() {
                   />
                 </div>
               ))}
+
+              <div>
+                <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
+                  WhatsApp Number
+                </label>
+                <div className="flex gap-3">
+                  <select
+                    aria-label="Country code"
+                    value={form.countryCode}
+                    onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                    style={{
+                      background: "var(--bg2)",
+                      border: "1px solid var(--border)",
+                      color: "var(--text)",
+                      borderRadius: 8,
+                    }}
+                    className="w-32 shrink-0 px-3 py-3 text-sm outline-none focus:border-current transition-all"
+                  >
+                    {COUNTRY_CODES.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.label}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    autoComplete="tel-national"
+                    placeholder="98765 43210"
+                    minLength={6}
+                    maxLength={14}
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "") })}
+                    required
+                    style={{
+                      background: "var(--bg2)",
+                      border: "1px solid var(--border)",
+                      color: "var(--text)",
+                      borderRadius: 8,
+                    }}
+                    className="w-full min-w-0 px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
+                  />
+                </div>
+              </div>
 
               <div>
                 <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
