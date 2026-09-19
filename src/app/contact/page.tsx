@@ -115,43 +115,51 @@ const inputStyle = {
   borderRadius: 8,
 } as const;
 
-function OtpBox({
+// Sits to the right of the input it verifies.
+function VerifyAction({
   v,
   canSend,
   hint,
-  verifiedLabel,
   onSend,
 }: {
   v: Verification;
   canSend: boolean;
   hint: string;
-  verifiedLabel: string;
   onSend: () => void;
 }) {
   if (v.status === "verified") {
     return (
-      <p style={{ color: "#12b76a" }} className="text-sm font-medium mt-3">
-        ✓ {verifiedLabel}
-      </p>
+      <span
+        style={{ color: "#12b76a" }}
+        className="shrink-0 flex items-center text-sm font-medium"
+      >
+        ✓ Verified
+      </span>
     );
   }
 
+  if (v.status !== "idle" && v.status !== "sending") return null;
+
+  return (
+    <button
+      type="button"
+      onClick={onSend}
+      disabled={!canSend || v.status === "sending"}
+      title={canSend ? undefined : hint}
+      style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+      className="shrink-0 px-5 rounded-full text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 disabled:opacity-40 disabled:cursor-not-allowed"
+    >
+      {v.status === "sending" ? "Sending..." : "Verify"}
+    </button>
+  );
+}
+
+// Appears below the input once a code has been sent.
+function OtpPanel({ v, onSend }: { v: Verification; onSend: () => void }) {
+  if (v.status === "verified") return null;
+
   if (v.status === "idle" || v.status === "sending") {
-    return (
-      <div className="mt-3">
-        <button
-          type="button"
-          onClick={onSend}
-          disabled={!canSend || v.status === "sending"}
-          title={canSend ? undefined : hint}
-          style={{ border: "1px solid var(--border)", color: "var(--text)" }}
-          className="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-          {v.status === "sending" ? "Sending..." : "Verify"}
-        </button>
-        {v.error && <p className="text-red-500 text-sm mt-2">{v.error}</p>}
-      </div>
-    );
+    return v.error ? <p className="text-red-500 text-sm mt-2">{v.error}</p> : null;
   }
 
   return (
@@ -469,26 +477,28 @@ export default function ContactPage() {
                 <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
                   Email Address
                 </label>
-                <input
-                  type="email"
-                  placeholder="rahul@company.com"
-                  value={form.email}
-                  readOnly={emailV.status === "verified"}
-                  onChange={(e) => {
-                    setForm({ ...form, email: e.target.value });
-                    if (emailV.status !== "idle") emailV.reset();
-                  }}
-                  required
-                  style={inputStyle}
-                  className="w-full px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
-                />
-                <OtpBox
-                  v={emailV}
-                  canSend={nameOk && emailOk}
-                  hint="Enter your name and a valid email first"
-                  verifiedLabel="Email verified"
-                  onSend={sendEmailCode}
-                />
+                <div className="flex gap-3">
+                  <input
+                    type="email"
+                    placeholder="rahul@company.com"
+                    value={form.email}
+                    readOnly={emailV.status === "verified"}
+                    onChange={(e) => {
+                      setForm({ ...form, email: e.target.value });
+                      if (emailV.status !== "idle") emailV.reset();
+                    }}
+                    required
+                    style={inputStyle}
+                    className="w-full min-w-0 px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
+                  />
+                  <VerifyAction
+                    v={emailV}
+                    canSend={nameOk && emailOk}
+                    hint="Enter your name and a valid email first"
+                    onSend={sendEmailCode}
+                  />
+                </div>
+                <OtpPanel v={emailV} onSend={sendEmailCode} />
               </div>
 
               <div>
@@ -530,14 +540,14 @@ export default function ContactPage() {
                     style={inputStyle}
                     className="w-full min-w-0 px-4 py-3 text-sm outline-none focus:border-current placeholder:opacity-30 transition-all"
                   />
+                  <VerifyAction
+                    v={phoneV}
+                    canSend={nameOk && phoneOk}
+                    hint="Enter your name and WhatsApp number first"
+                    onSend={sendPhoneCode}
+                  />
                 </div>
-                <OtpBox
-                  v={phoneV}
-                  canSend={nameOk && phoneOk}
-                  hint="Enter your name and WhatsApp number first"
-                  verifiedLabel="WhatsApp number verified"
-                  onSend={sendPhoneCode}
-                />
+                <OtpPanel v={phoneV} onSend={sendPhoneCode} />
               </div>
 
               <div>
