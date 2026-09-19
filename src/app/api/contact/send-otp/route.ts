@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    return NextResponse.json({ token: data.token });
+    return NextResponse.json({ token: data.token, sentTo: data.sentTo });
   } catch (error) {
     console.error("Send OTP error:", error);
     return NextResponse.json({ error: "Failed to send verification code" }, { status: 500 });

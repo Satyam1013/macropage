@@ -11,8 +11,17 @@ function formatCountdown(seconds: number) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
+// The backend expects E.164 (+919876543210); bare 10-digit numbers are treated as Indian.
+function toE164(input: string) {
+  const digits = input.replace(/\D/g, "");
+  if (input.trim().startsWith("+")) return `+${digits}`;
+  if (digits.length === 10) return `+91${digits}`;
+  return `+${digits}`;
+}
+
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [sentTo, setSentTo] = useState<string[]>([]);
   const [status, setStatus] = useState<"idle" | "sending_otp" | "otp_sent" | "verifying" | "sent" | "error">("idle");
   const [otp, setOtp] = useState("");
   const [token, setToken] = useState("");
@@ -35,11 +44,12 @@ export default function ContactPage() {
       const res = await fetch("/api/contact/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, phone: toE164(form.phone) }),
       });
       const data = await res.json();
       if (res.ok) {
         setToken(data.token);
+        setSentTo(data.sentTo ?? ["email"]);
         setSecondsLeft(OTP_TTL_SECONDS);
         setStatus("otp_sent");
       } else {
@@ -65,7 +75,7 @@ export default function ContactPage() {
       const data = await res.json();
       if (res.ok) {
         setStatus("sent");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", phone: "", message: "" });
         setOtp("");
         setToken("");
       } else {
@@ -258,12 +268,22 @@ export default function ContactPage() {
             <form onSubmit={handleVerify} className="flex flex-col gap-6 max-w-lg">
               <div>
                 <p style={{ color: "var(--muted)" }} className="text-xs tracking-widest uppercase mb-2">
-                  Verify Your Email
+                  Verify Your Details
                 </p>
                 <p style={{ color: "var(--text)" }} className="text-sm leading-relaxed">
                   We sent a 6-digit code to{" "}
-                  <span style={{ color: "var(--accent)" }} className="font-medium">{form.email}</span>.
-                  Enter it below to submit your message.
+                  {[
+                    sentTo.includes("email") && form.email,
+                    sentTo.includes("whatsapp") && `${form.phone} on WhatsApp`,
+                  ]
+                    .filter(Boolean)
+                    .map((target, i) => (
+                      <span key={i}>
+                        {i > 0 && " and "}
+                        <span style={{ color: "var(--accent)" }} className="font-medium">{target}</span>
+                      </span>
+                    ))}
+                  . Enter it below to submit your message.
                 </p>
               </div>
 
@@ -342,6 +362,7 @@ export default function ContactPage() {
               {[
                 { id: "name", label: "Your Name", type: "text", placeholder: "Rahul Sharma" },
                 { id: "email", label: "Email Address", type: "email", placeholder: "rahul@company.com" },
+                { id: "phone", label: "WhatsApp Number", type: "tel", placeholder: "+91 98765 43210" },
               ].map((field) => (
                 <div key={field.id}>
                   <label style={{ color: "var(--muted)" }} className="text-xs uppercase tracking-widest block mb-2">
