@@ -515,7 +515,7 @@ export default function ContactPage() {
                       if (phoneV.status !== "idle") phoneV.reset();
                     }}
                     style={inputStyle}
-                    className="w-32 shrink-0 px-3 py-3 text-sm outline-none focus:border-current transition-all"
+                    className="w-24 shrink-0 px-3 py-3 text-sm outline-none focus:border-current transition-all"
                   >
                     {COUNTRY_CODES.map((c) => (
                       <option key={c.code} value={c.code}>
