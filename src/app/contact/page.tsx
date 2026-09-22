@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { faqs } from "@/data/content";
+import { COUNTRY_CODES } from "@/data/countries";
 
 const OTP_TTL_SECONDS = 10 * 60;
 
@@ -10,20 +11,6 @@ function formatCountdown(seconds: number) {
   const s = seconds % 60;
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
-
-const COUNTRY_CODES = [
-  { code: "+91", label: "🇮🇳 +91" },
-  { code: "+1", label: "🇺🇸 +1" },
-  { code: "+44", label: "🇬🇧 +44" },
-  { code: "+971", label: "🇦🇪 +971" },
-  { code: "+966", label: "🇸🇦 +966" },
-  { code: "+65", label: "🇸🇬 +65" },
-  { code: "+61", label: "🇦🇺 +61" },
-  { code: "+49", label: "🇩🇪 +49" },
-  { code: "+977", label: "🇳🇵 +977" },
-  { code: "+880", label: "🇧🇩 +880" },
-  { code: "+94", label: "🇱🇰 +94" },
-];
 
 const INITIAL_FORM = { name: "", email: "", countryCode: "+91", phone: "", message: "" };
 
@@ -515,10 +502,10 @@ export default function ContactPage() {
                       if (phoneV.status !== "idle") phoneV.reset();
                     }}
                     style={inputStyle}
-                    className="w-20 shrink-0 px-3 py-3 text-sm outline-none focus:border-current transition-all"
+                    className="w-28 shrink-0 px-3 py-3 text-sm outline-none focus:border-current transition-all"
                   >
                     {COUNTRY_CODES.map((c) => (
-                      <option key={c.code} value={c.code}>
+                      <option key={c.country} value={c.code} title={c.country}>
                         {c.label}
                       </option>
                     ))}
