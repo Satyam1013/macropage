@@ -50,12 +50,9 @@ export const stats: Stat[] = [
 ];
 
 export const team: TeamMember[] = [
-  { name: "Satyam Rawat", role: "Founder & Tech Lead" },
-  { name: "Priya Singh", role: "UI/UX Designer" },
-  { name: "Rahul Verma", role: "Backend Engineer" },
-  { name: "Ankit Sharma", role: "Mobile Developer" },
-  { name: "Neha Gupta", role: "AI Engineer" },
-  { name: "Vikram Joshi", role: "DevOps Engineer" },
+  { name: "Nitish Thakur", role: "Founder" },
+  { name: "Satyam Banwale", role: "Co-Founder & Full Stack Engineer" },
+  { name: "Yash Shakhla", role: "Co-Founder & Full Stack Engineer" },
 ];
 
 export const tickerItems: string[] = [

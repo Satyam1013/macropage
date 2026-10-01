@@ -296,45 +296,22 @@ export default function AboutPage() {
         >
           Our Team
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {team.map((member, i) => (
-            <div key={i} className="flex flex-col gap-3">
-              {/* Avatar placeholder */}
-              <div
-                style={{
-                  background: "var(--bg2)",
-                  border: "1px solid var(--border)",
-                  borderRadius: 12,
-                  aspectRatio: "3/4",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+            <div
+              key={i}
+              style={{ borderTop: "1px solid var(--border)" }}
+              className="flex flex-col gap-1 pt-5"
+            >
+              <p
+                style={{ color: "var(--text)" }}
+                className="text-sm font-medium"
               >
-                <span
-                  style={{
-                    fontFamily: "var(--font-bebas)",
-                    color: "var(--border)",
-                    fontSize: "2rem",
-                  }}
-                >
-                  {member.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </span>
-              </div>
-              <div>
-                <p
-                  style={{ color: "var(--text)" }}
-                  className="text-sm font-medium"
-                >
-                  {member.name}
-                </p>
-                <p style={{ color: "var(--muted)" }} className="text-xs mt-0.5">
-                  {member.role}
-                </p>
-              </div>
+                {member.name}
+              </p>
+              <p style={{ color: "var(--muted)" }} className="text-xs">
+                {member.role}
+              </p>
             </div>
           ))}
         </div>
