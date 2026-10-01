@@ -63,7 +63,6 @@ export const tickerItems: string[] = [
   "UI/UX Design",
   "Cloud Services",
   "WhatsApp API",
-  "Social Media",
 ];
 
 export const marqueeItems: string[] = [
