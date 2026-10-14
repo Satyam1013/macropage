@@ -12,12 +12,14 @@ const CARD_W = 70;
 
 function ProjectCard({
   p,
+  index,
   style,
   className,
   priority,
   mobileImage,
 }: {
   p: (typeof projects)[number];
+  index: number;
   style?: React.CSSProperties;
   className: string;
   priority?: boolean;
@@ -25,53 +27,75 @@ function ProjectCard({
 }) {
   return (
     <div
-      style={{ background: p.color, ...style }}
-      className={`relative flex-shrink-0 ${className}`}
+      style={{ background: "var(--bg)", ...style }}
+      className={`relative flex-shrink-0 flex items-center justify-center p-4 sm:p-8 ${className}`}
     >
       <Link
         href={`/work/${p.slug}`}
         aria-label={`View ${p.name} project`}
-        className="group block h-full w-full"
+        style={{ background: "var(--card)", border: "1px solid var(--border)" }}
+        className="group relative flex h-[88%] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] sm:h-[72%] sm:flex-row"
       >
-        <Image
-          src={mobileImage ? p.imageMobile : p.image}
-          alt={`${p.name} project screenshot`}
-          fill
-          sizes="100vw"
-          priority={priority}
-          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-        />
-
-        {/* Bottom info bar */}
-        <div
-          style={{ background: p.color }}
-          className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-6 py-7 sm:px-10 sm:py-9"
-        >
-          <div className="flex flex-wrap items-center gap-3 sm:gap-8">
-            <span className="text-xs font-semibold tracking-widest text-white/70">
-              {p.year}
-            </span>
-            <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">
-              {p.category}
-            </span>
-            <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">
-              {p.tags}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <h2
-              style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
-              className="text-[clamp(2.5rem,8vw,6rem)] tracking-wide"
-            >
-              {p.name}
-            </h2>
+        {/* Text panel */}
+        <div className="order-2 flex min-w-0 flex-1 flex-col justify-start gap-6 p-6 sm:order-1 sm:justify-between sm:gap-5 sm:p-10">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <p
+                style={{ color: "var(--muted)" }}
+                className="mb-2 text-[11px] uppercase tracking-widest"
+              >
+                {p.category} · {p.year}
+              </p>
+              <h3
+                style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
+                className="text-[clamp(1.5rem,3vw,2.5rem)] tracking-wide"
+              >
+                {p.name}
+              </h3>
+            </div>
             <span
-              style={{ background: "#fff", color: "#111" }}
-              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-lg transition-transform duration-300 group-hover:rotate-45 sm:h-14 sm:w-14 sm:text-2xl"
+              style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
+              className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-sm transition-transform duration-300 group-hover:rotate-45"
             >
               ↗
             </span>
           </div>
+
+          <div style={{ borderTop: "1.5px dashed var(--border)" }} />
+
+          <div className="flex flex-col gap-4 sm:flex-1 sm:justify-end">
+            <div
+              style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+              className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full"
+            >
+              {p.icon}
+            </div>
+            <p style={{ color: "var(--muted)" }} className="max-w-xs text-sm leading-relaxed">
+              {p.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Dark image panel */}
+        <div
+          style={{ background: p.color }}
+          className="relative order-1 mx-3 mt-3 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[20px] sm:order-2 sm:mb-3 sm:ml-0 sm:mt-3 sm:h-auto sm:w-[44%]"
+        >
+          <Image
+            src={mobileImage ? p.imageMobile : p.image}
+            alt={`${p.name} project screenshot`}
+            fill
+            sizes="(max-width: 640px) 90vw, 45vw"
+            priority={priority}
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/55 to-transparent" />
+          <span
+            style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
+            className="absolute left-4 top-3 text-[clamp(2rem,5vw,3.25rem)] leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
         </div>
       </Link>
     </div>
@@ -123,7 +147,7 @@ function DesktopShowcase() {
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div style={{ x }} className="flex h-full">
           {projects.map((p, i) => (
-            <ProjectCard key={p.slug} p={p} style={cardStyle} className="" priority={i === 0} />
+            <ProjectCard key={p.slug} p={p} index={i} style={cardStyle} className="" priority={i === 0} />
           ))}
           <ClosingCard style={cardStyle} className="" />
         </motion.div>
@@ -166,7 +190,7 @@ function MobileShowcase() {
     <div>
       {projects.map((p, i) => (
         <StickyWrap key={p.slug} index={i}>
-          <ProjectCard p={p} className="h-full w-full" priority={i === 0} mobileImage />
+          <ProjectCard p={p} index={i} className="h-full w-full" priority={i === 0} mobileImage />
         </StickyWrap>
       ))}
       <StickyWrap index={total - 1}>
