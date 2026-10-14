@@ -77,12 +77,17 @@ function ProjectCard({
           </div>
         </div>
 
-        {/* Dark panel — fully transparent, no background of its own. It's a
-            window straight onto the section's shared backdrop (see
-            DesktopShowcase / MobileShowcase), carrying only the index
-            number; the text panel above is this card's only opaque part. */}
+        {/* Dark panel — a frosted window onto the section's shared backdrop
+            (see DesktopShowcase / MobileShowcase): blurred + softly tinted
+            rather than a sharp view of it, carrying only the index number.
+            The text panel above is this card's only fully opaque part. */}
         <div
-          style={{ borderColor: "var(--border)" }}
+          style={{
+            borderColor: "var(--border)",
+            background: "linear-gradient(145deg, rgba(0,0,0,0.38), rgba(0,0,0,0.12))",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+          }}
           className="relative order-1 h-[42%] w-auto flex-shrink-0 border-t sm:order-2 sm:h-auto sm:w-[44%] sm:border-l sm:border-t-0"
         >
           <span
@@ -93,6 +98,29 @@ function ProjectCard({
           </span>
         </div>
       </Link>
+    </div>
+  );
+}
+
+// Pinned over the shared backdrop (not inside the sliding/stacking cards),
+// so it stays in view the whole time you're scrolling through the cards —
+// matching the reference, where the heading sits on the same dark image
+// and never scrolls away.
+function PinnedHeading() {
+  return (
+    <div className="pointer-events-none absolute left-6 top-8 z-[1] sm:left-10 sm:top-10">
+      <p
+        style={{ color: "rgba(255,255,255,0.55)" }}
+        className="mb-2 text-xs uppercase tracking-widest"
+      >
+        [ 02 ] Selected Work
+      </p>
+      <h2
+        style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
+        className="text-[clamp(2rem,4.5vw,3.5rem)] tracking-wide"
+      >
+        Our Projects
+      </h2>
     </div>
   );
 }
@@ -156,6 +184,7 @@ function DesktopShowcase() {
             backgroundPosition: "center",
           }}
         />
+        <PinnedHeading />
         <motion.div style={{ x }} className="relative flex h-full">
           {projects.map((p, i) => (
             <ProjectCard key={p.slug} p={p} index={i} style={cardStyle} className="" />
