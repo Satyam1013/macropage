@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { workPageProjects as projects } from "@/data/projects";
+import { PROJECTS_SECTION_BG } from "@/constants";
 
 // Card is slightly narrower than the viewport (desktop only) so the next
 // project peeks in from the right edge as you scroll.
@@ -15,15 +15,11 @@ function ProjectCard({
   index,
   style,
   className,
-  priority,
-  mobileImage,
 }: {
   p: (typeof projects)[number];
   index: number;
   style?: React.CSSProperties;
   className: string;
-  priority?: boolean;
-  mobileImage?: boolean;
 }) {
   return (
     <div
@@ -76,20 +72,17 @@ function ProjectCard({
           </div>
         </div>
 
-        {/* Dark image panel */}
+        {/* Dark panel — no per-project screenshot; a shared backdrop image
+            shows through (via the section's own background), just like the
+            reference: a transparent window carrying only the index number. */}
         <div
-          style={{ background: p.color }}
+          style={{
+            backgroundImage: `url(${PROJECTS_SECTION_BG})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
           className="relative order-1 mx-3 mt-3 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[20px] sm:order-2 sm:mb-3 sm:ml-0 sm:mt-3 sm:h-auto sm:w-[44%]"
         >
-          <Image
-            src={mobileImage ? p.imageMobile : p.image}
-            alt={`${p.name} project screenshot`}
-            fill
-            sizes="(max-width: 640px) 90vw, 45vw"
-            priority={priority}
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/55 to-transparent" />
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
             className="absolute left-4 top-3 text-[clamp(2rem,5vw,3.25rem)] leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
@@ -147,7 +140,7 @@ function DesktopShowcase() {
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div style={{ x }} className="flex h-full">
           {projects.map((p, i) => (
-            <ProjectCard key={p.slug} p={p} index={i} style={cardStyle} className="" priority={i === 0} />
+            <ProjectCard key={p.slug} p={p} index={i} style={cardStyle} className="" />
           ))}
           <ClosingCard style={cardStyle} className="" />
         </motion.div>
@@ -190,7 +183,7 @@ function MobileShowcase() {
     <div>
       {projects.map((p, i) => (
         <StickyWrap key={p.slug} index={i}>
-          <ProjectCard p={p} index={i} className="h-full w-full" priority={i === 0} mobileImage />
+          <ProjectCard p={p} index={i} className="h-full w-full" />
         </StickyWrap>
       ))}
       <StickyWrap index={total - 1}>
