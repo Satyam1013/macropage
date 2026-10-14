@@ -41,10 +41,10 @@ function ProjectCard({
           style={{ background: "var(--card)", borderColor: "var(--border)" }}
           className="order-1 flex min-w-0 flex-1 flex-col justify-start gap-6 rounded-[28px] border p-6 sm:order-1 sm:justify-between sm:gap-5 sm:rounded-none sm:border-0 sm:p-10"
         >
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-col gap-3">
             <h3
               style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
-              className="text-[clamp(1.5rem,3vw,2.5rem)] tracking-wide"
+              className="text-[clamp(1.75rem,4vw,3rem)] tracking-wide"
             >
               {p.name}
             </h3>
