@@ -56,9 +56,15 @@ function ProjectCard({
             </div>
             <span
               style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
-              className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-sm transition-transform duration-300 group-hover:rotate-45"
+              className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-base transition-colors duration-300 group-hover:border-transparent group-hover:text-[var(--bg)]"
             >
-              ↗
+              <span
+                style={{ background: "var(--text)" }}
+                className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
+              />
+              <span className="relative transition-transform duration-300 group-hover:rotate-45">
+                ↗
+              </span>
             </span>
           </div>
 
@@ -92,7 +98,7 @@ function ProjectCard({
         >
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
-            className="absolute left-4 top-3 text-[clamp(2rem,5vw,3.25rem)] leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+            className="absolute left-4 top-3 text-[clamp(2.5rem,6vw,4.25rem)] leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
           >
             {String(index + 1).padStart(2, "0")}
           </span>
@@ -108,17 +114,17 @@ function ProjectCard({
 // and never scrolls away.
 function PinnedHeading() {
   return (
-    <div className="pointer-events-none absolute inset-x-6 top-8 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
+    <div className="pointer-events-none absolute inset-x-6 top-3 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
       <div>
         <p
           style={{ color: "rgba(255,255,255,0.55)" }}
-          className="mb-2 text-xs uppercase tracking-widest"
+          className="mb-2 hidden text-xs uppercase tracking-widest sm:block"
         >
           [ 02 ] Selected Work
         </p>
         <h2
           style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
-          className="text-[clamp(2rem,4.5vw,3.5rem)] tracking-wide"
+          className="text-[clamp(1.25rem,4.5vw,3.5rem)] tracking-wide"
         >
           Our Projects
         </h2>
@@ -126,7 +132,7 @@ function PinnedHeading() {
       <Link
         href="/work"
         style={{ color: "rgba(255,255,255,0.8)", borderBottom: "1px solid rgba(255,255,255,0.4)" }}
-        className="pointer-events-auto mt-2 flex-shrink-0 text-sm pb-0.5 hover:opacity-100 transition-all"
+        className="pointer-events-auto mt-2 hidden flex-shrink-0 text-sm pb-0.5 hover:opacity-100 transition-all sm:block"
       >
         See All Projects →
       </Link>
@@ -251,7 +257,9 @@ function MobileShowcase() {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      />
+      >
+        <PinnedHeading />
+      </div>
       {projects.map((p, i) => (
         <StickyWrap key={p.slug} index={i}>
           <ProjectCard p={p} index={i} className="h-full w-full" />
