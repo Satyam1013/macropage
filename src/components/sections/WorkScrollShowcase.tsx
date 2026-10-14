@@ -34,7 +34,7 @@ function ProjectCard({
         href={`/work/${p.slug}`}
         aria-label={`View ${p.name} project`}
         style={{ background: "var(--card)", border: "1px solid var(--border)" }}
-        className="group relative flex h-[88%] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] sm:h-[72%] sm:flex-row"
+        className="group relative flex h-[88%] w-full flex-col overflow-hidden rounded-[28px] sm:h-[72%] sm:flex-row"
       >
         {/* Text panel */}
         <div className="order-2 flex min-w-0 flex-1 flex-col justify-start gap-6 p-6 sm:order-1 sm:justify-between sm:gap-5 sm:p-10">
