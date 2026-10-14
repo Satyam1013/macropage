@@ -61,9 +61,14 @@ function ProjectCard({
             (see ScrollShowcase): blurred + softly tinted rather than a
             sharp view of it, carrying only the index number. The thick
             var(--card)-colored border frames it with a little breathing
-            room on all sides — it's opaque so it reads as a border, but
-            unlike giving the Link itself a background, it doesn't sit
-            behind the panel's own blur and block the real backdrop. */}
+            room — opaque, so it reads as a border, without sitting behind
+            the panel's own blur and blocking the real backdrop like
+            giving the Link itself a background would. No border on the
+            side touching the text panel (top on mobile, left on desktop)
+            — backdrop-filter's blur sampling leaves a faint dark fringe
+            right at that edge, which a border there only framed more
+            visibly; without it the panel just butts cleanly against the
+            text panel instead. */}
         <div
           style={{
             borderColor: "var(--card)",
@@ -71,7 +76,7 @@ function ProjectCard({
             backdropFilter: "blur(16px)",
             WebkitBackdropFilter: "blur(16px)",
           }}
-          className="relative order-2 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[22px] border-8 sm:h-auto sm:w-[44%]"
+          className="relative order-2 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[22px] border-x-8 border-b-8 border-t-0 sm:h-auto sm:w-[44%] sm:border-x-0 sm:border-y-8 sm:border-r-8 sm:border-l-0"
         >
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
