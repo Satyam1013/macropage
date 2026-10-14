@@ -243,22 +243,30 @@ function MobileShowcase() {
 
   return (
     <div className="relative">
-      {/* Shared backdrop. Sticky + a negative bottom margin pins it to the
-          viewport for the whole stack's scroll range without reserving any
-          layout height of its own (the stacked cards' z-index keeps it
-          behind all of them). Each card's dark panel is a transparent
-          window onto this one image, same idea as the desktop strip. */}
-      <div
-        className="sticky top-0 z-0"
-        style={{
-          height: "100dvh",
-          marginBottom: "-100dvh",
-          backgroundImage: `url(${PROJECTS_SECTION_BG})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <PinnedHeading />
+      {/* Shared backdrop. The sticky element itself is height-0 (so it
+          reserves no layout space); the actual 100dvh image lives on an
+          absolutely-positioned child, which is what keeps it pinned for
+          the whole stack's scroll range. It's wrapped in its own
+          `absolute inset-0 overflow-hidden` layer, sized to match this
+          whole component — any `position` element (this has one simply
+          from being `relative`/sticky) paints above later plain text
+          regardless of DOM order, so without that clip this backdrop
+          bleeds into — and blacks out — whatever section follows once
+          scrolled past. */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="sticky top-0 z-0 h-0 overflow-visible">
+          <div
+            className="absolute inset-x-0 top-0"
+            style={{
+              height: "100dvh",
+              backgroundImage: `url(${PROJECTS_SECTION_BG})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <PinnedHeading />
+          </div>
+        </div>
       </div>
       {projects.map((p, i) => (
         <StickyWrap key={p.slug} index={i}>
