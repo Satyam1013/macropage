@@ -645,14 +645,36 @@ export default function HeroSection() {
         transition={{ delay: 0.5 }}
         className="flex justify-between items-end mt-10 flex-wrap gap-6 relative z-10"
       >
-        <p
-          style={{ color: "rgba(255,255,255,0.8)" }}
-          className="text-base max-w-sm leading-relaxed"
-        >
-          We are a tech studio that pairs strategy, design, and performance —
-          helping businesses build bold digital products that are fast, scalable,
-          and built to grow.
-        </p>
+        <div className="flex flex-col gap-5">
+          <p
+            style={{ color: "rgba(255,255,255,0.8)" }}
+            className="text-base max-w-sm leading-relaxed"
+          >
+            We are a tech studio that pairs strategy, design, and performance —
+            helping businesses build bold digital products that are fast, scalable,
+            and built to grow.
+          </p>
+          <Link
+            href="/work"
+            style={{ color: "rgba(255,255,255,0.9)" }}
+            className="inline-flex items-center gap-3 w-fit group"
+          >
+            <span
+              style={{ border: "1px solid rgba(255,255,255,0.5)" }}
+              className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full transition-colors group-hover:border-white"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                <path d="M2 1.2v9.6a.6.6 0 00.92.51l7.6-4.8a.6.6 0 000-1.02l-7.6-4.8A.6.6 0 002 1.2z" />
+              </svg>
+            </span>
+            <span
+              style={{ borderColor: "rgba(255,255,255,0.5)" }}
+              className="border-b pb-1 text-xs font-medium uppercase tracking-widest transition-colors group-hover:border-white"
+            >
+              Watch Our Work
+            </span>
+          </Link>
+        </div>
         <Link
           href="/contact"
           style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
