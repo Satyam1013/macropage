@@ -28,7 +28,7 @@ function ProjectCard({
   return (
     <div
       style={{ background: "var(--bg)", ...style }}
-      className={`relative flex-shrink-0 flex items-center justify-center p-3 sm:p-4 ${className}`}
+      className={`relative flex-shrink-0 flex items-center justify-center p-1 sm:p-1.5 ${className}`}
     >
       <Link
         href={`/work/${p.slug}`}
