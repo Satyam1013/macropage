@@ -26,7 +26,7 @@ function ProjectCard({
         href={`/work/${p.slug}`}
         aria-label={`View ${p.name} project`}
         style={{ borderColor: "var(--border)" }}
-        className="group relative flex h-[88%] w-full flex-col overflow-hidden rounded-[28px] border sm:h-[72%] sm:flex-row"
+        className="group relative flex h-[68%] w-full flex-col overflow-hidden rounded-[28px] border sm:h-[72%] sm:flex-row"
       >
         {/* Text panel — the only opaque part of the card, so the dark panel
             below stays a true window onto the section's shared backdrop
@@ -125,7 +125,7 @@ function ClosingCard({ style, className }: { style?: React.CSSProperties; classN
     >
       <div
         style={{ background: "var(--card)", border: "1px solid var(--border)" }}
-        className="flex h-[88%] w-full flex-col justify-center gap-8 rounded-[28px] px-8 sm:h-[72%] sm:px-16"
+        className="flex h-[68%] w-full flex-col justify-center gap-8 rounded-[28px] px-8 sm:h-[72%] sm:px-16"
       >
         <h2
           style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
