@@ -57,7 +57,7 @@ export default function Navbar() {
             borderColor: "var(--border)",
             transform: navHidden && !menuOpen ? "translateY(-150%)" : "translateY(0)",
           }}
-          className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 sm:px-8 h-16 sm:h-[4.5rem] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
+          className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 sm:px-10 h-16 sm:h-[5.5rem] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
         >
           {/* Brand */}
           <Link
@@ -71,7 +71,7 @@ export default function Navbar() {
                 announcing the same logo three times, but each crop still carries a real alt for image search/SEO. */}
             <div
               aria-hidden="true"
-              className="flex items-center h-9 sm:h-11 [--logo-h:2.25rem] sm:[--logo-h:2.75rem] overflow-hidden"
+              className="flex items-center h-11 sm:h-16 [--logo-h:2.75rem] sm:[--logo-h:4rem] overflow-hidden"
             >
               {[
                 { start: 0, end: LOGO_ICON_END, themed: false },
@@ -203,13 +203,13 @@ export default function Navbar() {
           className="flex items-center justify-between px-6 py-5 flex-shrink-0"
         >
           <Link href="/" onClick={() => setMenuOpen(false)}>
-            <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+            <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
               <Image
                 src="/mobile-logo.png"
                 alt="MACROPAGE"
-                width={36}
-                height={36}
-                className="object-cover"
+                width={56}
+                height={56}
+                className="h-full w-full object-cover"
                 style={{ mixBlendMode: theme === "dark" ? "normal" : "multiply" }}
               />
             </div>
