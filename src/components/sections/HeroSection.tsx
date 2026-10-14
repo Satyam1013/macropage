@@ -534,6 +534,21 @@ function TechIllustration() {
 export default function HeroSection() {
   return (
     <section className="px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative overflow-hidden">
+      {/* Backdrop — faded toward the page's own background so the headline
+          and muted labels stay legible over it in both themes. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url(/landing-bg.jpeg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: "color-mix(in srgb, var(--bg) 78%, transparent)" }}
+      />
+
       {/* Top row */}
       <div className="flex justify-between items-start mb-8 relative z-10">
         <motion.p
