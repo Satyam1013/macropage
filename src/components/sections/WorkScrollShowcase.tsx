@@ -41,48 +41,26 @@ function ProjectCard({
           style={{ background: "var(--card)", borderColor: "var(--border)" }}
           className="order-1 flex min-w-0 flex-1 flex-col justify-start gap-6 rounded-[28px] border p-6 sm:order-1 sm:justify-between sm:gap-5 sm:rounded-none sm:border-0 sm:p-10"
         >
-          <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0">
-              <p
-                style={{ color: "var(--muted)" }}
-                className="mb-2 text-[11px] uppercase tracking-widest"
-              >
-                {p.category} · {p.year}
-              </p>
-              <h3
-                style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
-                className="text-[clamp(1.5rem,3vw,2.5rem)] tracking-wide"
-              >
-                {p.name}
-              </h3>
-            </div>
-            <span
-              style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
-              className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-base transition-colors duration-300 group-hover:border-transparent group-hover:text-[var(--bg)]"
+          <div className="flex items-center justify-between gap-4">
+            <h3
+              style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
+              className="text-[clamp(1.5rem,3vw,2.5rem)] tracking-wide"
             >
-              <span
-                style={{ background: "var(--text)" }}
-                className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
-              />
-              <span className="relative transition-transform duration-300 group-hover:rotate-45">
-                ↗
-              </span>
-            </span>
+              {p.name}
+            </h3>
+            <div
+              style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+              className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full"
+            >
+              {p.icon}
+            </div>
           </div>
 
           <div style={{ borderTop: "1.5px dashed var(--border)" }} />
 
-          <div className="flex flex-col gap-4 sm:flex-1 sm:justify-end">
-            <div
-              style={{ border: "1px solid var(--border)", color: "var(--text)" }}
-              className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full"
-            >
-              {p.icon}
-            </div>
-            <p style={{ color: "var(--muted)" }} className="max-w-xs text-sm leading-relaxed">
-              {p.description}
-            </p>
-          </div>
+          <p style={{ color: "var(--muted)" }} className="max-w-xs text-sm leading-relaxed sm:mt-auto">
+            {p.description}
+          </p>
         </div>
 
         {/* Dark panel — a frosted window onto the section's shared backdrop
