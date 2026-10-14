@@ -49,144 +49,146 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Top Navbar ── */}
-      <nav
-        style={{
-          background: "var(--bg)",
-          borderBottom: "1px solid var(--border)",
-          transform: navHidden && !menuOpen ? "translateY(-100%)" : "translateY(0)",
-        }}
-        className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 h-20 backdrop-blur-sm transition-transform duration-300 ease-out"
-      >
-        {/* Brand */}
-        <Link
-          href="/"
-          aria-label="MacroPage — Home"
-          className="flex items-center"
-          onClick={() => setMenuOpen(false)}
+      {/* ── Top Navbar — a floating, frosted-glass pill, not a full-width bar ── */}
+      <div className="sticky top-3 z-50 px-3 sm:top-4 sm:px-6">
+        <nav
+          style={{
+            background: "color-mix(in srgb, var(--bg) 65%, transparent)",
+            borderColor: "var(--border)",
+            transform: navHidden && !menuOpen ? "translateY(-150%)" : "translateY(0)",
+          }}
+          className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 sm:px-8 h-16 sm:h-[4.5rem] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
         >
-          {/* Logo split into 3 crops of the same image: icon + "Macro" (theme-aware) + "page" (always brand blue).
-              Accessible name lives on the Link above; this group is hidden from assistive tech to avoid
-              announcing the same logo three times, but each crop still carries a real alt for image search/SEO. */}
-          <div
-            aria-hidden="true"
-            className="flex items-center h-20 sm:h-28 [--logo-h:5rem] sm:[--logo-h:7rem] overflow-hidden"
+          {/* Brand */}
+          <Link
+            href="/"
+            aria-label="MacroPage — Home"
+            className="flex items-center"
+            onClick={() => setMenuOpen(false)}
           >
-            {[
-              { start: 0, end: LOGO_ICON_END, themed: false },
-              { start: LOGO_ICON_END, end: LOGO_TEXT_END, themed: true },
-              { start: LOGO_TEXT_END, end: 1, themed: false },
-            ].map(({ start, end, themed }, i) => (
-              <div
-                key={i}
-                style={{
-                  width: `calc(var(--logo-h) * ${LOGO_RATIO} * ${end - start})`,
-                  height: "var(--logo-h)",
-                  overflow: "hidden",
-                  position: "relative",
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/macropage-logo-1.svg"
-                  alt="MacroPage logo"
-                  style={{
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    left: `calc(var(--logo-h) * ${LOGO_RATIO} * ${-start})`,
-                    height: "var(--logo-h)",
-                    width: `calc(var(--logo-h) * ${LOGO_RATIO})`,
-                    maxWidth: "none",
-                    filter: themed && mounted && theme === "dark" ? "brightness(0) invert(1)" : "none",
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </Link>
-
-        {/* Desktop nav links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                style={{ color: "var(--muted)" }}
-                className="text-xs font-medium tracking-widest uppercase relative group"
-              >
-                {link.label}
-                <span
-                  style={{ background: "var(--accent)" }}
-                  className="absolute -bottom-1 left-0 h-[1.5px] w-0 group-hover:w-full transition-all duration-300 ease-out"
-                />
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Desktop right controls */}
-        <div className="hidden md:flex items-center gap-3">
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
-              className="text-xs px-4 py-2 rounded-full hover:opacity-80 transition-all font-medium"
+            {/* Logo split into 3 crops of the same image: icon + "Macro" (theme-aware) + "page" (always brand blue).
+                Accessible name lives on the Link above; this group is hidden from assistive tech to avoid
+                announcing the same logo three times, but each crop still carries a real alt for image search/SEO. */}
+            <div
+              aria-hidden="true"
+              className="flex items-center h-9 sm:h-11 [--logo-h:2.25rem] sm:[--logo-h:2.75rem] overflow-hidden"
             >
-              {theme === "dark" ? "Light" : "Dark"}
+              {[
+                { start: 0, end: LOGO_ICON_END, themed: false },
+                { start: LOGO_ICON_END, end: LOGO_TEXT_END, themed: true },
+                { start: LOGO_TEXT_END, end: 1, themed: false },
+              ].map(({ start, end, themed }, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: `calc(var(--logo-h) * ${LOGO_RATIO} * ${end - start})`,
+                    height: "var(--logo-h)",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/macropage-logo-1.svg"
+                    alt="MacroPage logo"
+                    style={{
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      left: `calc(var(--logo-h) * ${LOGO_RATIO} * ${-start})`,
+                      height: "var(--logo-h)",
+                      width: `calc(var(--logo-h) * ${LOGO_RATIO})`,
+                      maxWidth: "none",
+                      filter: themed && mounted && theme === "dark" ? "brightness(0) invert(1)" : "none",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </Link>
+  
+          {/* Desktop nav links */}
+          <ul className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  style={{ color: "var(--muted)" }}
+                  className="text-xs font-medium tracking-widest uppercase relative group"
+                >
+                  {link.label}
+                  <span
+                    style={{ background: "var(--accent)" }}
+                    className="absolute -bottom-1 left-0 h-[1.5px] w-0 group-hover:w-full transition-all duration-300 ease-out"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+  
+          {/* Desktop right controls */}
+          <div className="hidden md:flex items-center gap-3">
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
+                className="text-xs px-4 py-2 rounded-full hover:opacity-80 transition-all font-medium"
+              >
+                {theme === "dark" ? "Light" : "Dark"}
+              </button>
+            )}
+            <Link
+              href="/contact"
+              style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+              className="text-xs font-semibold px-5 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
+            >
+              <span
+                style={{ background: "var(--accent)" }}
+                className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+              />
+              <span className="relative z-10">Let&apos;s Talk</span>
+            </Link>
+          </div>
+  
+          {/* Mobile right — Contact + Hamburger */}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Contact button — both this and the desktop "Let's Talk" link exist in the
+                same rendered HTML at all times (only CSS display toggles between them),
+                so they need distinct text to avoid duplicate anchor text on every page. */}
+            <Link
+              href="/contact"
+              style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+              className="text-xs font-semibold px-4 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
+            >
+              <span
+                style={{ background: "var(--accent)" }}
+                className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+              />
+              <span className="relative z-10">Contact</span>
+            </Link>
+  
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex flex-col justify-center items-center w-9 h-9 gap-[5px]"
+              aria-label="Toggle menu"
+            >
+              <span
+                style={{ background: "var(--text)" }}
+                className={`block h-[1.5px] w-6 transition-all duration-300 origin-center ${menuOpen ? "rotate-45 translate-y-[6.5px]" : ""}`}
+              />
+              <span
+                style={{ background: "var(--text)" }}
+                className={`block h-[1.5px] w-6 transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
+              />
+              <span
+                style={{ background: "var(--text)" }}
+                className={`block h-[1.5px] w-6 transition-all duration-300 origin-center ${menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`}
+              />
             </button>
-          )}
-          <Link
-            href="/contact"
-            style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-            className="text-xs font-semibold px-5 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
-          >
-            <span
-              style={{ background: "var(--accent)" }}
-              className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
-            />
-            <span className="relative z-10">Let&apos;s Talk</span>
-          </Link>
-        </div>
-
-        {/* Mobile right — Contact + Hamburger */}
-        <div className="md:hidden flex items-center gap-3">
-          {/* Contact button — both this and the desktop "Let's Talk" link exist in the
-              same rendered HTML at all times (only CSS display toggles between them),
-              so they need distinct text to avoid duplicate anchor text on every page. */}
-          <Link
-            href="/contact"
-            style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-            className="text-xs font-semibold px-4 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
-          >
-            <span
-              style={{ background: "var(--accent)" }}
-              className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
-            />
-            <span className="relative z-10">Contact</span>
-          </Link>
-
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex flex-col justify-center items-center w-9 h-9 gap-[5px]"
-            aria-label="Toggle menu"
-          >
-            <span
-              style={{ background: "var(--text)" }}
-              className={`block h-[1.5px] w-6 transition-all duration-300 origin-center ${menuOpen ? "rotate-45 translate-y-[6.5px]" : ""}`}
-            />
-            <span
-              style={{ background: "var(--text)" }}
-              className={`block h-[1.5px] w-6 transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
-            />
-            <span
-              style={{ background: "var(--text)" }}
-              className={`block h-[1.5px] w-6 transition-all duration-300 origin-center ${menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`}
-            />
-          </button>
-        </div>
-      </nav>
+          </div>
+        </nav>
+      </div>
 
       {/* ── Mobile menu overlay ── */}
       <div
