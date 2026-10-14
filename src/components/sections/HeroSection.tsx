@@ -534,8 +534,10 @@ function TechIllustration() {
 export default function HeroSection() {
   return (
     <section className="px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative overflow-hidden">
-      {/* Backdrop — faded toward the page's own background so the headline
-          and muted labels stay legible over it in both themes. */}
+      {/* Backdrop — shown at full strength (not fogged with the page's own
+          background), so the hero text below is hardcoded light/white
+          rather than following the site's light/dark theme toggle; this
+          section always reads as a dark, image-backed hero. */}
       <div
         className="absolute inset-0"
         style={{
@@ -544,10 +546,7 @@ export default function HeroSection() {
           backgroundPosition: "center",
         }}
       />
-      <div
-        className="absolute inset-0"
-        style={{ background: "color-mix(in srgb, var(--bg) 78%, transparent)" }}
-      />
+      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.12)" }} />
 
       {/* Top row */}
       <div className="flex justify-between items-start mb-8 relative z-10">
@@ -555,7 +554,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          style={{ color: "var(--muted)" }}
+          style={{ color: "rgba(255,255,255,0.75)" }}
           className="text-xs tracking-widest uppercase max-w-[140px] sm:max-w-none"
         >
           [ 01 ] We Build Digital Products
@@ -564,7 +563,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          style={{ color: "var(--muted)" }}
+          style={{ color: "rgba(255,255,255,0.75)" }}
           className="text-xs max-w-[220px] text-right leading-relaxed"
         >
           From idea to scale — web, apps, AI, cloud & automation. All under one
@@ -582,7 +581,7 @@ export default function HeroSection() {
             transition={{ delay: 0.25, duration: 0.6, ease: "easeOut" }}
             style={{
               fontFamily: "var(--font-bebas)",
-              color: "var(--text)",
+              color: "#ffffff",
               lineHeight: 0.92,
               letterSpacing: "-1px",
             }}
@@ -602,8 +601,7 @@ export default function HeroSection() {
             <br />
             <span
               style={{
-                background:
-                  "linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-end))",
+                background: "linear-gradient(90deg, #4d7dfa, #1c76f2)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
@@ -641,7 +639,7 @@ export default function HeroSection() {
         className="flex justify-between items-end mt-10 flex-wrap gap-6 relative z-10"
       >
         <p
-          style={{ color: "var(--muted)" }}
+          style={{ color: "rgba(255,255,255,0.8)" }}
           className="text-base max-w-sm leading-relaxed"
         >
           We are a tech studio that pairs strategy, design, and performance —
