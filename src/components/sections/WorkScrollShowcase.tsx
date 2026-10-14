@@ -30,16 +30,14 @@ function ProjectCard({
         href={`/work/${p.slug}`}
         aria-label={`View ${p.name} project`}
         style={{ borderColor: "var(--border)" }}
-        className="group relative flex h-[88%] w-full flex-col gap-3 sm:h-[72%] sm:flex-row sm:gap-0 sm:overflow-hidden sm:rounded-[28px] sm:border"
+        className="group relative flex h-[88%] w-full flex-col overflow-hidden rounded-[28px] border sm:h-[72%] sm:flex-row"
       >
         {/* Text panel — the only opaque part of the card, so the dark panel
             below stays a true window onto the section's shared backdrop
-            instead of just showing this card's own background. On mobile
-            it's its own standalone rounded card, stacked above the dark
-            panel rather than joined to it. */}
+            instead of just showing this card's own background. */}
         <div
-          style={{ background: "var(--card)", borderColor: "var(--border)" }}
-          className="order-1 flex min-w-0 flex-1 flex-col justify-start gap-6 rounded-[28px] border p-6 sm:order-1 sm:justify-between sm:gap-5 sm:rounded-none sm:border-0 sm:p-10"
+          style={{ background: "var(--card)" }}
+          className="order-1 flex min-w-0 flex-1 flex-col justify-start gap-6 p-6 sm:order-1 sm:justify-between sm:gap-5 sm:p-10"
         >
           <div className="flex flex-col gap-3">
             <h3
@@ -66,9 +64,7 @@ function ProjectCard({
         {/* Dark panel — a frosted window onto the section's shared backdrop
             (see DesktopShowcase / MobileShowcase): blurred + softly tinted
             rather than a sharp view of it, carrying only the index number.
-            The text panel above is this card's only fully opaque part. On
-            mobile it's its own standalone rounded card below the text
-            panel; on desktop it rejoins as the right half of one card. */}
+            The text panel above is this card's only fully opaque part. */}
         <div
           style={{
             borderColor: "var(--border)",
@@ -76,7 +72,7 @@ function ProjectCard({
             backdropFilter: "blur(16px)",
             WebkitBackdropFilter: "blur(16px)",
           }}
-          className="relative order-2 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[28px] border sm:order-2 sm:h-auto sm:w-[44%] sm:rounded-none sm:border-0 sm:border-l"
+          className="relative order-2 h-[42%] w-auto flex-shrink-0 border-t sm:h-auto sm:w-[44%] sm:border-l sm:border-t-0"
         >
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
