@@ -57,7 +57,7 @@ export default function Navbar() {
             borderColor: "var(--border)",
             transform: navHidden && !menuOpen ? "translateY(-150%)" : "translateY(0)",
           }}
-          className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 sm:max-w-[90rem] sm:px-10 h-14 sm:h-[4.5rem] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
+          className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 sm:max-w-[90rem] sm:px-10 h-16 sm:h-20 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
         >
           {/* Brand */}
           <Link
@@ -71,7 +71,7 @@ export default function Navbar() {
                 announcing the same logo three times, but each crop still carries a real alt for image search/SEO. */}
             <div
               aria-hidden="true"
-              className="flex items-center h-9 sm:h-12 [--logo-h:2.25rem] sm:[--logo-h:3rem] overflow-hidden"
+              className="flex items-center h-11 sm:h-16 [--logo-h:2.75rem] sm:[--logo-h:4rem] overflow-hidden"
             >
               {[
                 { start: 0, end: LOGO_ICON_END, themed: false },
@@ -113,8 +113,8 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  style={{ color: "var(--muted)" }}
-                  className="text-xs font-medium tracking-widest uppercase relative group"
+                  style={{ color: "var(--text)" }}
+                  className="text-sm font-medium tracking-widest uppercase relative group"
                 >
                   {link.label}
                   <span
@@ -131,8 +131,8 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
-                className="text-xs px-4 py-2 rounded-full hover:opacity-80 transition-all font-medium"
+                style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+                className="text-sm px-4 py-2 rounded-full hover:opacity-80 transition-all font-medium"
               >
                 {theme === "dark" ? "Light" : "Dark"}
               </button>
@@ -140,7 +140,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-              className="text-xs font-semibold px-5 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
+              className="text-sm font-semibold px-5 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
             >
               <span
                 style={{ background: "var(--accent)" }}
@@ -158,7 +158,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-              className="text-xs font-semibold px-4 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
+              className="text-sm font-semibold px-4 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
             >
               <span
                 style={{ background: "var(--accent)" }}
