@@ -108,19 +108,28 @@ function ProjectCard({
 // and never scrolls away.
 function PinnedHeading() {
   return (
-    <div className="pointer-events-none absolute left-6 top-8 z-[1] sm:left-10 sm:top-10">
-      <p
-        style={{ color: "rgba(255,255,255,0.55)" }}
-        className="mb-2 text-xs uppercase tracking-widest"
+    <div className="pointer-events-none absolute inset-x-6 top-8 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
+      <div>
+        <p
+          style={{ color: "rgba(255,255,255,0.55)" }}
+          className="mb-2 text-xs uppercase tracking-widest"
+        >
+          [ 02 ] Selected Work
+        </p>
+        <h2
+          style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
+          className="text-[clamp(2rem,4.5vw,3.5rem)] tracking-wide"
+        >
+          Our Projects
+        </h2>
+      </div>
+      <Link
+        href="/work"
+        style={{ color: "rgba(255,255,255,0.8)", borderBottom: "1px solid rgba(255,255,255,0.4)" }}
+        className="pointer-events-auto mt-2 flex-shrink-0 text-sm pb-0.5 hover:opacity-100 transition-all"
       >
-        [ 02 ] Selected Work
-      </p>
-      <h2
-        style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
-        className="text-[clamp(2rem,4.5vw,3.5rem)] tracking-wide"
-      >
-        Our Projects
-      </h2>
+        See All Projects →
+      </Link>
     </div>
   );
 }
