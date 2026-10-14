@@ -215,71 +215,34 @@ function DesktopShowcase() {
   );
 }
 
-// Mobile: horizontal scroll-jacking is a bad fit for a narrow viewport (cards
-// end up cramped), so instead each card is full height and pinned via
-// `position: sticky` with an increasing z-index — same technique as the
-// stacking sections on /services — so the next project scrolls up and
-// covers the previous one instead of sliding in from the side. Each card
-// sits in a slightly taller wrapper than the screen so there's a short pause
-// (e.g. enough for the navbar's own hide-on-scroll) before the next one
-// starts covering it, instead of the cover starting on the very first pixel
-// of scroll.
-const BUFFER_VH = 25;
-
-function StickyWrap({
-  index,
-  children,
-}: {
-  index: number;
-  children: React.ReactNode;
-}) {
-  return (
-    <div style={{ position: "relative", height: `${100 + BUFFER_VH}dvh` }}>
-      <div style={{ position: "sticky", top: 0, zIndex: index + 1, height: "100dvh" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
+// Mobile: a native horizontal swipe carousel instead of vertical
+// scroll-jacking — simpler, touch-friendly, and it matches the reference
+// (cards swipe left/right over one shared backdrop, next card peeking in
+// from the right). The section sits at a fixed height in the page's normal
+// vertical flow; only the card row scrolls, via scroll-snap, so none of
+// desktop's sticky-pinning tricks are needed here.
+const mobileCardStyle: React.CSSProperties = { width: "88vw", height: "100%" };
 
 function MobileShowcase() {
-  const total = projects.length + 1; // +1 for the closing "Projects" card
-
   return (
-    <div className="relative">
-      {/* Shared backdrop. The sticky element itself is height-0 (so it
-          reserves no layout space); the actual 100dvh image lives on an
-          absolutely-positioned child, which is what keeps it pinned for
-          the whole stack's scroll range. It's wrapped in its own
-          `absolute inset-0 overflow-hidden` layer, sized to match this
-          whole component — any `position` element (this has one simply
-          from being `relative`/sticky) paints above later plain text
-          regardless of DOM order, so without that clip this backdrop
-          bleeds into — and blacks out — whatever section follows once
-          scrolled past. */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="sticky top-0 z-0 h-0 overflow-visible">
-          <div
-            className="absolute inset-x-0 top-0"
-            style={{
-              height: "100dvh",
-              backgroundImage: `url(${PROJECTS_SECTION_BG})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <PinnedHeading />
-          </div>
-        </div>
+    <div
+      className="relative h-[100dvh]"
+      style={{
+        backgroundImage: `url(${PROJECTS_SECTION_BG})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <PinnedHeading />
+      <div
+        className="flex h-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden [&::-webkit-scrollbar]:hidden"
+        style={{ scrollbarWidth: "none" }}
+      >
+        {projects.map((p, i) => (
+          <ProjectCard key={p.slug} p={p} index={i} style={mobileCardStyle} className="snap-start" />
+        ))}
+        <ClosingCard style={mobileCardStyle} className="snap-start" />
       </div>
-      {projects.map((p, i) => (
-        <StickyWrap key={p.slug} index={i}>
-          <ProjectCard p={p} index={i} className="h-full w-full" />
-        </StickyWrap>
-      ))}
-      <StickyWrap index={total - 1}>
-        <ClosingCard className="h-full w-full" />
-      </StickyWrap>
     </div>
   );
 }
