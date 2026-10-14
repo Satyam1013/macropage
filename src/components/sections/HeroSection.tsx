@@ -540,10 +540,10 @@ export default function HeroSection() {
           section always reads as a dark, image-backed hero. Pulled up by
           exactly how far this section's own top edge sits from the very
           top of the page (i.e. the floating navbar's own reserved height —
-          64px mobile, 80px desktop) so the image also shows behind the
+          72px mobile, 96px desktop) so the image also shows behind the
           navbar instead of leaving the page's plain background showing
           through that gap. */}
-      <div className="absolute inset-x-0 -top-16 bottom-0 overflow-hidden sm:-top-20">
+      <div className="absolute inset-x-0 -top-[4.5rem] bottom-0 overflow-hidden sm:-top-24">
         <div
           className="absolute inset-0"
           style={{
