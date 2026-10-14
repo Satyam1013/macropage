@@ -23,17 +23,22 @@ function ProjectCard({
 }) {
   return (
     <div
-      style={{ background: "var(--bg)", ...style }}
+      style={style}
       className={`relative flex-shrink-0 flex items-center justify-center p-1 sm:p-1.5 ${className}`}
     >
       <Link
         href={`/work/${p.slug}`}
         aria-label={`View ${p.name} project`}
-        style={{ background: "var(--card)", border: "1px solid var(--border)" }}
+        style={{ border: "1px solid var(--border)" }}
         className="group relative flex h-[88%] w-full flex-col overflow-hidden rounded-[28px] sm:h-[72%] sm:flex-row"
       >
-        {/* Text panel */}
-        <div className="order-2 flex min-w-0 flex-1 flex-col justify-start gap-6 p-6 sm:order-1 sm:justify-between sm:gap-5 sm:p-10">
+        {/* Text panel — the only opaque part of the card, so the dark panel
+            below stays a true window onto the section's shared backdrop
+            instead of just showing this card's own background. */}
+        <div
+          style={{ background: "var(--card)" }}
+          className="order-2 flex min-w-0 flex-1 flex-col justify-start gap-6 p-6 sm:order-1 sm:justify-between sm:gap-5 sm:p-10"
+        >
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <p
@@ -72,16 +77,13 @@ function ProjectCard({
           </div>
         </div>
 
-        {/* Dark panel — no per-project screenshot; a shared backdrop image
-            shows through (via the section's own background), just like the
-            reference: a transparent window carrying only the index number. */}
+        {/* Dark panel — fully transparent, no background of its own. It's a
+            window straight onto the section's shared backdrop (see
+            DesktopShowcase / MobileShowcase), carrying only the index
+            number; the text panel above is this card's only opaque part. */}
         <div
-          style={{
-            backgroundImage: `url(${PROJECTS_SECTION_BG})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          className="relative order-1 mx-3 mt-3 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[20px] sm:order-2 sm:mb-3 sm:ml-0 sm:mt-3 sm:h-auto sm:w-[44%]"
+          style={{ borderColor: "var(--border)" }}
+          className="relative order-1 h-[42%] w-auto flex-shrink-0 border-t sm:order-2 sm:h-auto sm:w-[44%] sm:border-l sm:border-t-0"
         >
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
@@ -138,7 +140,18 @@ function DesktopShowcase() {
   return (
     <section ref={containerRef} style={{ height: `${total * 100}vh` }} className="relative">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <motion.div style={{ x }} className="flex h-full">
+        {/* Shared backdrop — stays put on screen (it's a sibling of the
+            sliding strip, not inside it) so each card's transparent dark
+            panel acts as a window onto it as the strip moves past. */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${PROJECTS_SECTION_BG})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <motion.div style={{ x }} className="relative flex h-full">
           {projects.map((p, i) => (
             <ProjectCard key={p.slug} p={p} index={i} style={cardStyle} className="" />
           ))}
@@ -180,7 +193,22 @@ function MobileShowcase() {
   const total = projects.length + 1; // +1 for the closing "Projects" card
 
   return (
-    <div>
+    <div className="relative">
+      {/* Shared backdrop. Sticky + a negative bottom margin pins it to the
+          viewport for the whole stack's scroll range without reserving any
+          layout height of its own (the stacked cards' z-index keeps it
+          behind all of them). Each card's dark panel is a transparent
+          window onto this one image, same idea as the desktop strip. */}
+      <div
+        className="sticky top-0 z-0"
+        style={{
+          height: "100dvh",
+          marginBottom: "-100dvh",
+          backgroundImage: `url(${PROJECTS_SECTION_BG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       {projects.map((p, i) => (
         <StickyWrap key={p.slug} index={i}>
           <ProjectCard p={p} index={i} className="h-full w-full" />
