@@ -35,48 +35,40 @@ function ProjectCard({
           style={{ background: "var(--card)" }}
           className="order-1 flex min-w-0 flex-1 flex-col justify-start gap-6 p-6 sm:order-1 sm:justify-between sm:gap-5 sm:p-10"
         >
-          <div className="flex flex-col gap-3">
-            <h3
-              style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
-              className="text-[clamp(1.75rem,4vw,3rem)] tracking-wide"
-            >
-              {p.name}
-            </h3>
-            <div
-              style={{ border: "1px solid var(--border)", color: "var(--text)" }}
-              className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full"
-            >
-              {p.icon}
-            </div>
-          </div>
+          <h3
+            style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
+            className="text-[clamp(1.75rem,4vw,3rem)] tracking-wide"
+          >
+            {p.name}
+          </h3>
 
           <div style={{ borderTop: "1.5px dashed var(--border)" }} />
 
-          <p style={{ color: "var(--muted)" }} className="max-w-xs text-sm leading-relaxed sm:mt-auto">
-            {p.description}
-          </p>
+          <div className="flex flex-col gap-4 sm:mt-auto">
+            <div
+              style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+              className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full"
+            >
+              {p.icon}
+            </div>
+            <p style={{ color: "var(--muted)" }} className="max-w-xs text-sm leading-relaxed">
+              {p.description}
+            </p>
+          </div>
         </div>
 
         {/* Dark panel — a frosted window onto the section's shared backdrop
             (see ScrollShowcase): blurred + softly tinted rather than a
-            sharp view of it, carrying only the index number. The thick
-            var(--card)-colored border frames it with a little breathing
-            room — opaque, so it reads as a border, without sitting behind
-            the panel's own blur and blocking the real backdrop like
-            giving the Link itself a background would. No border on the
-            side touching the text panel (top on mobile, left on desktop)
-            — backdrop-filter's blur sampling leaves a faint dark fringe
-            right at that edge, which a border there only framed more
-            visibly; without it the panel just butts cleanly against the
-            text panel instead. */}
+            sharp view of it, carrying only the index number. Flush against
+            the text panel and the card's own edges — no border/inset of
+            its own, just the outer Link's rounded corners. */}
         <div
           style={{
-            borderColor: "var(--card)",
             background: "linear-gradient(145deg, rgba(0,0,0,0.38), rgba(0,0,0,0.12))",
             backdropFilter: "blur(16px)",
             WebkitBackdropFilter: "blur(16px)",
           }}
-          className="relative order-2 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[22px] border-x-8 border-b-8 border-t-0 sm:h-auto sm:w-[44%] sm:border-x-0 sm:border-y-8 sm:border-r-8 sm:border-l-0"
+          className="relative order-2 h-[42%] w-auto flex-shrink-0 sm:h-auto sm:w-[44%]"
         >
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
