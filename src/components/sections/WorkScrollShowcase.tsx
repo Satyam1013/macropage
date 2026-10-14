@@ -100,26 +100,31 @@ function ProjectCard({
 function ClosingCard({ style, className }: { style?: React.CSSProperties; className: string }) {
   return (
     <div
-      style={{ background: "var(--bg)", ...style }}
-      className={`relative flex-shrink-0 flex flex-col justify-center gap-8 px-8 sm:px-16 ${className}`}
+      style={style}
+      className={`relative flex-shrink-0 flex items-center justify-center p-1 sm:p-1.5 ${className}`}
     >
-      <h2
-        style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
-        className="text-[clamp(3rem,9vw,7rem)] tracking-wide"
+      <div
+        style={{ background: "var(--card)", border: "1px solid var(--border)" }}
+        className="flex h-[88%] w-full flex-col justify-center gap-8 rounded-[28px] px-8 sm:h-[72%] sm:px-16"
       >
-        Projects
-      </h2>
-      <p style={{ color: "var(--text)" }} className="max-w-7xl text-2xl sm:text-4xl leading-snug">
-        These aren&apos;t just projects — they&apos;re stories of our clients, our work, and the
-        impact we made.{" "}
-        <Link
-          href="/work"
-          style={{ color: "var(--accent)" }}
-          className="underline underline-offset-4 hover:opacity-70 transition-opacity whitespace-nowrap"
+        <h2
+          style={{ fontFamily: "var(--font-bebas)", color: "var(--text)", lineHeight: 1 }}
+          className="text-[clamp(3rem,9vw,7rem)] tracking-wide"
         >
-          See More ↗
-        </Link>
-      </p>
+          Projects
+        </h2>
+        <p style={{ color: "var(--text)" }} className="max-w-7xl text-2xl sm:text-4xl leading-snug">
+          These aren&apos;t just projects — they&apos;re stories of our clients, our work, and the
+          impact we made.{" "}
+          <Link
+            href="/work"
+            style={{ color: "var(--accent)" }}
+            className="underline underline-offset-4 hover:opacity-70 transition-opacity whitespace-nowrap"
+          >
+            See More ↗
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
