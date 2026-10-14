@@ -53,11 +53,11 @@ export default function Navbar() {
       <div className="sticky top-3 z-50 px-3 sm:top-4 sm:px-6">
         <nav
           style={{
-            background: "color-mix(in srgb, var(--bg) 65%, transparent)",
+            background: "color-mix(in srgb, var(--bg) 42%, transparent)",
             borderColor: "var(--border)",
             transform: navHidden && !menuOpen ? "translateY(-150%)" : "translateY(0)",
           }}
-          className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 sm:max-w-[90rem] sm:px-10 h-16 sm:h-[5.5rem] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
+          className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 sm:max-w-[90rem] sm:px-10 h-14 sm:h-[4.5rem] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
         >
           {/* Brand */}
           <Link
@@ -71,7 +71,7 @@ export default function Navbar() {
                 announcing the same logo three times, but each crop still carries a real alt for image search/SEO. */}
             <div
               aria-hidden="true"
-              className="flex items-center h-12 sm:h-[4.5rem] [--logo-h:3rem] sm:[--logo-h:4.5rem] overflow-hidden"
+              className="flex items-center h-9 sm:h-12 [--logo-h:2.25rem] sm:[--logo-h:3rem] overflow-hidden"
             >
               {[
                 { start: 0, end: LOGO_ICON_END, themed: false },
