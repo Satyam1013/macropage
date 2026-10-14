@@ -533,20 +533,27 @@ function TechIllustration() {
 
 export default function HeroSection() {
   return (
-    <section className="px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative overflow-hidden">
+    <section className="px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative">
       {/* Backdrop — shown at full strength (not fogged with the page's own
           background), so the hero text below is hardcoded light/white
           rather than following the site's light/dark theme toggle; this
-          section always reads as a dark, image-backed hero. */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "url(/landing-bg.jpeg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.12)" }} />
+          section always reads as a dark, image-backed hero. Pulled up by
+          exactly how far this section's own top edge sits from the very
+          top of the page (i.e. the floating navbar's own reserved height —
+          64px mobile, 88px desktop) so the image also shows behind the
+          navbar instead of leaving the page's plain background showing
+          through that gap. */}
+      <div className="absolute inset-x-0 -top-16 bottom-0 overflow-hidden sm:-top-[88px]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url(/landing-bg.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.12)" }} />
+      </div>
 
       {/* Top row */}
       <div className="flex justify-between items-start mb-8 relative z-10">
