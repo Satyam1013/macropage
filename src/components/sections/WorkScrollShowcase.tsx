@@ -58,17 +58,20 @@ function ProjectCard({
         </div>
 
         {/* Dark panel — a frosted window onto the section's shared backdrop
-            (see DesktopShowcase / MobileShowcase): blurred + softly tinted
-            rather than a sharp view of it, carrying only the index number.
-            The text panel above is this card's only fully opaque part. */}
+            (see ScrollShowcase): blurred + softly tinted rather than a
+            sharp view of it, carrying only the index number. The thick
+            var(--card)-colored border frames it with a little breathing
+            room on all sides — it's opaque so it reads as a border, but
+            unlike giving the Link itself a background, it doesn't sit
+            behind the panel's own blur and block the real backdrop. */}
         <div
           style={{
-            borderColor: "var(--border)",
+            borderColor: "var(--card)",
             background: "linear-gradient(145deg, rgba(0,0,0,0.38), rgba(0,0,0,0.12))",
             backdropFilter: "blur(16px)",
             WebkitBackdropFilter: "blur(16px)",
           }}
-          className="relative order-2 h-[42%] w-auto flex-shrink-0 border-t sm:h-auto sm:w-[44%] sm:border-l sm:border-t-0"
+          className="relative order-2 h-[42%] w-auto flex-shrink-0 overflow-hidden rounded-[22px] border-8 sm:h-auto sm:w-[44%]"
         >
           <span
             style={{ fontFamily: "var(--font-bebas)", color: "var(--accent)" }}
@@ -98,7 +101,7 @@ function PinnedHeading() {
         </p>
         <h2
           style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
-          className="text-[clamp(1.25rem,4.5vw,3.5rem)] tracking-wide"
+          className="text-[clamp(2.25rem,9vw,4.5rem)] tracking-wide"
         >
           Our Projects
         </h2>
