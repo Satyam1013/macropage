@@ -6,10 +6,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { workPageProjects as projects } from "@/data/projects";
 import { PROJECTS_SECTION_BG } from "@/constants";
 
-// Card is slightly narrower than the viewport (desktop only) so the next
-// project peeks in from the right edge as you scroll.
-const CARD_W = 70;
-
 function ProjectCard({
   p,
   index,
@@ -150,8 +146,13 @@ function ClosingCard({ style, className }: { style?: React.CSSProperties; classN
   );
 }
 
-// Desktop: horizontal scroll-jacking filmstrip, driven by vertical scroll.
-function DesktopShowcase() {
+// Horizontal scroll-jacking filmstrip, driven by vertical scroll — on touch
+// devices this is just the normal swipe-down gesture, same as any other
+// scroll; framer-motion reads it off scrollY regardless of input method.
+// The section is pinned (sticky) while its cards slide through, same
+// mechanism on mobile and desktop, just a wider card on mobile (less of
+// the next one peeks in, since there's less width to spare).
+function ScrollShowcase({ cardW }: { cardW: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const total = projects.length + 1; // +1 for the closing "Projects" card
 
@@ -160,12 +161,12 @@ function DesktopShowcase() {
     offset: ["start start", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0vw", `${-(total - 1) * CARD_W}vw`]);
-  const cardStyle: React.CSSProperties = { width: `${CARD_W}vw`, height: "100%" };
+  const x = useTransform(scrollYProgress, [0, 1], ["0vw", `${-(total - 1) * cardW}vw`]);
+  const cardStyle: React.CSSProperties = { width: `${cardW}vw`, height: "100%" };
 
   return (
-    <section ref={containerRef} style={{ height: `${total * 100}vh` }} className="relative">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+    <section ref={containerRef} style={{ height: `${total * 100}dvh` }} className="relative">
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
         {/* Shared backdrop — stays put on screen (it's a sibling of the
             sliding strip, not inside it) so each card's transparent dark
             panel acts as a window onto it as the strip moves past. */}
@@ -189,38 +190,6 @@ function DesktopShowcase() {
   );
 }
 
-// Mobile: a native horizontal swipe carousel instead of vertical
-// scroll-jacking — simpler, touch-friendly, and it matches the reference
-// (cards swipe left/right over one shared backdrop, next card peeking in
-// from the right). The section sits at a fixed height in the page's normal
-// vertical flow; only the card row scrolls, via scroll-snap, so none of
-// desktop's sticky-pinning tricks are needed here.
-const mobileCardStyle: React.CSSProperties = { width: "88vw", height: "100%" };
-
-function MobileShowcase() {
-  return (
-    <div
-      className="relative h-[100dvh]"
-      style={{
-        backgroundImage: `url(${PROJECTS_SECTION_BG})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <PinnedHeading />
-      <div
-        className="flex h-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden [&::-webkit-scrollbar]:hidden"
-        style={{ scrollbarWidth: "none" }}
-      >
-        {projects.map((p, i) => (
-          <ProjectCard key={p.slug} p={p} index={i} style={mobileCardStyle} className="snap-start" />
-        ))}
-        <ClosingCard style={mobileCardStyle} className="snap-start" />
-      </div>
-    </div>
-  );
-}
-
 export default function WorkScrollShowcase() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -231,5 +200,5 @@ export default function WorkScrollShowcase() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  return isMobile ? <MobileShowcase /> : <DesktopShowcase />;
+  return <ScrollShowcase cardW={isMobile ? 92 : 70} />;
 }
