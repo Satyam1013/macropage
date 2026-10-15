@@ -53,8 +53,8 @@ export default function Navbar() {
       <div className="sticky top-3 z-50 px-3 sm:top-4 sm:px-6">
         <nav
           style={{
-            background: "color-mix(in srgb, var(--bg) 26%, transparent)",
-            borderColor: "var(--border)",
+            background: "color-mix(in srgb, #0e0e0e 26%, transparent)",
+            borderColor: "rgba(255,255,255,0.14)",
             transform: navHidden && !menuOpen ? "translateY(-150%)" : "translateY(0)",
           }}
           className="mx-auto flex max-w-6xl items-center justify-between overflow-hidden rounded-full border px-5 sm:max-w-[90rem] sm:px-10 h-12 sm:h-16 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-out"
@@ -99,7 +99,7 @@ export default function Navbar() {
                       height: "var(--logo-h)",
                       width: `calc(var(--logo-h) * ${LOGO_RATIO})`,
                       maxWidth: "none",
-                      filter: themed && mounted && theme === "dark" ? "brightness(0) invert(1)" : "none",
+                      filter: themed ? "brightness(0) invert(1)" : "none",
                     }}
                   />
                 </div>
@@ -113,7 +113,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  style={{ color: "var(--text)" }}
+                  style={{ color: "#ffffff" }}
                   className="text-sm font-medium tracking-widest uppercase relative group"
                 >
                   {link.label}
@@ -131,7 +131,7 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+                style={{ border: "1px solid rgba(255,255,255,0.3)", color: "#ffffff" }}
                 className="text-sm px-4 py-2 rounded-full hover:opacity-80 transition-all font-medium"
               >
                 {theme === "dark" ? "Light" : "Dark"}
@@ -174,15 +174,15 @@ export default function Navbar() {
               aria-label="Toggle menu"
             >
               <span
-                style={{ background: "var(--text)" }}
+                style={{ background: "#ffffff" }}
                 className={`block h-[1.5px] w-6 transition-all duration-300 origin-center ${menuOpen ? "rotate-45 translate-y-[6.5px]" : ""}`}
               />
               <span
-                style={{ background: "var(--text)" }}
+                style={{ background: "#ffffff" }}
                 className={`block h-[1.5px] w-6 transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
               />
               <span
-                style={{ background: "var(--text)" }}
+                style={{ background: "#ffffff" }}
                 className={`block h-[1.5px] w-6 transition-all duration-300 origin-center ${menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`}
               />
             </button>
