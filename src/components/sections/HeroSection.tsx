@@ -115,23 +115,52 @@ export default function HeroSection() {
           <Link
             href="/contact"
             style={{ background: "#ffffff", color: "#0e0e0e" }}
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95"
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-base font-bold transition-all relative overflow-hidden group active:scale-95"
           >
             <span
               style={{ background: "var(--accent)" }}
               className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
             />
-            <span className="relative z-10">Start a Project ↗</span>
+            <span className="relative z-10">Start a Project</span>
+            <svg
+              className="relative z-10 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 7h10v10" />
+              <path d="M7 17 17 7" />
+            </svg>
           </Link>
           <Link
             href="/work"
-            style={{ borderColor: "rgba(255,255,255,0.35)", color: "#fff" }}
-            className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-semibold transition-colors hover:border-white"
+            style={{
+              background: "rgba(255,255,255,0.08)",
+              borderColor: "rgba(255,255,255,0.35)",
+              color: "#fff",
+            }}
+            className="group inline-flex items-center gap-2.5 rounded-full border px-8 py-4 text-base font-bold transition-colors hover:border-white"
           >
             Explore Our Work
-            <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1">
-              →
-            </span>
+            <svg
+              className="transition-transform duration-300 ease-out group-hover:translate-x-1"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
           </Link>
         </div>
       </motion.div>
