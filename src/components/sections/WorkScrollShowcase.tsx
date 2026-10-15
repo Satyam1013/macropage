@@ -88,7 +88,7 @@ function ProjectCard({
 // and never scrolls away.
 function PinnedHeading() {
   return (
-    <div className="pointer-events-none absolute inset-x-6 top-8 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
+    <div className="pointer-events-none absolute inset-x-6 top-8 z-[1] flex flex-col gap-3 sm:inset-x-10 sm:top-10 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
       <div>
         <p
           style={{ color: "rgba(255,255,255,0.6)" }}
@@ -98,7 +98,7 @@ function PinnedHeading() {
         </p>
         <h2
           style={{ fontFamily: "var(--font-dm)", color: "#fff", lineHeight: 1.1 }}
-          className="text-[clamp(1.5rem,6vw,3.5rem)] font-extrabold tracking-tight"
+          className="text-[clamp(2.25rem,8vw,3.5rem)] font-extrabold tracking-tight"
         >
           Our Projects
         </h2>
@@ -106,7 +106,7 @@ function PinnedHeading() {
       <Link
         href="/work"
         style={{ color: "rgba(255,255,255,0.9)" }}
-        className="group pointer-events-auto mt-1 inline-flex flex-shrink-0 items-center gap-2 text-xs font-semibold sm:mt-2 sm:text-sm"
+        className="group pointer-events-auto inline-flex flex-shrink-0 items-center gap-2 text-xs font-semibold sm:mt-2 sm:text-sm"
       >
         See All Projects
         <span

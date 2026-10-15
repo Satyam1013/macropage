@@ -118,7 +118,7 @@ export default function ServicesSection() {
               color: "var(--text)",
               lineHeight: 1.1,
             }}
-            className="text-[clamp(2.25rem,5vw,3.75rem)] font-extrabold tracking-tight max-w-xl"
+            className="text-[clamp(2.25rem,5vw,3.75rem)] font-extrabold tracking-tight max-w-5xl"
           >
             Expertise across the digital stack.
           </h2>
