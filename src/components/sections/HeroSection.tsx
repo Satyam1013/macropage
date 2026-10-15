@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <section className="flex min-h-dvh flex-col px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative">
+    <section className="flex min-h-[90dvh] flex-col px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative">
       {/* Backdrop — shown at full strength (not fogged with the page's own
           background), so the hero text below is hardcoded light/white
           rather than following the site's light/dark theme toggle; this
@@ -24,7 +24,7 @@ export default function HeroSection() {
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.34)" }} />
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.24)" }} />
       </div>
 
       {/* Top row */}
