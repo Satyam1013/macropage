@@ -51,7 +51,7 @@ function ServiceCard({
           {/* Hover arrow */}
           <span
             style={{ color: "var(--text)" }}
-            className="absolute right-6 top-6 text-2xl leading-none transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1"
+            className="absolute right-6 top-6 text-2xl leading-none opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100"
           >
             ↗
           </span>
