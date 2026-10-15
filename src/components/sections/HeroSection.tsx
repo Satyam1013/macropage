@@ -24,7 +24,7 @@ export default function HeroSection() {
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.12)" }} />
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.22)" }} />
       </div>
 
       {/* Top row */}
