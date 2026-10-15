@@ -139,7 +139,7 @@ export default function Navbar() {
             )}
             <Link
               href="/contact"
-              style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+              style={{ background: "#ffffff", color: "#0e0e0e" }}
               className="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
             >
               <span
@@ -157,7 +157,7 @@ export default function Navbar() {
                 so they need distinct text to avoid duplicate anchor text on every page. */}
             <Link
               href="/contact"
-              style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+              style={{ background: "#ffffff", color: "#0e0e0e" }}
               className="text-sm font-semibold px-4 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
             >
               <span

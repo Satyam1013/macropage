@@ -114,7 +114,7 @@ export default function HeroSection() {
         <div className="flex flex-wrap items-center gap-4">
           <Link
             href="/contact"
-            style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+            style={{ background: "#ffffff", color: "#0e0e0e" }}
             className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95"
           >
             <span
