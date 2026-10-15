@@ -50,16 +50,10 @@ function ServiceCard({
         >
           {/* Hover arrow */}
           <span
-            style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
-            className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full text-sm transition-colors group-hover:border-transparent group-hover:text-[var(--bg)]"
+            style={{ color: "var(--text)" }}
+            className="absolute right-6 top-6 text-2xl leading-none transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1"
           >
-            <span
-              style={{ background: "var(--text)" }}
-              className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
-            />
-            <span className="relative transition-transform duration-300 group-hover:rotate-45">
-              ↗
-            </span>
+            ↗
           </span>
 
           {/* Icon chip */}
