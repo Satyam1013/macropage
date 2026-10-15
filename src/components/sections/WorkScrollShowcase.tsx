@@ -88,27 +88,39 @@ function ProjectCard({
 // and never scrolls away.
 function PinnedHeading() {
   return (
-    <div className="pointer-events-none absolute inset-x-6 top-3 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
+    <div className="pointer-events-none absolute inset-x-6 top-4 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
       <div>
         <p
-          style={{ color: "rgba(255,255,255,0.55)" }}
-          className="mb-2 hidden text-xs uppercase tracking-widest sm:block"
+          style={{ color: "rgba(255,255,255,0.6)" }}
+          className="mb-2 text-xs font-medium uppercase tracking-widest"
         >
           [ 02 ] Selected Work
         </p>
         <h2
-          style={{ fontFamily: "var(--font-bebas)", color: "#fff", lineHeight: 1 }}
-          className="text-[clamp(2.25rem,9vw,4.5rem)] tracking-wide"
+          style={{ fontFamily: "var(--font-dm)", color: "#fff", lineHeight: 1.1 }}
+          className="text-[clamp(1.5rem,6vw,3.5rem)] font-extrabold tracking-tight"
         >
           Our Projects
         </h2>
       </div>
       <Link
         href="/work"
-        style={{ color: "rgba(255,255,255,0.8)", borderBottom: "1px solid rgba(255,255,255,0.4)" }}
-        className="pointer-events-auto mt-2 hidden flex-shrink-0 text-sm pb-0.5 hover:opacity-100 transition-all sm:block"
+        style={{ color: "rgba(255,255,255,0.9)" }}
+        className="group pointer-events-auto mt-1 inline-flex flex-shrink-0 items-center gap-2 text-xs font-semibold sm:mt-2 sm:text-sm"
       >
-        See All Projects →
+        See All Projects
+        <span
+          style={{ border: "1px solid rgba(255,255,255,0.5)" }}
+          className="relative flex h-7 w-7 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-xs transition-colors group-hover:border-transparent group-hover:text-black"
+        >
+          <span
+            style={{ background: "#fff" }}
+            className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
+          />
+          <span className="relative transition-transform duration-300 group-hover:rotate-45">
+            ↗
+          </span>
+        </span>
       </Link>
     </div>
   );
