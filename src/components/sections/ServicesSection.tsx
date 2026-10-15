@@ -34,7 +34,10 @@ function ServiceCard({
       <Link href={`/services/${service.slug}`} className="block group h-full">
         <div
           style={{
-            background: "var(--card)",
+            background:
+              "color-mix(in srgb, color-mix(in srgb, var(--accent) 12%, var(--card)) 65%, transparent)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
             borderRadius: 24,
             minHeight: 260,
             position: "relative",
