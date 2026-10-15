@@ -104,7 +104,7 @@ export default function ServicesSection() {
           backgroundImage: "url(/landing-bg.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          opacity: 0.2,
+          opacity: 0.4,
         }}
       />
       <div
@@ -112,7 +112,7 @@ export default function ServicesSection() {
         style={{
           background:
             "linear-gradient(160deg, color-mix(in srgb, var(--accent) 35%, var(--bg)), color-mix(in srgb, var(--accent) 10%, var(--bg)) 45%, var(--bg) 92%)",
-          opacity: 0.9,
+          opacity: 0.75,
         }}
       />
       <div className="relative z-10 flex justify-between items-end mb-14 flex-wrap gap-6">
