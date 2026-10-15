@@ -94,7 +94,7 @@ export default function ServicesSection() {
     <section
       style={{
         background:
-          "linear-gradient(160deg, color-mix(in srgb, var(--accent) 7%, var(--bg)), var(--bg) 60%)",
+          "linear-gradient(160deg, color-mix(in srgb, var(--accent) 20%, var(--bg)), color-mix(in srgb, var(--accent) 6%, var(--bg)) 45%, var(--bg) 90%)",
       }}
       className="px-10 py-24"
     >
