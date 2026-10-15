@@ -140,13 +140,13 @@ export default function Navbar() {
             <Link
               href="/contact"
               style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-              className="text-sm font-semibold px-5 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
+              className="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-full relative overflow-hidden group active:scale-95 transition-all tracking-wide"
             >
               <span
                 style={{ background: "var(--accent)" }}
                 className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
               />
-              <span className="relative z-10">Let&apos;s Talk</span>
+              <span className="relative z-10">Let&apos;s Talk ↗</span>
             </Link>
           </div>
   
