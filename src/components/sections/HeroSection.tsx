@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <section className="px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative">
+    <section className="flex min-h-dvh flex-col px-5 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12 relative">
       {/* Backdrop — shown at full strength (not fogged with the page's own
           background), so the hero text below is hardcoded light/white
           rather than following the site's light/dark theme toggle; this
@@ -51,7 +51,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main content + illustration side by side */}
-      <div className="relative flex items-center">
+      <div className="relative flex flex-1 items-center">
         {/* Left — headline */}
         <div className="relative z-10 flex-1">
           <motion.h1
@@ -119,15 +119,15 @@ export default function HeroSection() {
           >
             <span
               style={{ border: "1px solid rgba(255,255,255,0.5)" }}
-              className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full transition-colors group-hover:border-white"
+              className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full transition-colors group-hover:border-white"
             >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+              <svg width="18" height="18" viewBox="0 0 12 12" fill="currentColor">
                 <path d="M2 1.2v9.6a.6.6 0 00.92.51l7.6-4.8a.6.6 0 000-1.02l-7.6-4.8A.6.6 0 002 1.2z" />
               </svg>
             </span>
             <span
               style={{ borderColor: "rgba(255,255,255,0.5)" }}
-              className="border-b pb-1 text-xs font-medium uppercase tracking-widest transition-colors group-hover:border-white"
+              className="border-b pb-1 text-sm font-medium uppercase tracking-widest transition-colors group-hover:border-white"
             >
               Watch Our Work
             </span>
