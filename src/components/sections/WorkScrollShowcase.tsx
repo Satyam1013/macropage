@@ -179,7 +179,7 @@ function ScrollShowcase({ cardW }: { cardW: number }) {
           }}
         />
         <PinnedHeading />
-        <motion.div style={{ x }} className="relative flex h-full">
+        <motion.div style={{ x }} className="relative flex h-full mt-10">
           {projects.map((p, i) => (
             <ProjectCard key={p.slug} p={p} index={i} style={cardStyle} className="" />
           ))}

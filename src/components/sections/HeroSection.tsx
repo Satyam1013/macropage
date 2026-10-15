@@ -72,6 +72,10 @@ export default function HeroSection() {
               style={{
                 fontFamily: "var(--font-playfair)",
                 fontStyle: "italic",
+                background: "linear-gradient(180deg, #ffffff, #d9e6ff)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
               }}
               className="text-[0.85em]"
             >
@@ -80,7 +84,7 @@ export default function HeroSection() {
             <br />
             <span
               style={{
-                background: "linear-gradient(90deg, #4d7dfa, #1c76f2)",
+                background: "linear-gradient(180deg, #ffffff, #1c76f2)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
