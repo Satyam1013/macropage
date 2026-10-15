@@ -101,49 +101,48 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="flex justify-between items-end mt-10 flex-wrap gap-6 relative z-10"
+        className="flex flex-col gap-6 mt-10 relative z-10"
       >
-        <div className="flex flex-col gap-5">
-          <p
-            style={{ color: "rgba(255,255,255,0.8)" }}
-            className="text-base max-w-sm leading-relaxed"
+        <p
+          style={{ color: "rgba(255,255,255,0.8)" }}
+          className="text-base max-w-sm leading-relaxed"
+        >
+          We are a tech studio that pairs strategy, design, and performance —
+          helping businesses build bold digital products that are fast, scalable,
+          and built to grow.
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <Link
+            href="/contact"
+            style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95"
           >
-            We are a tech studio that pairs strategy, design, and performance —
-            helping businesses build bold digital products that are fast, scalable,
-            and built to grow.
-          </p>
+            <span
+              style={{ background: "var(--accent)" }}
+              className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
+            />
+            <span className="relative z-10">Start a Project ↗</span>
+          </Link>
           <Link
             href="/work"
-            style={{ color: "rgba(255,255,255,0.9)" }}
-            className="inline-flex items-center gap-3 w-fit group"
+            style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff" }}
+            className="group inline-flex items-center gap-3 rounded-full border py-2 pl-7 pr-2 text-sm font-semibold transition-colors hover:border-white"
           >
+            Explore Our Work
             <span
               style={{ border: "1px solid rgba(255,255,255,0.5)" }}
-              className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full transition-colors group-hover:border-white"
+              className="relative flex h-9 w-9 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-sm transition-colors group-hover:border-transparent group-hover:text-black"
             >
-              <svg width="18" height="18" viewBox="0 0 12 12" fill="currentColor">
-                <path d="M2 1.2v9.6a.6.6 0 00.92.51l7.6-4.8a.6.6 0 000-1.02l-7.6-4.8A.6.6 0 002 1.2z" />
-              </svg>
-            </span>
-            <span
-              style={{ borderColor: "rgba(255,255,255,0.5)" }}
-              className="border-b pb-1 text-sm font-medium uppercase tracking-widest transition-colors group-hover:border-white"
-            >
-              Watch Our Work
+              <span
+                style={{ background: "#fff" }}
+                className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
+              />
+              <span className="relative transition-transform duration-300 group-hover:rotate-45">
+                →
+              </span>
             </span>
           </Link>
         </div>
-        <Link
-          href="/contact"
-          style={{ background: "var(--btn-bg)", color: "var(--btn-text)" }}
-          className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold transition-all relative overflow-hidden group active:scale-95"
-        >
-          <span
-            style={{ background: "var(--accent)" }}
-            className="absolute inset-0 w-full translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out rounded-full"
-          />
-          <span className="relative z-10">Start a Project →</span>
-        </Link>
       </motion.div>
     </section>
   );
