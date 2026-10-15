@@ -34,10 +34,12 @@ function ServiceCard({
       <Link href={`/services/${service.slug}`} className="block group h-full">
         <div
           style={{
-            background:
-              "color-mix(in srgb, color-mix(in srgb, var(--accent) 12%, var(--card)) 48%, transparent)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
+            background: `linear-gradient(135deg,
+              color-mix(in srgb, color-mix(in srgb, var(--accent) 8%, var(--card)) 62%, transparent),
+              color-mix(in srgb, color-mix(in srgb, var(--accent) 22%, var(--card)) 32%, transparent))`,
+            border: "1px solid rgba(255,255,255,0.35)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
             borderRadius: 24,
             minHeight: 260,
             position: "relative",
