@@ -125,21 +125,12 @@ export default function HeroSection() {
           </Link>
           <Link
             href="/work"
-            style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff" }}
-            className="group inline-flex items-center gap-3 rounded-full border py-2 pl-7 pr-2 text-sm font-semibold transition-colors hover:border-white"
+            style={{ borderColor: "rgba(255,255,255,0.35)", color: "#fff" }}
+            className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-semibold transition-colors hover:border-white"
           >
             Explore Our Work
-            <span
-              style={{ border: "1px solid rgba(255,255,255,0.5)" }}
-              className="relative flex h-9 w-9 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-sm transition-colors group-hover:border-transparent group-hover:text-black"
-            >
-              <span
-                style={{ background: "#fff" }}
-                className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
-              />
-              <span className="relative transition-transform duration-300 group-hover:rotate-45">
-                →
-              </span>
+            <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1">
+              →
             </span>
           </Link>
         </div>
