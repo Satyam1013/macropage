@@ -94,32 +94,14 @@ export default function ServicesSection() {
   }
 
   return (
-    <section className="relative overflow-hidden px-10 py-24">
-      {/* Backdrop — a real image (not just a flat gradient) so the cards'
-          backdrop-blur has actual texture to blur; without it there was
-          nothing for the blur to act on, so the "glass" look never showed. */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "url(/landing-bg.jpeg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.6,
-        }}
-      />
-      {/* Tint, not a cover-up: this used to be fully opaque, which hid the
-          image completely — defeating the point of having it (nothing left
-          for the cards' backdrop-blur to actually blur). */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(160deg, color-mix(in srgb, var(--accent) 35%, var(--bg)), color-mix(in srgb, var(--accent) 10%, var(--bg)) 45%, var(--bg) 92%)",
-          opacity: 0.75,
-        }}
-      />
-
-      <div className="relative z-10 flex justify-between items-end mb-14 flex-wrap gap-6">
+    <section
+      style={{
+        background:
+          "linear-gradient(160deg, color-mix(in srgb, var(--accent) 35%, var(--bg)), color-mix(in srgb, var(--accent) 10%, var(--bg)) 45%, var(--bg) 92%)",
+      }}
+      className="px-10 py-24"
+    >
+      <div className="flex justify-between items-end mb-14 flex-wrap gap-6">
         <div>
           <p
             style={{ color: "var(--muted)" }}
@@ -159,7 +141,7 @@ export default function ServicesSection() {
         </Link>
       </div>
       {/* Rows — each card knows its column index */}
-      <div className="relative z-10 flex flex-col gap-5">
+      <div className="flex flex-col gap-5">
         {rows.map((row, rowIdx) => (
           <div
             key={rowIdx}
