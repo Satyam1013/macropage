@@ -88,7 +88,7 @@ function ProjectCard({
 // and never scrolls away.
 function PinnedHeading() {
   return (
-    <div className="pointer-events-none absolute inset-x-6 top-4 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
+    <div className="pointer-events-none absolute inset-x-6 top-8 z-[1] flex items-start justify-between gap-4 sm:inset-x-10 sm:top-10">
       <div>
         <p
           style={{ color: "rgba(255,255,255,0.6)" }}
