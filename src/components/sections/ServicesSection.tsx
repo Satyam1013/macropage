@@ -34,26 +34,32 @@ function ServiceCard({
       <Link href={`/services/${service.slug}`} className="block group h-full">
         <div
           style={{
-            background: "var(--bg)",
-            border: "1px solid var(--border)",
-            borderRadius: 20,
-            minHeight: 320,
+            background: "var(--card)",
+            borderRadius: 24,
+            minHeight: 260,
             position: "relative",
             overflow: "hidden",
           }}
-          className="p-8 flex flex-col justify-between h-full transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl"
+          className="p-7 flex flex-col justify-between h-full transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl"
         >
-          {/* Icon */}
+          {/* Hover arrow */}
+          <span
+            style={{ border: "1px solid var(--border)", color: "var(--muted)" }}
+            className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full text-sm transition-colors group-hover:border-transparent group-hover:text-[var(--bg)]"
+          >
+            <span
+              style={{ background: "var(--text)" }}
+              className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
+            />
+            <span className="relative transition-transform duration-300 group-hover:rotate-45">
+              ↗
+            </span>
+          </span>
+
+          {/* Icon chip */}
           <div
-            style={{
-              color: "var(--accent)",
-              width: 90,
-              height: 90,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            className="mb-12 [&>svg]:w-24 [&>svg]:h-24"
+            style={{ background: "var(--bg)", color: "var(--accent)", borderRadius: 14 }}
+            className="mb-8 flex h-14 w-14 items-center justify-center [&>svg]:h-7 [&>svg]:w-7"
           >
             {service.icon}
           </div>
@@ -61,7 +67,7 @@ function ServiceCard({
           <div>
             <h3
               style={{ color: "var(--text)" }}
-              className="text-xl font-semibold mb-3 leading-tight"
+              className="text-lg font-semibold mb-2 leading-tight"
             >
               {service.name}
             </h3>
@@ -85,38 +91,50 @@ export default function ServicesSection() {
   }
 
   return (
-    <section style={{ background: "var(--bg2)" }} className="px-10 py-24">
-      <div
-        style={{ borderBottom: "1px solid var(--border)" }}
-        className="flex justify-between items-end pb-4 mb-10 flex-wrap gap-3"
-      >
+    <section
+      style={{
+        background:
+          "linear-gradient(160deg, color-mix(in srgb, var(--accent) 7%, var(--bg)), var(--bg) 60%)",
+      }}
+      className="px-10 py-24"
+    >
+      <div className="flex justify-between items-end mb-14 flex-wrap gap-6">
         <div>
           <p
             style={{ color: "var(--muted)" }}
-            className="text-xs tracking-widest uppercase mb-2"
+            className="text-xs tracking-widest uppercase mb-4 font-medium"
           >
             [ 03 ] What We Do
           </p>
           <h2
             style={{
-              fontFamily: "var(--font-bebas)",
+              fontFamily: "var(--font-dm)",
               color: "var(--text)",
-              lineHeight: 1,
+              lineHeight: 1.1,
             }}
-            className="text-[clamp(2.5rem,6vw,4.5rem)] tracking-wide"
+            className="text-[clamp(2.25rem,5vw,3.75rem)] font-extrabold tracking-tight max-w-xl"
           >
-            Services
+            Expertise across the digital stack.
           </h2>
         </div>
         <Link
           href="/services"
-          style={{
-            color: "var(--muted)",
-            borderBottom: "1px solid var(--border)",
-          }}
-          className="text-sm pb-0.5 hover:opacity-100 transition-all"
+          style={{ color: "var(--text)" }}
+          className="group inline-flex items-center gap-2 text-sm font-semibold"
         >
-          See All Services →
+          See All Services
+          <span
+            style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+            className="relative flex h-7 w-7 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-xs transition-colors group-hover:border-transparent group-hover:text-[var(--bg)]"
+          >
+            <span
+              style={{ background: "var(--text)" }}
+              className="absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100"
+            />
+            <span className="relative transition-transform duration-300 group-hover:rotate-45">
+              ↗
+            </span>
+          </span>
         </Link>
       </div>
       {/* Rows — each card knows its column index */}
