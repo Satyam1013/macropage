@@ -35,9 +35,10 @@ function ServiceCard({
         <div
           style={{
             background: `linear-gradient(135deg,
-              color-mix(in srgb, color-mix(in srgb, var(--accent) 8%, var(--card)) 62%, transparent),
-              color-mix(in srgb, color-mix(in srgb, var(--accent) 22%, var(--card)) 32%, transparent))`,
-            border: "1px solid rgba(255,255,255,0.35)",
+              rgba(255,255,255,0.55),
+              color-mix(in srgb, color-mix(in srgb, var(--accent) 18%, var(--card)) 55%, transparent) 45%,
+              color-mix(in srgb, color-mix(in srgb, var(--accent) 42%, var(--card)) 30%, transparent))`,
+            border: "1px solid rgba(255,255,255,0.55)",
             backdropFilter: "blur(10px)",
             WebkitBackdropFilter: "blur(10px)",
             borderRadius: 24,
